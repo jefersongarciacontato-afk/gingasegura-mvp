@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GingaSegura - Assoc. Martelo Predador</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #14361d; color: #fff; margin: 0; padding: 16px; }
+    .card { background: #1e4d2b; border-radius: 12px; padding: 16px; margin-bottom: 14px; border: 1px solid #2e6f40; }
+    .btn { display: block; width: 100%; min-height: 54px; border: none; border-radius: 10px; font-size: 17px; font-weight: 700; cursor: pointer; margin-top: 10px; }
+    .btn-primary { background: #c85a17; color: #fff; }
+    .btn-danger { background: #b91c1c; color: #fff; text-decoration: none; display: flex; align-items: center; justify-content: center; }
+    .badge-online { color: #4ade80; font-weight: bold; }
+    .alerta-med { background: #991b1b; padding: 8px 12px; border-radius: 8px; margin-top: 8px; font-weight: bold; }
+    .row { display: flex; justify-content: space-between; align-items: center; }
+    input[type="checkbox"] { width: 32px; height: 32px; accent-color: #22c55e; }
+  </style>
+</head>
+<body>
+  <header class="row">
+    <div><strong>GINGASEGURA</strong><br><small>Assoc. Martelo Predador</small></div>
+    <span id="net-status" class="badge-online">â— ONLINE</span>
+  </header>
+  <h2>Ola, Mestre Martelo</h2>
+  <section id="tela-1"><h3>TURMAS DE HOJE</h3><div id="lista-turmas"></div></section>
+  <section id="tela-2" hidden>
+    <button onclick="mostrarTela('tela-1')">â† Voltar</button>
+    <h3>CHAMADA DE HOJE</h3>
+    <div id="lista-alunos"></div>
+    <button class="btn btn-primary" onclick="finalizarChamada()">FINALIZAR CHAMADA</button>
+  </section>
+  <section id="tela-3" hidden>
+    <div class="card"><h3>âœ“ CHAMADA ENVIADA!</h3><p id="resumo-chamada"></p></div>
+    <div id="ficha-emergencia" class="card" hidden>
+      <h3>âš  FICHA MEDICA DE EMERGENCIA</h3>
+      <p id="med-aluno"></p>
+      <div class="alerta-med" id="med-detalhe"></div>
+      <a id="btn-ligar" class="btn btn-danger" href="#">LIGAR PARA RESPONSAVEL</a>
+    </div>
+    <button class="btn" onclick="mostrarTela('tela-1')">VOLTAR AO MENU</button>
+  </section>
+  <script>
+    let alunosAtuais = [];
+    function mostrarTela(id) { ['tela-1', 'tela-2', 'tela-3'].forEach(t => document.getElementById(t).hidden = (t !== id)); }
+    async function carregarTurmas() {
+      const res = await fetch('/api/turmas');
+      const turmas = await res.json();
+      document.getElementById('lista-turmas').innerHTML = turmas.map(t => '<div class="card" onclick="abrirChamada(' + t.id + ')"><strong>' + t.nome + '</strong><br>' + t.horario + '<br><span style="color:#f59e0b">Iniciar Chamada ></span></div>').join('');
+    }
+    async function abrirChamada(turmaId) {
+      const res = await fetch('/api/turmas/' + turmaId€¬€œ½…±Õ¹½Ìœ¤ì(€€€€€…±Õ¹½ÍÑÕ…¥Ì€ô…Ý…¥ÐÉ•Ì¹©Í½¸ ¤ì(€€€€€‘½Õµ•¹Ð¹•Ñ±•µ•¹Ñ	å% ±¥ÍÑ„µ…±Õ¹½Ìœ¤¹¥¹¹•É!Q50€ô…±Õ¹½ÍÑÕ…¥Ì¹µ…À¡„€ôø€œñ‘¥Ø±…ÍÌô‰…ÉÉ½Üˆøñ‘¥ØøñÍÑÉ½¹œøœ€¬„¹¹½µ”€¬€œ€ ˆœ€¬„¹…Á•±¥‘¼€¬€œˆ¤ð½ÍÑÉ½¹œøñ‰ÈøñÍµ…±°øœ€¬„¹½É‘„€¬€œð½Íµ…±°øœ€¬€¡„¹É•ÍÑÉ¥…½}µ•‘¥„€„ôô€9•¹¡Õµ„œ€ü€œñ‘¥Ø±…ÍÌô‰…±•ÉÑ„µµ•ˆûŠr@€œ€¬„¹É•ÍÑÉ¥…½}µ•‘¥„€¬€œð½‘¥Øøœ€è€œœ¤€¬€œð½‘¥Øøñ‘¥Øøñ¥¹ÁÕÐÑåÁ”ô‰¡•­‰½àˆ¥ô‰ÁÉ•Ì´œ€¬„¹¥€¬€œˆ¡•­•øñ‰ÕÑÑ½¸½¹±¥¬õp…‰É¥Éµ•É•¹¥„ œ€¬)M=8¹ÍÑÉ¥¹¥™ä¡„¤€¬€œ¥pœ€ÍÑå±”ô‰µ…É¥¸µ±•™ÐèáÁàíµ¥¸µÝ¥‘Ñ èÐáÁàíµ¥¸µ¡•¥¡ÐèÐáÁàí‰…­É½Õ¹èˆäÅŒÅŒí½±½Èè™™˜í‰½É‘•Èé¹½¹”í‰½É‘•ÈµÉ…‘¥ÕÌèáÁàí™½¹ÐµÝ•¥¡Ðé‰½±ìˆûŠr@ð½‰ÕÑÑ½¸øð½‘¥Øøð½‘¥Øøœ¤¹©½¥¸ œœ¤ì(€€€€€µ½ÍÑÉ…ÉQ•±„ Ñ•±„´Èœ¤ì(€€€ô(€€€™Õ¹Ñ¥½¸…‰É¥Éµ•É•¹¥„¡…±Õ¹¼¤ì(€€€€€‘½Õµ•¹Ð¹•Ñ±•µ•¹Ñ	å% ™¥¡„µ•µ•É•¹¥„œ¤¹¡¥‘‘•¸€ô™…±Í”ì(€€€€€‘½Õµ•¹Ð¹•Ñ±•µ•¹Ñ	å% µ•µ…±Õ¹¼œ¤¹¥¹¹•ÉQ•áÐ€ô…±Õ¹¼¹¹½µ”€¬€œ€ ˆœ€¬…±Õ¹¼¹…Á•±¥‘¼€¬€œˆ¤€´I•ÍÀè€œ€¬…±Õ¹¼¹É•ÍÁ½¹Í…Ù•±}¹½µ”ì(€€€€€‘½Õµ•¹Ð¹•Ñ±•µ•¹Ñ	å% µ•µ‘•Ñ…±¡”œ¤¹¥¹¹•ÉQ•áÐ€ô€±•É¥„è€œ€¬…±Õ¹¼¹…±•É¥„€¬€œðI•ÍÑÉ¥…¼è€œ€¬…±Õ¹¼¹É•ÍÑÉ¥…½}µ•‘¥„ì(€€€€€‘½Õµ•¹Ð¹•Ñ±•µ•¹Ñ	å% ‰Ñ¸µ±¥…Èœ¤¹¡É•˜€ô€Ñ•°èœ€¬…±Õ¹¼¹É•ÍÁ½¹Í…Ù•±}Ñ•±•™½¹”ì(€€€€€µ½ÍÑÉ…ÉQ•±„ Ñ•±„´Ìœ¤ì(€€€ô(€€€…Íå¹Œ™Õ¹Ñ¥½¸™¥¹…±¥é…É¡…µ…‘„ ¤ì(€€€€€½¹ÍÐÁ…å±½…€ôì‘…Ñ…}…Õ±„è¹•Ü…Ñ” ¤¹Ñ½%M=MÑÉ¥¹œ ¤¹ÍÁ±¥Ð Pœ¥lÁt°É•¥ÍÑÉ½Ìè…±Õ¹½ÍÑÕ…¥Ì¹µ…À¡„€ôø€¡í…±Õ¹½}¥è„¹¥°ÁÉ•Í•¹Ñ”è‘½Õµ•¹Ð¹•Ñ±•µ•¹Ñ	å% ÁÉ•Ì´œ€¬„¹¥¤¹¡•­•‘ô¤¤ôì(€€€€€ÑÉäì(€€€€€€€½¹ÍÐÉ•Ì€ô…Ý…¥Ð™•Ñ  œ½…Á¤½¡…µ…‘…Ì½±½Ñ”œ°ìµ•Ñ¡½è€A=MPœ°¡•…‘•ÉÌèì½¹Ñ•¹ÐµQåÁ”œè€…ÁÁ±¥…Ñ¥½¸½©Í½¸ô°‰½‘äè)M=8¹ÍÑÉ¥¹¥™ä¡Á…å±½…¤ô¤ì(€€€€€€€½¹ÍÐ‘…Ñ„€ô…Ý…¥ÐÉ•Ì¹©Í½¸ ¤ì(€€€€€€€‘½Õµ•¹Ð¹•Ñ±•µ•¹Ñ	å% É•ÍÕµ¼µ¡…µ…‘„œ¤¹¥¹¹•ÉQ•áÐ€ôÉ•Ì¹½¬€ü‘…Ñ„¹ÁÉ•Í•¹Ñ•Ì€¬€œAÉ•Í•¹Ñ•Ì€¼€œ€¬‘…Ñ„¹…ÕÍ•¹Ñ•Ì€¬€œÕÍ•¹Ñ•Ì€¡M¥¹É½¹¥é…‘¼¤œ€è‘…Ñ„¹‘•Ñ…¥°ì(€€€€€ô…Ñ ì(€€€€€€€±½…±MÑ½É…”¹Í•Ñ%Ñ•´ ™¥±…}½™™±¥¹”œ°)M=8¹ÍÑÉ¥¹¥™ä¡Á…å±½…¤¤ì(€€€€€€€‘½Õµ•¹Ð¹•Ñ±•µ•¹Ñ	å% É•ÍÕµ¼µ¡…µ…‘„œ¤¹¥¹¹•ÉQ•áÐ€ô€M…±Ù¼¹„™¥±„½™™±¥¹”±½…°€¡IÀÐ¤¸œì(€€€€€ô(€€€€€µ½ÍÑÉ…ÉQ•±„ Ñ•±„´Ìœ¤ì(€€€ô(€€€…ÉÉ•…ÉQÕÉµ…Ì ¤ì(€€ð½ÍÉ¥ÁÐø(ð½‰½‘äø(ð½¡Ñµ°
