@@ -1,4 +1,4 @@
-from datetime import date
+﻿from datetime import date
 from sqlalchemy import Boolean, Date, ForeignKey, Integer, String, UniqueConstraint, create_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, sessionmaker
 
@@ -13,15 +13,15 @@ class Turma(Base):
     __tablename__ = "turmas"
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     nome: Mapped[str] = mapped_column(String(100), nullable=False)
-    horario: Mapped[srr] = mapped_column(String(50), nullable=False)
+    horario: Mapped[str] = mapped_column(String(50), nullable=False)
 
 class Aluno(Base):
     __tablename__ = "alunos"
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     nome: Mapped[str] = mapped_column(String(120), nullable=False)
     apelido: Mapped[str] = mapped_column(String(60), nullable=False)
-    corda: Mapped[srr] = mapped_column(String(50), nullable=False)
-    alergia: Mapped[srr] = mapped_column(String(150), default="Nenhuma")
+    corda: Mapped[str] = mapped_column(String(50), nullable=False)
+    alergia: Mapped[str] = mapped_column(String(150), default="Nenhuma")
     restricao_medica: Mapped[str] = mapped_column(String(150), default="Nenhuma")
     responsavel_nome: Mapped[str] = mapped_column(String(120), nullable=False)
     responsavel_telefone: Mapped[str] = mapped_column(String(20), nullable=False)

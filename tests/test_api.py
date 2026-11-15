@@ -1,4 +1,4 @@
-from fastapi.testclient import TestClient
+﻿from fastapi.testclient import TestClient
 from app.main import app, seed_dados_iniciais
 
 seed_dados_iniciais()
@@ -21,7 +21,7 @@ def test_ficha_medica_emergencia_rf02():
     assert mariana["responsavel_telefone"] == "11987654321"
 
 def test_registro_chamada_e_prevencao_duplicidade_rnf02():
-    payload = {"data_aula": "2026-11-01",,"registros": [{"aluno_id": 1, "presente": True}, {"aluno_id": 2, "presente": True}, {"aluno_id": 3, "presente": False}]}
+    payload = {"data_aula": "2026-11-01","registros": [{"aluno_id": 1, "presente": True}, {"aluno_id": 2, "presente": True}, {"aluno_id": 3, "presente": False}]}
     res1 = client.post("/api/chamadas/lote", json=payload)
     assert res1.status_code == 201
     assert res1.json()["presentes"] == 2
