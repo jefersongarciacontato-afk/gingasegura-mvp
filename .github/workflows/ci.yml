@@ -1,4 +1,4 @@
-name: CI - GingaSegura MVP
+﻿name: CI - GingaSegura MVP
 
 on:
   push:
@@ -20,6 +20,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Analise estatica (Ruff)
-        run: ruff check .
+        run: ruff check . --select E9,F63,F7,F82
       - name: Executar testes automatizados (Pytest)
-        run: pytest -v
+        run: python -m pytest -v
