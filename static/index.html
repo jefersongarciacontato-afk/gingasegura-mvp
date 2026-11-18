@@ -6,191 +6,385 @@
   <title>GingaSegura — Equipe Martelo Predador Team</title>
   <style>
     :root {
-      --bg: #f1f5f3;
-      --surface: #ffffff;
-      --surface-alt: #f8faf9;
-      --primary: #123d23;
-      --primary-hover: #1a5632;
-      --accent: #eab308;
-      --accent-soft: #fef9c3;
-      --text: #0f172a;
-      --text-muted: #475569;
-      --border: #cbd5e1;
-      --success: #15803d;
-      --success-bg: #dcfce7;
-      --danger: #b91c1c;
-      --danger-bg: #fee2e2;
-      --warn: #b45309;
-      --warn-bg: #fef3c7;
-      --info: #1d4ed8;
-      --info-bg: #dbeafe;
-      --purple: #6b21a8;
-      --purple-bg: #f3e8ff;
-      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
-      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --bg: #0c0f14;
+      --surface: #141922;
+      --surface-alt: #1b222e;
+      --primary: #dc2626;
+      --primary-hover: #b91c1c;
+      --accent: #f59e0b;
+      --accent-soft: rgba(245, 158, 11, 0.14);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #2a3342;
+      --success: #22c55e;
+      --success-bg: rgba(34, 197, 94, 0.14);
+      --danger: #ef4444;
+      --danger-bg: rgba(239, 68, 68, 0.14);
+      --warn: #f59e0b;
+      --warn-bg: rgba(245, 158, 11, 0.14);
+      --info: #38bdf8;
+      --info-bg: rgba(56, 189, 248, 0.14);
+      --purple: #c084fc;
+      --purple-bg: rgba(192, 132, 252, 0.14);
+      --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.45);
+      --shadow-md: 0 14px 36px rgba(0, 0, 0, 0.75);
       --radius: 14px;
       --font-scale: 1;
+      --mod-glow: rgba(220, 38, 38, 0.14);
     }
+
+    body.theme-capoeira { --mod-glow: rgba(245, 158, 11, 0.16); }
+    body.theme-muaythai { --mod-glow: rgba(220, 38, 38, 0.18); }
+    body.theme-contatototal { --mod-glow: rgba(56, 189, 248, 0.16); }
 
     body.high-contrast {
       --bg: #000000;
-      --surface: #0a0a0a;
-      --surface-alt: #121212;
-      --primary: #000000;
-      --primary-hover: #1a1a1a;
+      --surface: #050505;
+      --surface-alt: #111111;
+      --primary: #facc15;
+      --primary-hover: #eab308;
       --accent: #facc15;
-      --accent-soft: #1f1a00;
       --text: #ffffff;
       --text-muted: #facc15;
       --border: #facc15;
-      --success: #22c55e;
-      --success-bg: #052e16;
-      --danger: #ff4d4d;
-      --danger-bg: #2a0000;
-      --warn: #facc15;
-      --warn-bg: #1f1a00;
-      --info: #facc15;
-      --info-bg: #121212;
-      --purple: #facc15;
-      --purple-bg: #121212;
-      --shadow-sm: none;
-      --shadow-md: none;
     }
 
     body.large-text { --font-scale: 1.15; }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
-    body { background: var(--bg); color: var(--text); font-size: calc(16px * var(--font-scale)); line-height: 1.55; padding-bottom: 96px; transition: background 0.2s, color 0.2s; }
 
-    .a11y-bar { background: #0a2414; color: #f8fafc; padding: 8px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid var(--accent); font-size: 0.84em; }
-    body.high-contrast .a11y-bar { background: #000; border-bottom: 2px solid #facc15; }
+    /* TEXTURA DE GRADE DE RINGUE / OCTÓGONO DINÂMICA */
+    body {
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(circle at 80% 12%, var(--mod-glow), transparent 48%),
+        radial-gradient(circle at 12% 85%, rgba(255, 255, 255, 0.03), transparent 45%),
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.028) 0, rgba(255,255,255,0.028) 1px, transparent 1px, transparent 16px),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,0.028) 0, rgba(255,255,255,0.028) 1px, transparent 1px, transparent 16px);
+      color: var(--text);
+      font-size: calc(16px * var(--font-scale));
+      line-height: 1.55;
+      padding-bottom: 96px;
+      transition: background 0.35s ease;
+    }
+
+    /* MARCA D'ÁGUA VETORIAL LIMPA NO FUNDO (BERIMBAU / KRUANG / GRADE) */
+    .arena-watermark {
+      position: fixed;
+      right: -20px;
+      bottom: 40px;
+      width: 340px;
+      height: 340px;
+      pointer-events: none;
+      opacity: 0.065;
+      z-index: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .a11y-bar {
+      background: #07090c;
+      color: #cbd5e1;
+      padding: 8px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      border-bottom: 2px solid var(--primary);
+      font-size: 0.84em;
+      position: relative;
+      z-index: 5;
+    }
     .a11y-actions { display: flex; gap: 8px; }
-    .btn-a11y { background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.4); padding: 5px 12px; border-radius: 8px; cursor: pointer; font-weight: 700; }
-    body.high-contrast .btn-a11y { background: #000; color: #facc15; border: 2px solid #facc15; }
-    .btn-a11y[aria-pressed="true"] { background: var(--accent); color: #0f172a; border-color: var(--accent); }
+    .btn-a11y { background: #1e2530; color: #f8fafc; border: 1px solid #3b4454; padding: 5px 12px; border-radius: 8px; cursor: pointer; font-weight: 700; }
+    .btn-a11y[aria-pressed="true"] { background: var(--accent); color: #000; border-color: var(--accent); }
 
-    /* TELA INICIAL LIMPA: APENAS LOGOTIPO + E-MAIL/SENHA + VISITANTE */
-    .login-wrapper { min-height: calc(100vh - 46px); display: flex; align-items: center; justify-content: center; padding: 24px 16px; background: radial-gradient(circle at top right, rgba(234, 179, 8, 0.12), transparent 45%), var(--bg); }
-    .login-card { background: var(--surface); border: 2px solid var(--border); border-radius: 22px; max-width: 420px; width: 100%; padding: 30px 28px; box-shadow: var(--shadow-md); }
+    /* TELA INICIAL LIMPA */
+    .login-wrapper {
+      min-height: calc(100vh - 46px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      position: relative;
+      z-index: 2;
+    }
+    .login-card {
+      background: linear-gradient(180deg, #171d27 0%, #0f131a 100%);
+      border: 2px solid #2f3949;
+      border-top: 4px solid var(--primary);
+      border-radius: 22px;
+      max-width: 420px;
+      width: 100%;
+      padding: 30px 28px;
+      box-shadow: var(--shadow-md);
+    }
     .logo-container { text-align: center; margin-bottom: 22px; }
-    .logo-img { width: 170px; height: 170px; object-fit: contain; border-radius: 50%; border: 3px solid #111827; box-shadow: 0 6px 18px rgba(0,0,0,0.15); background: #fff; }
-    body.high-contrast .logo-img { border-color: #facc15; }
+    .logo-img {
+      width: 170px;
+      height: 170px;
+      object-fit: contain;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 28px rgba(220, 38, 38, 0.35);
+      background: #ffffff;
+    }
 
     .form-group { margin-bottom: 13px; }
-    .form-group label { display: block; font-size: 0.8em; font-weight: 800; text-transform: uppercase; color: var(--text-muted); margin-bottom: 5px; }
-    .form-group input, .form-group select { width: 100%; padding: 11px 13px; border: 2px solid var(--border); border-radius: 10px; background: var(--surface); color: var(--text); font-weight: 600; font-size: 0.95em; }
+    .form-group label { display: block; font-size: 0.78em; font-weight: 800; text-transform: uppercase; color: var(--text-muted); margin-bottom: 5px; letter-spacing: 0.5px; }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 11px 13px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      background: #0b0e13;
+      color: #f8fafc;
+      font-weight: 600;
+      font-size: 0.95em;
+    }
+    .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--accent); }
 
-    .btn-primary { width: 100%; background: var(--primary); color: #fff; border: 2px solid var(--primary); padding: 12px 16px; border-radius: 10px; font-weight: 800; font-size: 0.98em; cursor: pointer; }
-    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-primary {
+      width: 100%;
+      background: linear-gradient(135deg, #dc2626, #991b1b);
+      color: #ffffff;
+      border: 2px solid #ef4444;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-weight: 900;
+      font-size: 0.96em;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+    }
+    .btn-primary:hover { background: linear-gradient(135deg, #ef4444, #b91c1c); }
     body.high-contrast .btn-primary { background: #facc15; color: #000; border-color: #facc15; }
 
-    .visitor-box { margin-top: 18px; padding-top: 16px; border-top: 1.5px dashed var(--border); }
-    .btn-visitor { width: 100%; background: var(--surface-alt); color: var(--text); border: 2px solid var(--primary); padding: 11px 16px; border-radius: 10px; font-weight: 800; font-size: 0.94em; cursor: pointer; }
-    .btn-visitor:hover { background: var(--accent-soft); }
+    .visitor-box { margin-top: 18px; padding-top: 16px; border-top: 1.5px dashed #333c4a; }
+    .btn-visitor {
+      width: 100%;
+      background: #1b222e;
+      color: #f8fafc;
+      border: 2px solid var(--accent);
+      padding: 11px 16px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 0.92em;
+      cursor: pointer;
+    }
+    .btn-visitor:hover { background: rgba(245, 158, 11, 0.16); }
 
-    .login-error { background: var(--danger-bg); color: var(--danger); border: 1.5px solid var(--danger); padding: 10px 12px; border-radius: 10px; font-size: 0.86em; font-weight: 700; margin-bottom: 14px; display: none; }
+    .maps-link-btn {
+      display: block;
+      text-align: center;
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(245, 158, 11, 0.1);
+      color: #fbbf24;
+      border: 1.5px solid rgba(245, 158, 11, 0.4);
+      font-weight: 800;
+      font-size: 0.81em;
+      text-decoration: none;
+    }
 
-    /* HEADER INTERNO */
-    header.app-header { background: linear-gradient(135deg, var(--primary), #1d5c37); color: #fff; padding: 20px 16px 32px; border-bottom: 3px solid var(--accent); }
-    body.high-contrast header.app-header { background: #000; border-bottom: 3px solid #facc15; }
-    .container { max-width: 1060px; margin: 0 auto; padding: 0 16px; }
+    .login-error { background: var(--danger-bg); color: #fca5a5; border: 1.5px solid var(--danger); padding: 10px 12px; border-radius: 10px; font-size: 0.86em; font-weight: 700; margin-bottom: 14px; display: none; }
+
+    /* HEADER INTERNO COM GRADE DE RINGUE */
+    header.app-header {
+      background:
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.035) 0, rgba(255,255,255,0.035) 2px, transparent 2px, transparent 14px),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,0.035) 0, rgba(255,255,255,0.035) 2px, transparent 2px, transparent 14px),
+        linear-gradient(135deg, #101319 0%, #2b0909 65%, #101319 100%);
+      color: #fff;
+      padding: 20px 16px 34px;
+      border-bottom: 3px solid var(--primary);
+      position: relative;
+      z-index: 2;
+    }
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 16px; position: relative; z-index: 2; }
     .header-flex { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-    .brand-pill { display: inline-block; background: var(--accent); color: #0f172a; font-weight: 800; font-size: 0.74em; padding: 3px 12px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.4px; }
-    .user-badge { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.12); padding: 8px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.25); }
-    .btn-logout { background: #fff; color: #0f172a; border: none; padding: 7px 13px; border-radius: 8px; font-weight: 800; font-size: 0.84em; cursor: pointer; }
-    body.high-contrast .btn-logout { background: #facc15; color: #000; }
+    .brand-pill { display: inline-block; background: var(--accent); color: #090a0d; font-weight: 900; font-size: 0.74em; padding: 3px 12px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.4px; text-decoration: none; }
+    .user-badge { display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.45); padding: 8px 14px; border-radius: 12px; border: 1px solid #3f4856; }
+    .btn-logout { background: var(--primary); color: #fff; border: 1px solid #f87171; padding: 7px 13px; border-radius: 8px; font-weight: 800; font-size: 0.84em; cursor: pointer; }
 
-    .readonly-banner { background: var(--warn-bg); color: var(--warn); border: 2px solid #f59e0b; padding: 10px 16px; border-radius: 12px; font-weight: 800; font-size: 0.9em; margin-bottom: 16px; display: none; }
+    .readonly-banner { background: var(--warn-bg); color: #fbbf24; border: 2px solid #f59e0b; padding: 10px 16px; border-radius: 12px; font-weight: 800; font-size: 0.9em; margin-bottom: 16px; display: none; }
 
-    /* NAVEGAÇÃO */
-    .nav-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: -20px 0 20px; }
-    .nav-btn { flex: 1 1 120px; background: var(--surface); color: var(--text); border: 2px solid var(--border); padding: 12px 6px; border-radius: var(--radius); font-weight: 800; font-size: 0.82em; cursor: pointer; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; align-items: center; gap: 4px; }
-    .nav-btn.active { background: var(--primary); color: #fff; border-color: var(--accent); }
-    body.high-contrast .nav-btn.active { background: #facc15; color: #000; }
+    /* NAVEGAÇÃO PRINCIPAL (SEM EMOJIS POLUINDO) */
+    .nav-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: -22px 0 20px; }
+    .nav-btn {
+      flex: 1 1 115px;
+      background: #161c26;
+      color: #e2e8f0;
+      border: 2px solid #2e3746;
+      padding: 12px 8px;
+      border-radius: var(--radius);
+      font-weight: 800;
+      font-size: 0.82em;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+    }
+    .nav-btn:hover { border-color: var(--accent); }
+    .nav-btn.active { background: linear-gradient(135deg, #dc2626, #991b1b); color: #fff; border-color: var(--accent); }
 
-    .card { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); padding: 18px; margin-bottom: 16px; box-shadow: var(--shadow-sm); }
+    /* SUB-ABAS DE MODALIDADE (CAPOEIRA | MUAY THAI | CONTATO TOTAL) */
+    .sub-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+      background: #0d1016;
+      padding: 6px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+    }
+    @media (max-width: 600px) { .sub-tabs { grid-template-columns: 1fr; } }
+    .sub-tab-btn {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1.5px solid transparent;
+      padding: 10px 12px;
+      border-radius: 9px;
+      font-weight: 800;
+      font-size: 0.86em;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .sub-tab-btn:hover { color: #fff; background: #181f2b; }
+    .sub-tab-btn.active { background: var(--surface-alt); color: var(--accent); border-color: var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+
+    .card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
     .section-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
-    .section-title { font-size: 1.15em; font-weight: 900; }
+    .section-title { font-size: 1.12em; font-weight: 900; color: #f8fafc; text-transform: uppercase; letter-spacing: 0.3px; }
     .section-subtitle { font-size: 0.88em; color: var(--text-muted); }
 
     .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
     @media (max-width: 720px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
-    .kpi-card { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); padding: 14px; }
-    .kpi-label { font-size: 0.78em; font-weight: 800; text-transform: uppercase; color: var(--text-muted); }
-    .kpi-value { font-size: 1.65em; font-weight: 900; margin-top: 4px; color: var(--primary); }
-    body.high-contrast .kpi-value { color: #facc15; }
+    .kpi-card { background: var(--surface); border: 2px solid var(--border); border-left: 4px solid var(--primary); border-radius: var(--radius); padding: 14px; }
+    .kpi-label { font-size: 0.76em; font-weight: 800; text-transform: uppercase; color: var(--text-muted); }
+    .kpi-value { font-size: 1.65em; font-weight: 900; margin-top: 4px; color: var(--accent); }
     .kpi-foot { font-size: 0.8em; color: var(--text-muted); margin-top: 2px; }
 
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .grid-3 { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 12px; }
     @media (max-width: 680px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
 
-    .profile-chip { background: var(--surface-alt); color: var(--text); border: 1.5px solid var(--border); padding: 12px; border-radius: 10px; font-size: 0.85em; font-weight: 700; cursor: pointer; text-align: left; }
-    .profile-chip:hover { border-color: var(--primary); background: var(--accent-soft); }
-    .profile-chip span { display: block; font-size: 0.84em; font-weight: 600; color: var(--text-muted); }
+    .profile-chip {
+      background: var(--surface-alt);
+      color: var(--text);
+      border: 1.5px solid var(--border);
+      border-left: 4px solid var(--accent);
+      padding: 13px;
+      border-radius: 12px;
+      font-size: 0.88em;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: left;
+    }
+    .profile-chip:hover { border-color: var(--accent); background: #232b3a; }
+    .profile-chip span { display: block; font-size: 0.84em; font-weight: 600; color: var(--text-muted); margin-top: 3px; }
 
-    .student-row { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
-    .apelido-main { font-size: 1.18em; font-weight: 900; }
+    /* CHECKBOXES DE MODALIDADE NO CADASTRO DE ALUNO */
+    .mod-check-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+    .mod-check-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #0b0e13;
+      border: 2px solid var(--border);
+      padding: 9px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.9em;
+    }
+    .mod-check-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--primary); }
+
+    .student-row {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .apelido-main { font-size: 1.15em; font-weight: 900; color: #fff; }
     .nome-sub { font-size: 0.88em; color: var(--text-muted); font-weight: 600; }
 
-    .pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 999px; font-size: 0.78em; font-weight: 800; margin-right: 6px; margin-top: 5px; }
-    .pill-mod-cap { background: #dcfce7; color: #14532d; border: 1px solid #86efac; }
-    .pill-mod-mt { background: var(--purple-bg); color: var(--purple); border: 1px solid #d8b4fe; }
-    .pill-mod-ctp { background: var(--info-bg); color: var(--info); border: 1px solid #93c5fd; }
-    .pill-grad { background: #e2e8f0; color: #1e293b; border: 1px solid #cbd5e1; }
-    body.high-contrast .pill-grad, body.high-contrast .pill-mod-cap, body.high-contrast .pill-mod-mt, body.high-contrast .pill-mod-ctp { background: #facc15; color: #000; border-color: #facc15; }
-    .pill-warn { background: var(--warn-bg); color: var(--warn); border: 1px solid #f59e0b; }
-    .pill-ok { background: var(--success-bg); color: var(--success); }
-    .pill-danger { background: var(--danger-bg); color: var(--danger); }
+    .pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 999px; font-size: 0.76em; font-weight: 800; margin-right: 6px; margin-top: 5px; }
+    .pill-mod-cap { background: rgba(245, 158, 11, 0.16); color: #fbbf24; border: 1px solid #f59e0b; }
+    .pill-mod-mt { background: rgba(239, 68, 68, 0.16); color: #f87171; border: 1px solid #ef4444; }
+    .pill-mod-ctp { background: rgba(56, 189, 248, 0.16); color: #7dd3fc; border: 1px solid #38bdf8; }
+    .pill-grad { background: #1e2530; color: #e2e8f0; border: 1px solid #3b4454; }
+    .pill-warn { background: var(--warn-bg); color: #fbbf24; border: 1px solid #f59e0b; }
+    .pill-ok { background: var(--success-bg); color: #4ade80; border: 1px solid #22c55e; }
+    .pill-danger { background: var(--danger-bg); color: #f87171; border: 1px solid #ef4444; }
 
-    .color-dot { width: 12px; height: 12px; border-radius: 999px; display: inline-block; border: 1.5px solid #334155; }
+    .color-dot { width: 12px; height: 12px; border-radius: 999px; display: inline-block; border: 1.5px solid #fff; }
 
-    .btn-sos { background: var(--danger-bg); color: var(--danger); border: 2px solid var(--danger); padding: 8px 13px; border-radius: 10px; font-weight: 800; cursor: pointer; }
+    .btn-sos { background: var(--danger-bg); color: #fca5a5; border: 2px solid var(--danger); padding: 8px 13px; border-radius: 10px; font-weight: 800; cursor: pointer; }
     .btn-toggle { min-width: 122px; padding: 9px 14px; border-radius: 10px; font-weight: 800; cursor: pointer; border: 2px solid transparent; }
-    .btn-toggle.presente { background: var(--success); color: #fff; }
-    .btn-toggle.ausente { background: transparent; color: var(--danger); border-color: var(--danger); }
-    .btn-accent { background: var(--accent); color: #0f172a; border: 2px solid #ca8a04; padding: 8px 13px; border-radius: 10px; font-weight: 800; cursor: pointer; font-size: 0.85em; }
-    .btn-sm-danger { background: var(--danger-bg); color: var(--danger); border: 1.5px solid var(--danger); padding: 7px 11px; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 0.82em; }
+    .btn-toggle.presente { background: #16a34a; color: #fff; border-color: #4ade80; }
+    .btn-toggle.ausente { background: transparent; color: #f87171; border-color: #ef4444; }
+    .btn-accent { background: var(--accent); color: #090a0d; border: 2px solid #fbbf24; padding: 8px 13px; border-radius: 10px; font-weight: 900; cursor: pointer; font-size: 0.84em; }
+    .btn-sm-danger { background: var(--danger-bg); color: #fca5a5; border: 1.5px solid var(--danger); padding: 7px 11px; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 0.82em; }
 
     table.ux-table { width: 100%; border-collapse: collapse; font-size: 0.92em; }
-    table.ux-table th { text-align: left; padding: 11px 10px; background: var(--surface-alt); border-bottom: 2px solid var(--border); font-size: 0.82em; text-transform: uppercase; color: var(--text-muted); }
+    table.ux-table th { text-align: left; padding: 11px 10px; background: var(--surface-alt); border-bottom: 2px solid var(--border); font-size: 0.8em; text-transform: uppercase; color: var(--accent); }
     table.ux-table td { padding: 11px 10px; border-bottom: 1px solid var(--border); }
 
-    .track-bar { width: 100%; height: 18px; background: #e2e8f0; border-radius: 999px; overflow: hidden; margin-top: 8px; border: 1.5px solid #64748b; position: relative; }
+    .track-bar { width: 100%; height: 18px; background: #0b0e13; border-radius: 999px; overflow: hidden; margin-top: 8px; border: 1.5px solid #475569; position: relative; }
     .track-fill { height: 100%; border-radius: 999px; transition: width 0.35s ease; display: flex; align-items: center; justify-content: flex-end; padding-right: 6px; }
-    .graus-tip { display: inline-flex; align-items: center; gap: 3px; background: #0f172a; padding: 2px 6px; border-radius: 4px; height: 12px; }
+    .graus-tip { display: inline-flex; align-items: center; gap: 3px; background: #090a0d; padding: 2px 6px; border-radius: 4px; height: 12px; border: 1px solid #64748b; }
     .grau-tape { width: 3px; height: 9px; background: #ffffff; display: inline-block; border-radius: 1px; }
 
-    .grad-legend { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
-    @media (max-width: 780px) { .grad-legend { grid-template-columns: 1fr; } }
-    .legend-box { background: var(--surface-alt); border: 1.5px solid var(--border); border-radius: 12px; padding: 12px; font-size: 0.83em; }
+    .legend-box { background: var(--surface-alt); border: 1.5px solid var(--border); border-left: 4px solid var(--accent); border-radius: 12px; padding: 13px; font-size: 0.86em; margin-top: 14px; }
 
-    .cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center; font-weight: 800; font-size: 0.8em; color: var(--text-muted); margin-top: 12px; }
+    .cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center; font-weight: 800; font-size: 0.8em; color: var(--accent); margin-top: 12px; }
     .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 6px; }
-    .cal-cell { border: 1.5px solid var(--border); border-radius: 10px; padding: 8px 6px; min-height: 68px; background: var(--surface); font-size: 0.86em; }
-    .cal-cell.event-day { background: var(--warn-bg); border: 2px solid #eab308; }
-    .cal-tag { display: block; margin-top: 4px; font-size: 0.75em; font-weight: 800; color: var(--warn); line-height: 1.2; }
+    .cal-cell { border: 1.5px solid var(--border); border-radius: 10px; padding: 8px 6px; min-height: 68px; background: #0e1218; font-size: 0.86em; }
+    .cal-cell.event-day { background: rgba(220, 38, 38, 0.2); border: 2px solid var(--accent); }
+    .cal-tag { display: block; margin-top: 4px; font-size: 0.75em; font-weight: 800; color: #fbbf24; line-height: 1.2; }
 
-    .toast { margin-bottom: 14px; padding: 13px 16px; border-radius: 12px; font-weight: 800; display: none; border: 2px solid var(--success); background: var(--success-bg); color: var(--success); }
-    .sticky-footer { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); border-top: 2px solid var(--border); padding: 12px 16px; z-index: 20; }
+    .toast { margin-bottom: 14px; padding: 13px 16px; border-radius: 12px; font-weight: 800; display: none; border: 2px solid var(--success); background: var(--success-bg); color: #4ade80; }
+    .sticky-footer { position: fixed; bottom: 0; left: 0; right: 0; background: #0b0e13; border-top: 2px solid var(--primary); padding: 12px 16px; z-index: 20; }
 
-    .modal-backdrop { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.78); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 50; }
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 50; }
     .modal-backdrop.open { display: flex; }
-    .modal-box { background: var(--surface); border: 3px solid var(--primary); border-radius: 16px; max-width: 470px; width: 100%; padding: 22px; }
+    .modal-box { background: var(--surface); border: 3px solid var(--accent); border-radius: 16px; max-width: 520px; width: 100%; padding: 22px; max-height: 92vh; overflow-y: auto; }
     .modal-box.danger-border { border-color: var(--danger); }
     .sos-field { background: var(--surface-alt); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; margin-top: 8px; }
   </style>
 </head>
 <body>
+  <!-- MARCA D'ÁGUA DINÂMICA (BERIMBAU / KRUANG / GRADE DE RINGUE) -->
+  <div id="arenaWatermark" class="arena-watermark" aria-hidden="true"></div>
+
   <nav class="a11y-bar" aria-label="Recursos de Acessibilidade">
-    <span>Equipe Martelo Predador Team • WCAG 2.1</span>
+    <span>EQUIPE MARTELO PREDADOR TEAM • GESTÃO DE ARTES MARCIAIS</span>
     <div class="a11y-actions">
       <button type="button" id="btnContrast" class="btn-a11y" aria-pressed="false">Alto Contraste</button>
       <button type="button" id="btnFont" class="btn-a11y" aria-pressed="false">Texto Maior (A+)</button>
     </div>
   </nav>
 
-  <!-- TELA INICIAL LIMPA: APENAS LOGOTIPO + LOGIN/SENHA + VISITANTE -->
+  <!-- TELA INICIAL LIMPA -->
   <section id="loginScreen" class="login-wrapper">
     <div class="login-card">
       <div class="logo-container">
@@ -224,9 +418,9 @@
           </div>
           <button type="submit" class="btn-visitor">Entrar como Visitante</button>
         </form>
-        <a href="https://maps.app.goo.gl/sDvSmFmkW5NZPg4UA?g_st=ic" target="_blank" rel="noopener noreferrer"
-           style="display:block;text-align:center;margin-top:12px;padding:10px 12px;border-radius:10px;background:#fef9c3;color:#854d0e;border:1.5px solid #fde047;font-weight:800;font-size:0.84em;text-decoration:none;">
-          📍 Av. Hercílio Wustemberg, 475 — Jardim Pinheirinho, Embu das Artes - SP
+
+        <a href="https://maps.app.goo.gl/sDvSmFmkW5NZPg4UA?g_st=ic" target="_blank" rel="noopener noreferrer" class="maps-link-btn">
+          Av. Hercílio Wustemberg, 475 — Jardim Pinheirinho, Embu das Artes - SP
         </a>
       </div>
     </div>
@@ -241,18 +435,20 @@
             src="/static/logo-martelo.jpg"
             onerror="this.onerror=null; this.src='/static/logo-martelo.png';"
             alt="Logo Martelo Predador"
-            style="width:54px;height:54px;border-radius:50%;border:2px solid var(--accent);background:#fff;object-fit:contain;"
+            style="width:58px;height:58px;border-radius:50%;border:2px solid var(--accent);background:#fff;object-fit:contain;"
           />
           <div>
-            <a href="https://maps.app.goo.gl/sDvSmFmkW5NZPg4UA?g_st=ic" target="_blank" rel="noopener noreferrer" class="brand-pill" style="text-decoration:none;">📍 Av. Hercílio Wustemberg, 475 • Jardim Pinheirinho, Embu das Artes - SP</a>
+            <a href="https://maps.app.goo.gl/sDvSmFmkW5NZPg4UA?g_st=ic" target="_blank" rel="noopener noreferrer" class="brand-pill">
+              Av. Hercílio Wustemberg, 475 • Embu das Artes - SP
+            </a>
             <h1 style="font-size:1.38em;font-weight:900;margin-top:4px;">Equipe Martelo Predador Team</h1>
-            <p style="font-size:0.85em;opacity:0.92;">Capoeira • Muay Thai • Contato Total Português</p>
+            <p style="font-size:0.85em;color:#cbd5e1;">Capoeira (Cordas) • Muay Thai (Kruangs) • Contato Total Português (Faixas)</p>
           </div>
         </div>
         <div class="user-badge">
           <div>
-            <strong id="loggedUserName" style="display:block;font-size:0.92em;">—</strong>
-            <small id="loggedUserRole" style="opacity:0.85;">—</small>
+            <strong id="loggedUserName" style="display:block;font-size:0.92em;color:var(--accent);">—</strong>
+            <small id="loggedUserRole" style="color:#cbd5e1;">—</small>
           </div>
           <button type="button" id="btnLogout" class="btn-logout">Sair</button>
         </div>
@@ -261,13 +457,13 @@
 
     <main class="container">
       <nav class="nav-tabs" role="tablist" aria-label="Módulos do Sistema">
-        <button type="button" class="nav-btn active" data-target="secInicio">🏠 Visão Geral</button>
-        <button type="button" class="nav-btn" data-target="secChamada">✅ Chamada</button>
-        <button type="button" class="nav-btn" data-target="secLista">📋 Lista Chamada</button>
-        <button type="button" class="nav-btn" data-target="secMensalidade">💳 Mensalidades</button>
-        <button type="button" class="nav-btn" data-target="secGraduacao">🥋 Graduação</button>
-        <button type="button" class="nav-btn" data-target="secEventos">📅 Eventos</button>
-        <button type="button" class="nav-btn" id="tabAdminBtn" data-target="secAdmin">🔐 Acessos</button>
+        <button type="button" class="nav-btn active" data-target="secInicio">Visão Geral</button>
+        <button type="button" class="nav-btn" data-target="secChamada">Chamada</button>
+        <button type="button" class="nav-btn" data-target="secLista">Lista Chamada</button>
+        <button type="button" class="nav-btn" data-target="secMensalidade">Mensalidades</button>
+        <button type="button" class="nav-btn" data-target="secGraduacao">Graduação</button>
+        <button type="button" class="nav-btn" data-target="secEventos">Eventos</button>
+        <button type="button" class="nav-btn" id="tabAdminBtn" data-target="secAdmin">Acessos</button>
       </nav>
 
       <div id="readonlyBanner" class="readonly-banner" role="status"></div>
@@ -276,69 +472,79 @@
       <!-- VISÃO GERAL -->
       <section id="secInicio" class="ux-page">
         <div class="kpi-grid">
-          <div class="kpi-card"><div class="kpi-label">Alunos Ativos</div><div class="kpi-value">6</div><div class="kpi-foot">3 Modalidades Ativas</div></div>
+          <div class="kpi-card"><div class="kpi-label">Alunos Ativos</div><div class="kpi-value" id="kpiTotalAlunos">6</div><div class="kpi-foot">Capoeira, Muay Thai &amp; Contato Total</div></div>
           <div class="kpi-card"><div class="kpi-label">Frequência Média</div><div class="kpi-value">86%</div><div class="kpi-foot">Meta Exame/Batizado: 75%</div></div>
-          <div class="kpi-card"><div class="kpi-label">Alertas Médicos</div><div class="kpi-value">2</div><div class="kpi-foot">Monitorados (ODS 3)</div></div>
-          <div class="kpi-card"><div class="kpi-label">Próximo Evento</div><div class="kpi-value">21/11</div><div class="kpi-foot">Roda &amp; Treino Aberto</div></div>
+          <div class="kpi-card"><div class="kpi-label">Alertas Médicos</div><div class="kpi-value" id="kpiAlertasMed">2</div><div class="kpi-foot">Prontuário rápido (ODS 3)</div></div>
+          <div class="kpi-card"><div class="kpi-label">Próximo Evento</div><div class="kpi-value">21/11</div><div class="kpi-foot">Roda &amp; Sparring Aberto</div></div>
         </div>
 
         <div class="card">
           <div class="section-header">
             <div>
-              <h2 class="section-title">Operações — Equipe Martelo Predador Team</h2>
-              <p class="section-subtitle">Selecione um módulo abaixo para visualizar ou gerenciar conforme sua permissão</p>
+              <h2 class="section-title">Centro de Treinamento — Equipe Martelo Predador Team</h2>
+              <p class="section-subtitle">Gestão separada por arte marcial, frequência e graduação oficial</p>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button type="button" id="btnAbrirCadastroAluno" class="btn-accent" onclick="abrirModalNovoAluno()">+ Cadastrar Novo Aluno</button>
+              <a href="https://maps.app.goo.gl/sDvSmFmkW5NZPg4UA?g_st=ic" target="_blank" rel="noopener noreferrer" class="btn-a11y" style="text-decoration:none;display:inline-flex;align-items:center;">Localização no Mapa</a>
             </div>
           </div>
           <div class="grid-3">
-            <button type="button" class="profile-chip" onclick="irParaPagina('secChamada')">✅ Chamada do Dia<span>Visualização e registro conforme perfil</span></button>
-            <button type="button" class="profile-chip" onclick="irParaPagina('secLista')">📋 Lista de Chamada<span>Conferência de presença por data</span></button>
-            <button type="button" class="profile-chip" onclick="irParaPagina('secMensalidade')">💳 Mensalidades<span>Situação financeira e bolsas sociais</span></button>
-            <button type="button" class="profile-chip" onclick="irParaPagina('secGraduacao')">🥋 Graduação (3 Sistemas)<span>Cordas, Kruangs e Faixas com Graus</span></button>
-            <button type="button" class="profile-chip" onclick="irParaPagina('secEventos')">📅 Eventos &amp; Calendário<span>Batizados, Kruangs e Exames de Faixa</span></button>
-            <button type="button" class="profile-chip" id="cardAtalhoAdmin" onclick="irParaPagina('secAdmin')">🔐 Acessos, Senhas &amp; Visitantes<span>Controle exclusivo do Administrador</span></button>
+            <button type="button" class="profile-chip" onclick="irParaPagina('secChamada')">Chamada de Treino<span>Registro rápido por modalidade + SOS Médico</span></button>
+            <button type="button" class="profile-chip" onclick="irParaPagina('secLista')">Lista de Chamada (3 Abas)<span>Capoeira, Muay Thai e Contato Total separados</span></button>
+            <button type="button" class="profile-chip" onclick="irParaPagina('secMensalidade')">Mensalidades<span>Situação financeira e bolsas sociais</span></button>
+            <button type="button" class="profile-chip" onclick="irParaPagina('secGraduacao')">Graduação (3 Abas)<span>Contato Total, Capoeira e Muay Thai</span></button>
+            <button type="button" class="profile-chip" onclick="irParaPagina('secEventos')">Eventos &amp; Calendário<span>Batizados, Kruangs e Exames de Faixa</span></button>
+            <button type="button" class="profile-chip" id="cardAtalhoAdmin" onclick="irParaPagina('secAdmin')">Acessos, Senhas &amp; Visitantes<span>Controle exclusivo do Administrador</span></button>
           </div>
         </div>
       </section>
 
       <!-- PÁGINA 2: CHAMADA + SOS MÉDICO -->
       <section id="secChamada" class="ux-page" style="display:none;">
-        <div class="card grid-3">
-          <div class="form-group" style="margin:0;">
-            <label for="selTurma">Modalidade</label>
-            <select id="selTurma">
-              <option value="Todas">Todas (Capoeira, Muay Thai e Contato Total)</option>
-              <option value="Capoeira">Capoeira (Cordas)</option>
-              <option value="Muay Thai">Muay Thai (Kruangs)</option>
-              <option value="Contato Total Português">Contato Total Português (Faixas)</option>
-            </select>
-          </div>
+        <div class="sub-tabs" id="tabsChamadaMod">
+          <button type="button" class="sub-tab-btn active" data-mod="Capoeira">Capoeira (Cordas)</button>
+          <button type="button" class="sub-tab-btn" data-mod="Muay Thai">Muay Thai (Kruangs)</button>
+          <button type="button" class="sub-tab-btn" data-mod="Contato Total Português">Contato Total Português (Faixas)</button>
+        </div>
+
+        <div class="card grid-2">
           <div class="form-group" style="margin:0;">
             <label for="inpDataAula">Data do Treino</label>
             <input type="date" id="inpDataAula" value="2026-11-17" />
           </div>
           <div class="form-group" style="margin:0;">
             <label for="buscaAluno">Buscar Apelido ou Nome</label>
-            <input type="search" id="buscaAluno" placeholder="Ex: Gavião, Estrela, Falcão..." />
+            <input type="search" id="buscaAluno" placeholder="Filtrar atleta..." />
           </div>
         </div>
 
         <div class="section-header">
           <div>
-            <h2 class="section-title">Chamada (<span id="countPres">5</span>/<span id="countTot">6</span> Presentes)</h2>
-            <p class="section-subtitle">Identificação por apelido, modalidade, graduação oficial e alerta médico</p>
+            <h2 class="section-title">Chamada — <span id="tituloModChamada">Capoeira</span> (<span id="countPres">0</span>/<span id="countTot">0</span> Presentes)</h2>
+            <p class="section-subtitle">Alunos matriculados nesta modalidade</p>
           </div>
-          <button type="button" id="btnMarcarTodos" class="btn-accent">✓ Marcar Todos Presentes</button>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button type="button" id="btnCadastroAlunoChamada" class="btn-a11y" onclick="abrirModalNovoAluno()">+ Novo Aluno</button>
+            <button type="button" id="btnMarcarTodos" class="btn-accent">Marcar Todos Presentes</button>
+          </div>
         </div>
 
         <div id="listaChamadaCards"></div>
 
         <div class="sticky-footer" id="footerSalvarChamada">
-          <button type="button" id="btnSalvarChamada" class="btn-primary" style="max-width:1060px;margin:0 auto;display:block;">Confirmar e Salvar Chamada na Lista</button>
+          <button type="button" id="btnSalvarChamada" class="btn-primary" style="max-width:1080px;margin:0 auto;display:block;">Salvar Chamada de <span id="btnSaveModLabel">Capoeira</span></button>
         </div>
       </section>
 
-      <!-- PÁGINA 3: CONFERIR LISTA DE CHAMADA -->
+      <!-- PÁGINA 3: LISTA DE CHAMADA (3 ABAS SEPARADAS POR ARTE MARCIAL) -->
       <section id="secLista" class="ux-page" style="display:none;">
+        <div class="sub-tabs" id="tabsListaMod">
+          <button type="button" class="sub-tab-btn active" data-mod="Capoeira">Capoeira</button>
+          <button type="button" class="sub-tab-btn" data-mod="Muay Thai">Muay Thai</button>
+          <button type="button" class="sub-tab-btn" data-mod="Contato Total Português">Contato Total Português</button>
+        </div>
+
         <div class="card grid-2">
           <div class="form-group" style="margin:0;">
             <label for="filtroDataLista">Filtrar Histórico por Data</label>
@@ -346,7 +552,7 @@
           </div>
           <div class="form-group" style="margin:0;">
             <label>&nbsp;</label>
-            <button type="button" id="btnResetLista" class="btn-primary">Mostrar Todas as Listas Salvas</button>
+            <button type="button" id="btnResetLista" class="btn-primary">Mostrar Todas as Datas</button>
           </div>
         </div>
         <div id="containerListasSalvas"></div>
@@ -363,13 +569,13 @@
           <div class="section-header">
             <div>
               <h2 class="section-title">Mensalidades e Contribuição Comunitária</h2>
-              <p class="section-subtitle">Controle unificado das turmas de Capoeira, Muay Thai e Contato Total Português</p>
+              <p class="section-subtitle">Controle financeiro dos alunos matriculados</p>
             </div>
           </div>
           <div style="overflow-x:auto;">
             <table class="ux-table">
               <thead>
-                <tr><th>Apelido / Nome Civil</th><th>Modalidade</th><th>Plano</th><th>Vencimento</th><th>Status</th><th>Situação / Ação</th></tr>
+                <tr><th>Apelido / Nome Civil</th><th>Modalidades Matriculadas</th><th>Plano</th><th>Vencimento</th><th>Status</th><th>Situação / Ação</th></tr>
               </thead>
               <tbody id="tbodyMensalidade"></tbody>
             </table>
@@ -377,37 +583,24 @@
         </div>
       </section>
 
-      <!-- PÁGINA 5: GRADUAÇÃO OFICIAL -->
+      <!-- PÁGINA 5: GRADUAÇÃO OFICIAL (3 ABAS SEPARADAS: CONTATO TOTAL, CAPOEIRA E MUAY THAI) -->
       <section id="secGraduacao" class="ux-page" style="display:none;">
+        <div class="sub-tabs" id="tabsGradMod">
+          <button type="button" class="sub-tab-btn active" data-mod="Contato Total Português">Contato Total Português (Faixas &amp; Graus)</button>
+          <button type="button" class="sub-tab-btn" data-mod="Capoeira">Capoeira (Cordas)</button>
+          <button type="button" class="sub-tab-btn" data-mod="Muay Thai">Muay Thai (Kruangs)</button>
+        </div>
+
         <div class="card">
           <div class="section-header">
             <div>
-              <h2 class="section-title">Sistema Oficial de Graduação — Equipe Martelo Predador</h2>
-              <p class="section-subtitle">Barra colorida conforme a Corda (Capoeira), Kruang (Muay Thai) ou Faixa com Graus (Contato Total Português)</p>
+              <h2 class="section-title">Graduação — <span id="tituloModGrad">Contato Total Português</span></h2>
+              <p class="section-subtitle" id="subtituloModGrad">Acompanhamento individual de frequência e troca de graduação</p>
             </div>
-            <select id="filtroGradMod" style="padding:8px 12px;border:2px solid var(--border);border-radius:10px;font-weight:700;">
-              <option value="Todas">Todas as Modalidades</option>
-              <option value="Capoeira">Capoeira (Cordas)</option>
-              <option value="Muay Thai">Muay Thai (Kruangs)</option>
-              <option value="Contato Total Português">Contato Total Português (Faixas)</option>
-            </select>
+            <button type="button" id="btnCadastroAlunoGrad" class="btn-accent" onclick="abrirModalNovoAluno()">+ Matricular Aluno na Modalidade</button>
           </div>
           <div id="containerGraduacao"></div>
-
-          <div class="grad-legend">
-            <div class="legend-box">
-              <strong>1. Capoeira — Cordas (Raízes Escola):</strong>
-              <p style="margin-top:4px;color:var(--text-muted);">Crua (Aluno) ➔ Verde ➔ Amarela ➔ Azul ➔ Marrom ➔ Roxa ➔ Laranja ➔ Crua/Verde (Estagiário 1º Grau) até Mestre / Grão-Mestre.</p>
-            </div>
-            <div class="legend-box">
-              <strong>2. Muay Thai — Kruangs (Ram Muay Thai):</strong>
-              <p style="margin-top:4px;color:var(--text-muted);">Branco ➔ Branco Ponta Vermelha ➔ Vermelho (Instrutor 1º Grau) ➔ Vermelho Ponta Roxa (2º) ➔ Roxo (Monitor 1º) ➔ Roxo Ponta Marrom (2º) ➔ Marrom (Professor 1º) ➔ Marrom Ponta Preta (2º) ➔ Preto (Mestrando) ➔ 1º ao 7º Dan.</p>
-            </div>
-            <div class="legend-box">
-              <strong>3. Contato Total Português — Faixas &amp; Graus:</strong>
-              <p style="margin-top:4px;color:var(--text-muted);">Branca (1º ao 4º Grau ➔ Estagiário) ➔ Azul (1º ao 4º Grau) ➔ Roxa Monitor (1º ao 4º Grau) ➔ Marrom Professor (1º ao 4º Grau) ➔ Preta (1º ao 4º Grau) ➔ Mestre (Faixa Verde com ponta vermelha e tarja preta de graus).</p>
-            </div>
-          </div>
+          <div id="legendaGradAtual" class="legend-box"></div>
         </div>
       </section>
 
@@ -417,7 +610,7 @@
           <div class="section-header">
             <div>
               <h2 class="section-title">Marcar Novo Evento no Calendário</h2>
-              <p class="section-subtitle">Agende Batizados de Capoeira, Exames de Kruang e Exames de Faixa (Contato Total Português)</p>
+              <p class="section-subtitle">Batizados de Capoeira, Exames de Kruang e Exames de Faixa</p>
             </div>
           </div>
           <form id="formNovoEvento" class="grid-2">
@@ -430,7 +623,7 @@
               <input type="date" id="evData" value="2026-11-28" required />
             </div>
             <div class="form-group" style="margin:0;">
-              <label for="evLocal">Local / Núcleo</label>
+              <label for="evLocal">Local / Academia</label>
               <input type="text" id="evLocal" value="Academia Família Martelo Predador — Av. Hercílio Wustemberg, 475, Jardim Pinheirinho, Embu das Artes - SP" required />
             </div>
             <div class="form-group" style="margin:0;">
@@ -460,12 +653,12 @@
         </div>
       </section>
 
-      <!-- PÁGINA 7: ADMINISTRAÇÃO EXCLUSIVA (ACESSOS, SENHAS E REGISTRO DE VISITANTES) -->
+      <!-- PÁGINA 7: ADMINISTRAÇÃO EXCLUSIVA -->
       <section id="secAdmin" class="ux-page" style="display:none;">
         <div class="card">
           <div class="section-header">
             <div>
-              <h2 class="section-title">🔐 Cadastrar Novo Usuário por Categoria</h2>
+              <h2 class="section-title">Cadastrar Novo Usuário por Categoria</h2>
               <p class="section-subtitle">Defina o nível de permissão de cada membro</p>
             </div>
           </div>
@@ -521,7 +714,7 @@
         <div class="card">
           <div class="section-header">
             <div>
-              <h2 class="section-title">👁️ Registro de Visitantes (Auditoria de Acessos)</h2>
+              <h2 class="section-title">Registro de Visitantes (Auditoria de Acessos)</h2>
               <p class="section-subtitle">Histórico nominal de todas as pessoas que acessaram o site em modo visitante</p>
             </div>
           </div>
@@ -538,10 +731,74 @@
     </main>
   </div>
 
+  <!-- MODAL CADASTRAR NOVO ALUNO (MULTI-MODALIDADE) -->
+  <div id="novoAlunoModal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <h2 style="font-weight:900;color:var(--accent);margin-bottom:4px;">Cadastrar Novo Aluno / Atleta</h2>
+      <p style="font-size:0.86em;color:var(--text-muted);margin-bottom:14px;">Selecione uma ou mais artes marciais para iniciar automaticamente a chamada e a contagem de graduação.</p>
+      <form id="formNovoAluno">
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="alApelido">Apelido de Roda / Ringue</label>
+            <input type="text" id="alApelido" placeholder="Ex: Leão" required />
+          </div>
+          <div class="form-group">
+            <label for="alNome">Nome Completo</label>
+            <input type="text" id="alNome" placeholder="Nome civil do aluno" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Modalidades Matriculadas (marque todas que o aluno vai praticar)</label>
+          <div class="mod-check-group">
+            <label class="mod-check-item"><input type="checkbox" id="chkCapoeira" checked /> Capoeira</label>
+            <label class="mod-check-item"><input type="checkbox" id="chkMuayThai" /> Muay Thai</label>
+            <label class="mod-check-item"><input type="checkbox" id="chkContatoTotal" /> Contato Total Português</label>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="alSangue">Tipo Sanguíneo</label>
+            <select id="alSangue">
+              <option value="O+">O+</option><option value="O-">O-</option>
+              <option value="A+">A+</option><option value="A-">A-</option>
+              <option value="B+">B+</option><option value="B-">B-</option>
+              <option value="AB+">AB+</option><option value="AB-">AB-</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="alPlano">Plano / Contribuição</label>
+            <select id="alPlano">
+              <option value="R$ 60,00/mês">R$ 60,00/mês (1 Modalidade)</option>
+              <option value="R$ 100,00/mês">R$ 100,00/mês (Combo 2+ Modalidades)</option>
+              <option value="Isento (Inclusão ODS 10)">Bolsista Social (Isento)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="alAlergia">Alergias / Observações Médicas (SOS)</label>
+          <input type="text" id="alAlergia" value="Nenhuma restrição médica" required />
+        </div>
+
+        <div class="form-group">
+          <label for="alContato">Contato de Emergência</label>
+          <input type="text" id="alContato" placeholder="(11) 99999-0000 — Nome do Responsável" required />
+        </div>
+
+        <div style="display:flex;gap:8px;margin-top:10px;">
+          <button type="submit" class="btn-primary">Salvar Matrícula e Iniciar Graduação</button>
+          <button type="button" onclick="document.getElementById('novoAlunoModal').classList.remove('open')" class="btn-logout" style="padding:0 16px;">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- MODAL SOS MÉDICO -->
   <div id="sosModal" class="modal-backdrop" role="dialog" aria-modal="true">
     <div class="modal-box danger-border">
-      <h2 style="color:var(--danger);font-weight:900;">🚨 Ficha Médica de Emergência (ODS 3)</h2>
+      <h2 style="color:#f87171;font-weight:900;">Ficha Médica de Emergência (ODS 3)</h2>
       <div id="sosModalBody"></div>
       <button type="button" onclick="document.getElementById('sosModal').classList.remove('open')" class="btn-primary" style="margin-top:16px;">Fechar Prontuário</button>
     </div>
@@ -550,7 +807,7 @@
   <!-- MODAL ALTERAR SENHA -->
   <div id="pwdModal" class="modal-backdrop" role="dialog" aria-modal="true">
     <div class="modal-box">
-      <h2 style="font-weight:900;color:var(--primary);">🔑 Alterar Senha de Acesso</h2>
+      <h2 style="font-weight:900;color:var(--accent);">Alterar Senha de Acesso</h2>
       <p id="pwdModalUserLabel" style="font-size:0.9em;color:var(--text-muted);margin:6px 0 14px;"></p>
       <form id="formAlterarSenha">
         <input type="hidden" id="pwdTargetUserId" />
@@ -560,7 +817,7 @@
         </div>
         <div style="display:flex;gap:8px;">
           <button type="submit" class="btn-primary">Salvar Nova Senha</button>
-          <button type="button" onclick="document.getElementById('pwdModal').classList.remove('open')" class="btn-logout" style="border:2px solid var(--border);padding:0 16px;">Cancelar</button>
+          <button type="button" onclick="document.getElementById('pwdModal').classList.remove('open')" class="btn-logout" style="padding:0 16px;">Cancelar</button>
         </div>
       </form>
     </div>
@@ -569,6 +826,9 @@
   <script>
     let authToken = null;
     let currentUser = null;
+    let modChamadaAtiva = "Capoeira";
+    let modListaAtiva = "Capoeira";
+    let modGradAtiva = "Contato Total Português";
 
     function canManageUsers() { return currentUser?.role === "admin"; }
     function canManageAdminOps() { return ["admin", "super_admin"].includes(currentUser?.role); }
@@ -583,6 +843,21 @@
       estagiario: "Estagiário",
       visitante: "Visitante (Somente Leitura)"
     };
+
+    // MARCAS D'ÁGUA VETORIAIS DINÂMICAS (BERIMBAU / KRUANG / GRADE DE RINGUE)
+    const WATERMARKS_SVG = {
+      "Capoeira": `<svg viewBox="0 0 200 200" fill="none" stroke="#f59e0b" stroke-width="5"><path d="M135 20 C65 55, 65 145, 135 180" stroke-linecap="round"/><line x1="135" y1="20" x2="135" y2="180" stroke-width="2"/><circle cx="115" cy="145" r="22" fill="#f59e0b" fill-opacity="0.25"/><line x1="60" y1="115" x2="150" y2="135" stroke-width="3"/></svg>`,
+      "Muay Thai": `<svg viewBox="0 0 200 200" fill="none" stroke="#ef4444" stroke-width="5"><path d="M55 130 C55 75, 145 75, 145 130" stroke-linecap="round"/><path d="M70 130 C70 90, 130 90, 130 130" stroke-linecap="round"/><path d="M100 88 L100 35 L118 55" stroke-linecap="round" stroke-linejoin="round"/><circle cx="62" cy="136" r="10"/><circle cx="138" cy="136" r="10"/></svg>`,
+      "Contato Total Português": `<svg viewBox="0 0 200 200" fill="none" stroke="#38bdf8" stroke-width="4"><polygon points="65,25 135,25 175,65 175,135 135,175 65,175 25,135 25,65"/><line x1="45" y1="45" x2="155" y2="155" stroke-width="2"/><line x1="155" y1="45" x2="45" y2="155" stroke-width="2"/><line x1="25" y1="100" x2="175" y2="100" stroke-width="2"/><line x1="100" y1="25" x2="100" y2="175" stroke-width="2"/></svg>`
+    };
+
+    function atualizarTemaArena(mod) {
+      document.body.classList.remove("theme-capoeira", "theme-muaythai", "theme-contatototal");
+      if (mod === "Capoeira") document.body.classList.add("theme-capoeira");
+      else if (mod === "Muay Thai") document.body.classList.add("theme-muaythai");
+      else document.body.classList.add("theme-contatototal");
+      document.getElementById("arenaWatermark").innerHTML = WATERMARKS_SVG[mod] || WATERMARKS_SVG["Contato Total Português"];
+    }
 
     const CORES_GRADUACAO = {
       "Corda Crua (Aluno)": { css: "#d6cbb5", dot: "#d6cbb5", graus: 0 },
@@ -615,25 +890,79 @@
       "Faixa de Mestre (Verde c/ Ponta Vermelha)": { css: "linear-gradient(90deg, #15803d 75%, #dc2626 75%)", dot: "#15803d", graus: 4 }
     };
 
+    // ALUNOS SUPORTANDO MÚLTIPLAS MODALIDADES SIMULTÂNEAS
     const alunos = [
-      { id: 1, apelido: "Gavião", nome: "Lucas Gabriel Silva", modalidade: "Capoeira", presente: true, sangue: "O+", alerta: false, alergia: "Nenhuma alergia conhecida", contato: "(11) 98412-3390 — Mariana Silva (Mãe)", statusFin: "Em Dia", plano: "R$ 60,00/mês", venc: "10/11/2026", gradAtual: "Corda Verde (Aluno)", proxGrad: "Corda Amarela (Aluno)", freq: 92 },
-      { id: 2, apelido: "Estrela", nome: "Ana Beatriz Oliveira", modalidade: "Capoeira", presente: true, sangue: "A+", alerta: true, alergia: "Alergia à Dipirona • Asma leve (bombinha na mochila)", contato: "(11) 97230-1184 — Carlos Oliveira (Pai)", statusFin: "Em Dia", plano: "R$ 60,00/mês", venc: "10/11/2026", gradAtual: "Corda Amarela (Aluno)", proxGrad: "Corda Azul (Aluno)", freq: 88 },
-      { id: 3, apelido: "Tigre", nome: "Bruno Henrique Ferreira", modalidade: "Muay Thai", presente: true, sangue: "O-", alerta: false, alergia: "Nenhuma restrição médica", contato: "(11) 98210-7741 — Sandra Ferreira (Mãe)", statusFin: "Em Dia", plano: "R$ 70,00/mês", venc: "10/11/2026", gradAtual: "Kruang Vermelho Ponta Roxa (2º Grau)", proxGrad: "Kruang Roxo (Monitor 1º Grau)", freq: 90 },
-      { id: 4, apelido: "Trovão", nome: "Pedro Henrique Santos", modalidade: "Muay Thai", presente: false, sangue: "B-", alerta: true, alergia: "Intolerância severa à lactose", contato: "(11) 99104-5521 — Fernanda Santos (Mãe)", statusFin: "Pendente", plano: "R$ 70,00/mês", venc: "10/11/2026", gradAtual: "Kruang Branco Ponta Vermelha", proxGrad: "Kruang Vermelho (Instrutor 1º Grau)", freq: 68 },
-      { id: 5, apelido: "Falcão", nome: "Rafael Mendes Costa", modalidade: "Contato Total Português", presente: true, sangue: "AB+", alerta: false, alergia: "Nenhuma restrição médica", contato: "(11) 98119-4402 — Patrícia Costa (Esposa)", statusFin: "Em Dia", plano: "R$ 70,00/mês", venc: "10/11/2026", gradAtual: "Faixa Azul 2º Grau", proxGrad: "Faixa Azul 3º Grau", freq: 95 },
-      { id: 6, apelido: "Pantera", nome: "Mariana Souza Lima", modalidade: "Contato Total Português", presente: true, sangue: "A-", alerta: false, alergia: "Nenhuma restrição médica", contato: "(11) 98871-2019 — Cláudia Lima (Mãe)", statusFin: "Bolsista Social", plano: "Isento (Inclusão ODS 10)", venc: "—", gradAtual: "Faixa Branca 3º Grau", proxGrad: "Faixa Branca 4º Grau (Estagiário)", freq: 84 }
+      {
+        id: 1, apelido: "Gavião", nome: "Lucas Gabriel Silva",
+        modalidades: ["Capoeira", "Muay Thai"],
+        presencaPorMod: { "Capoeira": true, "Muay Thai": true },
+        graduacoes: {
+          "Capoeira": { atual: "Corda Verde (Aluno)", proxima: "Corda Amarela (Aluno)", freq: 92 },
+          "Muay Thai": { atual: "Kruang Branco Ponta Vermelha", proxima: "Kruang Vermelho (Instrutor 1º Grau)", freq: 85 }
+        },
+        sangue: "O+", alerta: false, alergia: "Nenhuma alergia conhecida", contato: "(11) 98412-3390 — Mariana Silva (Mãe)", statusFin: "Em Dia", plano: "R$ 100,00/mês", venc: "10/11/2026"
+      },
+      {
+        id: 2, apelido: "Estrela", nome: "Ana Beatriz Oliveira",
+        modalidades: ["Capoeira"],
+        presencaPorMod: { "Capoeira": true },
+        graduacoes: {
+          "Capoeira": { atual: "Corda Amarela (Aluno)", proxima: "Corda Azul (Aluno)", freq: 88 }
+        },
+        sangue: "A+", alerta: true, alergia: "Alergia à Dipirona • Asma leve (bombinha na mochila)", contato: "(11) 97230-1184 — Carlos Oliveira (Pai)", statusFin: "Em Dia", plano: "R$ 60,00/mês", venc: "10/11/2026"
+      },
+      {
+        id: 3, apelido: "Tigre", nome: "Bruno Henrique Ferreira",
+        modalidades: ["Muay Thai", "Contato Total Português"],
+        presencaPorMod: { "Muay Thai": true, "Contato Total Português": true },
+        graduacoes: {
+          "Muay Thai": { atual: "Kruang Vermelho Ponta Roxa (2º Grau)", proxima: "Kruang Roxo (Monitor 1º Grau)", freq: 90 },
+          "Contato Total Português": { atual: "Faixa Branca 3º Grau", proxima: "Faixa Branca 4º Grau (Estagiário)", freq: 82 }
+        },
+        sangue: "O-", alerta: false, alergia: "Nenhuma restrição médica", contato: "(11) 98210-7741 — Sandra Ferreira (Mãe)", statusFin: "Em Dia", plano: "R$ 100,00/mês", venc: "10/11/2026"
+      },
+      {
+        id: 4, apelido: "Trovão", nome: "Pedro Henrique Santos",
+        modalidades: ["Muay Thai"],
+        presencaPorMod: { "Muay Thai": false },
+        graduacoes: {
+          "Muay Thai": { atual: "Kruang Branco Ponta Vermelha", proxima: "Kruang Vermelho (Instrutor 1º Grau)", freq: 68 }
+        },
+        sangue: "B-", alerta: true, alergia: "Intolerância severa à lactose", contato: "(11) 99104-5521 — Fernanda Santos (Mãe)", statusFin: "Pendente", plano: "R$ 70,00/mês", venc: "10/11/2026"
+      },
+      {
+        id: 5, apelido: "Falcão", nome: "Rafael Mendes Costa",
+        modalidades: ["Contato Total Português"],
+        presencaPorMod: { "Contato Total Português": true },
+        graduacoes: {
+          "Contato Total Português": { atual: "Faixa Azul 2º Grau", proxima: "Faixa Azul 3º Grau", freq: 95 }
+        },
+        sangue: "AB+", alerta: false, alergia: "Nenhuma restrição médica", contato: "(11) 98119-4402 — Patrícia Costa (Esposa)", statusFin: "Em Dia", plano: "R$ 70,00/mês", venc: "10/11/2026"
+      },
+      {
+        id: 6, apelido: "Pantera", nome: "Mariana Souza Lima",
+        modalidades: ["Contato Total Português", "Capoeira"],
+        presencaPorMod: { "Contato Total Português": true, "Capoeira": true },
+        graduacoes: {
+          "Contato Total Português": { atual: "Faixa Branca 3º Grau", proxima: "Faixa Branca 4º Grau (Estagiário)", freq: 84 },
+          "Capoeira": { atual: "Corda Crua (Aluno)", proxima: "Corda Verde (Aluno)", freq: 80 }
+        },
+        sangue: "A-", alerta: false, alergia: "Nenhuma restrição médica", contato: "(11) 98871-2019 — Cláudia Lima (Mãe)", statusFin: "Bolsista Social", plano: "Isento (Inclusão ODS 10)", venc: "—",
+      }
     ];
 
     const listasHistorico = [
-      { data: "2026-11-17", turma: "Treino Geral — Capoeira, Muay Thai & Contato Total Português", registros: alunos.map(a => ({ apelido: a.apelido, nome: a.nome, modalidade: a.modalidade, grad: a.gradAtual, presente: a.presente })) }
+      { data: "2026-11-17", modalidade: "Capoeira", registros: alunos.filter(a => a.modalidades.includes("Capoeira")).map(a => ({ apelido: a.apelido, nome: a.nome, grad: a.graduacoes["Capoeira"].atual, presente: a.presencaPorMod["Capoeira"] })) },
+      { data: "2026-11-17", modalidade: "Muay Thai", registros: alunos.filter(a => a.modalidades.includes("Muay Thai")).map(a => ({ apelido: a.apelido, nome: a.nome, grad: a.graduacoes["Muay Thai"].atual, presente: a.presencaPorMod["Muay Thai"] })) },
+      { data: "2026-11-17", modalidade: "Contato Total Português", registros: alunos.filter(a => a.modalidades.includes("Contato Total Português")).map(a => ({ apelido: a.apelido, nome: a.nome, grad: a.graduacoes["Contato Total Português"].atual, presente: a.presencaPorMod["Contato Total Português"] })) }
     ];
 
     const agendaEventos = [
-      { titulo: "Batizado de Capoeira, Exame de Kruang & Faixa Contato Total", data: "2026-11-28", local: "Quadra E.M. Jequitibá • Embu das Artes", tipo: "Cerimônia Oficial de Graduação" },
-      { titulo: "Roda Aberta & Treino Comunitário — Equipe Martelo Predador", data: "2026-11-21", local: "Av. Hercílio Wustemberg, 475 — Jardim Pinheirinho, Embu das Artes - SP", tipo: "Treino Integrado & Roda Aberta" }
+      { titulo: "Batizado de Capoeira, Exame de Kruang & Faixa Contato Total", data: "2026-11-28", local: "Academia Família Martelo Predador — Av. Hercílio Wustemberg, 475, Embu das Artes - SP", tipo: "Cerimônia Oficial de Graduação" },
+      { titulo: "Roda Aberta & Sparring Comunitário — Equipe Martelo Predador", data: "2026-11-21", local: "Av. Hercílio Wustemberg, 475 — Jardim Pinheirinho, Embu das Artes - SP", tipo: "Treino Integrado & Roda Aberta" }
     ];
 
-    function getGradStyle(gradNome) { return CORES_GRADUACAO[gradNome] || { css: "#15803d", dot: "#15803d", graus: 0 }; }
+    function getGradStyle(gradNome) { return CORES_GRADUACAO[gradNome] || { css: "#dc2626", dot: "#dc2626", graus: 0 }; }
     function getModPillClass(mod) { return mod === "Capoeira" ? "pill-mod-cap" : mod === "Muay Thai" ? "pill-mod-mt" : "pill-mod-ctp"; }
 
     function showToast(msg) {
@@ -663,18 +992,23 @@
       document.getElementById("footerSalvarChamada").style.display = editaChamada ? "block" : "none";
       document.getElementById("cardFormNovoEvento").style.display = canManageAdminOps() ? "block" : "none";
 
+      const podeMatricular = canManageAdminOps();
+      document.getElementById("btnAbrirCadastroAluno").style.display = podeMatricular ? "inline-block" : "none";
+      document.getElementById("btnCadastroAlunoChamada").style.display = podeMatricular ? "inline-block" : "none";
+      document.getElementById("btnCadastroAlunoGrad").style.display = podeMatricular ? "inline-block" : "none";
+
       const roBanner = document.getElementById("readonlyBanner");
       if (currentUser.role === "visitante") {
-        roBanner.textContent = "👁️ MODO VISITANTE (SOMENTE LEITURA): Sua visita foi registrada. Você pode navegar por todas as telas, mas nenhuma alteração é permitida.";
+        roBanner.textContent = "MODO VISITANTE (SOMENTE LEITURA): Sua visita foi registrada. Navegação liberada sem permissão de edição.";
         roBanner.style.display = "block";
       } else if (currentUser.role === "estagiario") {
-        roBanner.textContent = "📋 PERFIL ESTAGIÁRIO: Permissão ativa para conferência das Listas de Chamada e consulta geral.";
+        roBanner.textContent = "PERFIL ESTAGIÁRIO: Permissão ativa para conferência das Listas de Chamada.";
         roBanner.style.display = "block";
       } else if (currentUser.role === "monitor") {
-        roBanner.textContent = "✅ PERFIL MONITOR: Permissão ativa para realizar Chamadas e conferir Listas de Presença.";
+        roBanner.textContent = "PERFIL MONITOR: Permissão ativa para realizar Chamadas e conferir Listas de Presença.";
         roBanner.style.display = "block";
       } else if (currentUser.role === "professor") {
-        roBanner.textContent = "🥋 PERFIL PROFESSOR: Permissão ativa para Chamadas, Listas de Presença e Promoção de Graduações.";
+        roBanner.textContent = "PERFIL PROFESSOR: Permissão ativa para Chamadas, Listas de Presença e Promoção de Graduações.";
         roBanner.style.display = "block";
       } else {
         roBanner.style.display = "none";
@@ -682,6 +1016,7 @@
 
       document.getElementById("loginScreen").style.display = "none";
       document.getElementById("appShell").style.display = "block";
+      atualizarTemaArena("Contato Total Português");
       irParaPagina("secInicio");
       renderTudo();
       if (isAdmin) carregarDadosAdmin();
@@ -729,11 +1064,68 @@
       document.querySelectorAll(".ux-page").forEach(sec => sec.style.display = "none");
       document.getElementById(targetId).style.display = "block";
       if (targetId === "secAdmin" && canManageUsers()) carregarDadosAdmin();
+      if (targetId === "secChamada") atualizarTemaArena(modChamadaAtiva);
+      if (targetId === "secLista") atualizarTemaArena(modListaAtiva);
+      if (targetId === "secGraduacao") atualizarTemaArena(modGradAtiva);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     document.querySelectorAll(".nav-btn").forEach(btn => { btn.onclick = () => irParaPagina(btn.dataset.target); });
 
+    // CADASTRO DE NOVO ALUNO MULTI-MODALIDADE
+    window.abrirModalNovoAluno = () => {
+      if (!canManageAdminOps()) return;
+      document.getElementById("novoAlunoModal").classList.add("open");
+    };
+
+    document.getElementById("formNovoAluno").onsubmit = (e) => {
+      e.preventDefault();
+      if (!canManageAdminOps()) return;
+      const mods = [];
+      if (document.getElementById("chkCapoeira").checked) mods.push("Capoeira");
+      if (document.getElementById("chkMuayThai").checked) mods.push("Muay Thai");
+      if (document.getElementById("chkContatoTotal").checked) mods.push("Contato Total Português");
+
+      if (mods.length === 0) {
+        alert("Selecione pelo menos uma modalidade para o aluno.");
+        return;
+      }
+
+      const presencaPorMod = {};
+      const graduacoes = {};
+      mods.forEach(m => {
+        presencaPorMod[m] = true;
+        if (m === "Capoeira") graduacoes[m] = { atual: "Corda Crua (Aluno)", proxima: "Corda Verde (Aluno)", freq: 100 };
+        if (m === "Muay Thai") graduacoes[m] = { atual: "Kruang Branco", proxima: "Kruang Branco Ponta Vermelha", freq: 100 };
+        if (m === "Contato Total Português") graduacoes[m] = { atual: "Faixa Branca", proxima: "Faixa Branca 3º Grau", freq: 100 };
+      });
+
+      const planoVal = document.getElementById("alPlano").value;
+      const novoAluno = {
+        id: alunos.length + 1,
+        apelido: document.getElementById("alApelido").value.trim(),
+        nome: document.getElementById("alNome").value.trim(),
+        modalidades: mods,
+        presencaPorMod,
+        graduacoes,
+        sangue: document.getElementById("alSangue").value,
+        alerta: document.getElementById("alAlergia").value.toLowerCase() !== "nenhuma restrição médica",
+        alergia: document.getElementById("alAlergia").value.trim(),
+        contato: document.getElementById("alContato").value.trim(),
+        statusFin: planoVal.includes("Isento") ? "Bolsista Social" : "Em Dia",
+        plano: planoVal,
+        venc: planoVal.includes("Isento") ? "—" : "10/12/2026"
+      };
+
+      alunos.unshift(novoAluno);
+      document.getElementById("novoAlunoModal").classList.remove("open");
+      e.target.reset();
+      document.getElementById("chkCapoeira").checked = true;
+      renderTudo();
+      showToast(`Aluno ${novoAluno.apelido} matriculado em ${mods.join(" + ")} com graduação inicial iniciada!`);
+    };
+
+    // ADMIN USUÁRIOS & VISITANTES
     async function carregarDadosAdmin() {
       if (!authToken || !canManageUsers()) return;
       const [resUsers, resVis] = await Promise.all([
@@ -750,7 +1142,7 @@
             <td><span class="pill pill-mod-ctp">${ROLE_LABELS[u.role] || u.role}</span></td>
             <td><span class="pill ${u.ativo ? "pill-ok" : "pill-danger"}">${u.ativo ? "Ativo" : "Bloqueado"}</span></td>
             <td style="display:flex;gap:6px;flex-wrap:wrap;">
-              <button type="button" class="btn-accent" onclick="abrirModalSenha(${u.id}, '${u.nome.replace(/'/g, "")}')">🔑 Senha</button>
+              <button type="button" class="btn-accent" onclick="abrirModalSenha(${u.id}, '${u.nome.replace(/'/g, "")}')">Senha</button>
               ${u.id !== currentUser.id ? `<button type="button" class="btn-sm-danger" onclick="alternarStatusUsuario(${u.id})">${u.ativo ? "Bloquear" : "Ativar"}</button>` : ""}
             </td>
           </tr>
@@ -782,7 +1174,7 @@
       if (!res.ok) { alert(data.detail || "Erro ao criar usuário."); return; }
       e.target.reset();
       carregarDadosAdmin();
-      showToast(`✓ Usuário ${payload.nome} criado como ${ROLE_LABELS[payload.role]}!`);
+      showToast(`Usuário ${payload.nome} criado como ${ROLE_LABELS[payload.role]}!`);
     };
 
     window.abrirModalSenha = (id, nome) => {
@@ -803,49 +1195,64 @@
       });
       if (res.ok) {
         document.getElementById("pwdModal").classList.remove("open");
-        showToast("✓ Senha atualizada com sucesso!");
+        showToast("Senha atualizada com sucesso!");
       }
     };
 
     window.alternarStatusUsuario = async (id) => {
       const res = await fetch(`/api/admin/usuarios/${id}/status`, { method: "PUT", headers: { "Authorization": `Bearer ${authToken}` } });
-      if (res.ok) { carregarDadosAdmin(); showToast("✓ Status do usuário atualizado!"); }
+      if (res.ok) { carregarDadosAdmin(); showToast("Status do usuário atualizado!"); }
     };
 
+    // SUB-ABAS DA CHAMADA
+    document.querySelectorAll("#tabsChamadaMod .sub-tab-btn").forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll("#tabsChamadaMod .sub-tab-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        modChamadaAtiva = btn.dataset.mod;
+        atualizarTemaArena(modChamadaAtiva);
+        renderChamada();
+      };
+    });
+
     function renderChamada() {
-      const mod = document.getElementById("selTurma").value;
       const termo = (document.getElementById("buscaAluno").value || "").toLowerCase();
       const box = document.getElementById("listaChamadaCards");
       box.innerHTML = "";
+      document.getElementById("tituloModChamada").textContent = modChamadaAtiva;
+      document.getElementById("btnSaveModLabel").textContent = modChamadaAtiva;
+
       const edita = canEditChamada();
-      const filtrados = alunos.filter(a => (mod === "Todas" || a.modalidade === mod) && (a.apelido.toLowerCase().includes(termo) || a.nome.toLowerCase().includes(termo)));
+      const filtrados = alunos.filter(a => a.modalidades.includes(modChamadaAtiva) && (a.apelido.toLowerCase().includes(termo) || a.nome.toLowerCase().includes(termo)));
 
       filtrados.forEach(a => {
-        const gStyle = getGradStyle(a.gradAtual);
+        const gradInfo = a.graduacoes[modChamadaAtiva];
+        const gStyle = getGradStyle(gradInfo.atual);
+        const presente = a.presencaPorMod[modChamadaAtiva];
         const row = document.createElement("div");
         row.className = "student-row";
         row.innerHTML = `
           <div>
             <div class="apelido-main">${a.apelido} <span class="nome-sub">• ${a.nome}</span></div>
             <div>
-              <span class="pill ${getModPillClass(a.modalidade)}">${a.modalidade}</span>
-              <span class="pill pill-grad"><span class="color-dot" style="background:${gStyle.dot};"></span>${a.gradAtual}</span>
+              <span class="pill ${getModPillClass(modChamadaAtiva)}">${modChamadaAtiva}</span>
+              <span class="pill pill-grad"><span class="color-dot" style="background:${gStyle.dot};"></span>${gradInfo.atual}</span>
               <span class="pill pill-grad">Sangue ${a.sangue}</span>
-              ${a.alerta ? `<span class="pill pill-warn">⚠ Alerta Médico</span>` : ""}
+              ${a.alerta ? `<span class="pill pill-warn">Alerta Médico</span>` : ""}
             </div>
           </div>
           <div style="display:flex;gap:8px;align-items:center;">
             <button type="button" class="btn-sos">SOS Médico</button>
             ${edita
-              ? `<button type="button" class="btn-toggle ${a.presente ? "presente" : "ausente"}">${a.presente ? "✓ Presente" : "✕ Ausente"}</button>`
-              : `<span class="pill ${a.presente ? "pill-ok" : "pill-danger"}">${a.presente ? "✓ Presente (Leitura)" : "✕ Ausente (Leitura)"}</span>`
+              ? `<button type="button" class="btn-toggle ${presente ? "presente" : "ausente"}">${presente ? "Presente" : "Ausente"}</button>`
+              : `<span class="pill ${presente ? "pill-ok" : "pill-danger"}">${presente ? "Presente (Leitura)" : "Ausente (Leitura)"}</span>`
             }
           </div>
         `;
         row.querySelector(".btn-sos").onclick = () => {
           document.getElementById("sosModalBody").innerHTML = `
-            <div class="sos-field"><small>ATLETA / CAPOEIRISTA</small><br><strong>${a.apelido} (${a.nome})</strong></div>
-            <div class="sos-field"><small>MODALIDADE &amp; GRADUAÇÃO</small><br><strong>${a.modalidade} • ${a.gradAtual}</strong></div>
+            <div class="sos-field"><small>ATLETA / ALUNO</small><br><strong>${a.apelido} (${a.nome})</strong></div>
+            <div class="sos-field"><small>MODALIDADES MATRICULADAS</small><br><strong>${a.modalidades.join(" • ")}</strong></div>
             <div class="sos-field"><small>TIPO SANGUÍNEO</small><br><strong>${a.sangue}</strong></div>
             <div class="sos-field"><small>ALERGIAS / CONDIÇÕES CLÍNICAS</small><br><strong>${a.alergia}</strong></div>
             <div class="sos-field"><small>CONTATO DE EMERGÊNCIA</small><br><strong>${a.contato}</strong></div>
@@ -853,53 +1260,75 @@
           document.getElementById("sosModal").classList.add("open");
         };
         if (edita) {
-          row.querySelector(".btn-toggle").onclick = () => { a.presente = !a.presente; renderChamada(); };
+          row.querySelector(".btn-toggle").onclick = () => {
+            a.presencaPorMod[modChamadaAtiva] = !a.presencaPorMod[modChamadaAtiva];
+            renderChamada();
+          };
         }
         box.appendChild(row);
       });
       document.getElementById("countTot").textContent = filtrados.length;
-      document.getElementById("countPres").textContent = filtrados.filter(a => a.presente).length;
+      document.getElementById("countPres").textContent = filtrados.filter(a => a.presencaPorMod[modChamadaAtiva]).length;
     }
 
-    document.getElementById("selTurma").onchange = renderChamada;
     document.getElementById("buscaAluno").oninput = renderChamada;
     document.getElementById("btnMarcarTodos").onclick = () => {
       if (!canEditChamada()) return;
-      const mod = document.getElementById("selTurma").value;
-      alunos.forEach(a => { if (mod === "Todas" || a.modalidade === mod) a.presente = true; });
+      alunos.forEach(a => { if (a.modalidades.includes(modChamadaAtiva)) a.presencaPorMod[modChamadaAtiva] = true; });
       renderChamada();
     };
 
     document.getElementById("btnSalvarChamada").onclick = async () => {
       if (!canEditChamada()) return;
       const data = document.getElementById("inpDataAula").value;
-      const mod = document.getElementById("selTurma").value;
-      const turmaLabel = mod === "Todas" ? "Treino Geral — Capoeira, Muay Thai & Contato Total Português" : `Turma ${mod}`;
+      const turmaAlunos = alunos.filter(a => a.modalidades.includes(modChamadaAtiva));
       const res = await fetch("/api/chamadas/lote", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${authToken}` },
-        body: JSON.stringify({ data_aula: data, registros: alunos.map(a => ({ aluno_id: a.id, presente: a.presente })) })
+        body: JSON.stringify({ data_aula: data, registros: turmaAlunos.map(a => ({ aluno_id: a.id, presente: a.presencaPorMod[modChamadaAtiva] })) })
       });
       if (!res.ok) return;
-      listasHistorico.unshift({ data, turma: turmaLabel, registros: alunos.map(a => ({ apelido: a.apelido, nome: a.nome, modalidade: a.modalidade, grad: a.gradAtual, presente: a.presente })) });
+      listasHistorico.unshift({
+        data,
+        modalidade: modChamadaAtiva,
+        registros: turmaAlunos.map(a => ({ apelido: a.apelido, nome: a.nome, grad: a.graduacoes[modChamadaAtiva].atual, presente: a.presencaPorMod[modChamadaAtiva] }))
+      });
       renderListasSalvas();
-      showToast(`✓ Chamada de ${fmtData(data)} salva com sucesso na Lista de Chamada!`);
+      showToast(`Chamada de ${modChamadaAtiva} (${fmtData(data)}) salva na Lista de Chamada!`);
     };
 
-    function renderListasSalvas(filtro = "") {
+    // SUB-ABAS DA LISTA DE CHAMADA (3 ABAS SEPARADAS POR ARTE MARCIAL)
+    document.querySelectorAll("#tabsListaMod .sub-tab-btn").forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll("#tabsListaMod .sub-tab-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        modListaAtiva = btn.dataset.mod;
+        atualizarTemaArena(modListaAtiva);
+        renderListasSalvas(document.getElementById("filtroDataLista").value);
+      };
+    });
+
+    function renderListasSalvas(filtroData = "") {
       const box = document.getElementById("containerListasSalvas");
-      const items = filtro ? listasHistorico.filter(l => l.data === filtro) : listasHistorico;
+      let items = listasHistorico.filter(l => l.modalidade === modListaAtiva);
+      if (filtroData) items = items.filter(l => l.data === filtroData);
+
+      if (!items.length) {
+        box.innerHTML = `<div class="card"><p style="color:var(--text-muted);">Nenhuma chamada registrada para ${modListaAtiva} nesta data.</p></div>`;
+        return;
+      }
+
       box.innerHTML = items.map(l => {
         const pres = l.registros.filter(r => r.presente).length;
         const pct = Math.round((pres / l.registros.length) * 100);
         return `
           <div class="card">
             <div class="section-header">
-              <div><h3 class="section-title">Data: ${fmtData(l.data)} — ${l.turma}</h3><p class="section-subtitle">Aproveitamento: ${pres} de ${l.registros.length} alunos (${pct}%)</p></div>
+              <div><h3 class="section-title">Lista de Chamada — ${l.modalidade} (${fmtData(l.data)})</h3><p class="section-subtitle">Frequência da turma: ${pres} de ${l.registros.length} presentes (${pct}%)</p></div>
               <span class="pill pill-ok">Auditado</span>
             </div>
-            <div style="overflow-x:auto;"><table class="ux-table"><thead><tr><th>Apelido</th><th>Nome Civil</th><th>Modalidade</th><th>Corda / Kruang / Faixa</th><th>Frequência</th></tr></thead>
-            <tbody>${l.registros.map(r => `<tr><td><strong>${r.apelido}</strong></td><td>${r.nome}</td><td>${r.modalidade}</td><td>${r.grad}</td><td><span class="pill ${r.presente ? "pill-ok" : "pill-danger"}">${r.presente ? "✓ Presente" : "✕ Ausente"}</span></td></tr>`).join("")}</tbody></table></div>
+            <div style="overflow-x:auto;"><table class="ux-table"><thead><tr><th>Apelido</th><th>Nome Civil</th><th>Graduação na Modalidade</th><th>Situação</th></tr></thead>
+            <tbody>${l.registros.map(r => `<tr><td><strong>${r.apelido}</strong></td><td>${r.nome}</td><td>${r.grad}</td><td><span class="pill ${r.presente ? "pill-ok" : "pill-danger"}">${r.presente ? "Presente" : "Ausente"}</span></td></tr>`).join("")}</tbody></table></div>
           </div>`;
       }).join("");
     }
@@ -907,42 +1336,64 @@
     document.getElementById("filtroDataLista").onchange = (e) => renderListasSalvas(e.target.value);
     document.getElementById("btnResetLista").onclick = () => { document.getElementById("filtroDataLista").value = ""; renderListasSalvas(""); };
 
+    // MENSALIDADES
     function renderMensalidades() {
       const podeBaixar = canManageAdminOps();
       document.getElementById("tbodyMensalidade").innerHTML = alunos.map((a, i) => `
         <tr>
           <td><strong>${a.apelido}</strong><br><small style="color:var(--text-muted);">${a.nome}</small></td>
-          <td><span class="pill ${getModPillClass(a.modalidade)}">${a.modalidade}</span></td>
+          <td>${a.modalidades.map(m => `<span class="pill ${getModPillClass(m)}">${m}</span>`).join("")}</td>
           <td>${a.plano}</td><td>${a.venc}</td>
           <td><span class="pill ${a.statusFin === "Pendente" ? "pill-danger" : "pill-ok"}">${a.statusFin}</span></td>
           <td>${a.statusFin === "Pendente"
             ? (podeBaixar ? `<button type="button" class="btn-accent" onclick="darBaixa(${i})">Registrar Pagamento</button>` : `<span style="color:var(--text-muted);font-size:0.84em;">Somente leitura</span>`)
-            : "✓ Quitado"}</td>
+            : "Quitado"}</td>
         </tr>`).join("");
       document.getElementById("mEmDia").textContent = alunos.filter(a => a.statusFin === "Em Dia").length;
       document.getElementById("mPendente").textContent = alunos.filter(a => a.statusFin === "Pendente").length;
       document.getElementById("mBolsista").textContent = alunos.filter(a => a.statusFin === "Bolsista Social").length;
+      document.getElementById("kpiTotalAlunos").textContent = alunos.length;
+      document.getElementById("kpiAlertasMed").textContent = alunos.filter(a => a.alerta).length;
     }
 
     window.darBaixa = (i) => {
       if (!canManageAdminOps()) return;
       alunos[i].statusFin = "Em Dia";
       renderMensalidades();
-      showToast(`✓ Mensalidade de ${alunos[i].apelido} baixada como Em Dia!`);
+      showToast(`Mensalidade de ${alunos[i].apelido} baixada como Em Dia!`);
     };
 
+    // SUB-ABAS DA GRADUAÇÃO (3 ABAS SEPARADAS: CONTATO TOTAL, CAPOEIRA E MUAY THAI)
+    const LEGENDAS_MOD = {
+      "Contato Total Português": "<strong>Hierarquia Contato Total Português:</strong> Branca (1º ao 4º Grau ➔ Estagiário) ➔ Azul (1º ao 4º Grau) ➔ Roxa Monitor (1º ao 4º Grau) ➔ Marrom Professor (1º ao 4º Grau) ➔ Preta (1º ao 4º Grau) ➔ Mestre (Faixa Verde com ponta vermelha e tarja preta de graus).",
+      "Capoeira": "<strong>Hierarquia Capoeira (Raízes Escola):</strong> Crua (Aluno) ➔ Verde ➔ Amarela ➔ Azul ➔ Marrom ➔ Roxa ➔ Laranja ➔ Crua/Verde (Estagiário 1º Grau) até Mestre / Grão-Mestre.",
+      "Muay Thai": "<strong>Hierarquia Muay Thai (Ram Muay Thai):</strong> Branco ➔ Branco Ponta Vermelha ➔ Vermelho (Instrutor 1º Grau) ➔ Vermelho Ponta Roxa (2º) ➔ Roxo (Monitor 1º) ➔ Roxo Ponta Marrom (2º) ➔ Marrom (Professor 1º) ➔ Marrom Ponta Preta (2º) ➔ Preto (Mestrando) ➔ 1º ao 7º Dan."
+    };
+
+    document.querySelectorAll("#tabsGradMod .sub-tab-btn").forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll("#tabsGradMod .sub-tab-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        modGradAtiva = btn.dataset.mod;
+        atualizarTemaArena(modGradAtiva);
+        renderGraduacao();
+      };
+    });
+
     function renderGraduacao() {
-      const filtro = document.getElementById("filtroGradMod").value;
-      const lista = filtro === "Todas" ? alunos : alunos.filter(a => a.modalidade === filtro);
+      document.getElementById("tituloModGrad").textContent = modGradAtiva;
+      document.getElementById("legendaGradAtual").innerHTML = LEGENDAS_MOD[modGradAtiva];
+      const lista = alunos.filter(a => a.modalidades.includes(modGradAtiva));
       const podeGraduar = canEditGraduacao();
 
       document.getElementById("containerGraduacao").innerHTML = lista.map(a => {
-        const apto = a.freq >= 75;
-        const gAtualStyle = getGradStyle(a.gradAtual);
-        const gProxStyle = getGradStyle(a.proxGrad);
-        const labelApto = a.modalidade === "Capoeira" ? "✓ Apto para Troca de Corda" : a.modalidade === "Muay Thai" ? "✓ Apto para Exame de Kruang" : "✓ Apto para Exame de Faixa/Grau";
+        const gInfo = a.graduacoes[modGradAtiva];
+        const apto = gInfo.freq >= 75;
+        const gAtualStyle = getGradStyle(gInfo.atual);
+        const gProxStyle = getGradStyle(gInfo.proxima);
+        const labelApto = modGradAtiva === "Capoeira" ? "Apto para Troca de Corda" : modGradAtiva === "Muay Thai" ? "Apto para Exame de Kruang" : "Apto para Exame de Faixa/Grau";
         let ponteiraHtml = "";
-        if (a.modalidade === "Contato Total Português") {
+        if (modGradAtiva === "Contato Total Português") {
           let fitas = "";
           for (let g = 0; g < gAtualStyle.graus; g++) fitas += `<span class="grau-tape"></span>`;
           ponteiraHtml = `<span class="graus-tip">${fitas}</span>`;
@@ -950,31 +1401,30 @@
         return `
           <div class="student-row" style="display:block;">
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-              <div><strong class="apelido-main">${a.apelido}</strong> <span class="nome-sub">• ${a.nome}</span> <span class="pill ${getModPillClass(a.modalidade)}">${a.modalidade}</span></div>
+              <div><strong class="apelido-main">${a.apelido}</strong> <span class="nome-sub">• ${a.nome}</span></div>
               <div style="display:flex;gap:8px;align-items:center;">
                 <span class="pill ${apto ? "pill-ok" : "pill-danger"}">${apto ? labelApto : "Abaixo da meta (75%)"}</span>
-                ${(apto && podeGraduar) ? `<button type="button" class="btn-accent" onclick="promoverAluno(${a.id})">🎓 Promover Graduação</button>` : ""}
+                ${(apto && podeGraduar) ? `<button type="button" class="btn-accent" onclick="promoverAluno(${a.id}, '${modGradAtiva}')">Promover Graduação</button>` : ""}
               </div>
             </div>
             <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:8px;font-size:0.92em;">
-              <span>Graduação Atual:</span><span class="pill pill-grad" style="margin:0;"><span class="color-dot" style="background:${gAtualStyle.dot};"></span><strong>${a.gradAtual}</strong></span>
-              <span>➔ Próxima:</span><span class="pill pill-grad" style="margin:0;"><span class="color-dot" style="background:${gProxStyle.dot};"></span><strong>${a.proxGrad}</strong></span>
-              <span style="margin-left:auto;font-weight:800;">Frequência: ${a.freq}%</span>
+              <span style="color:var(--text-muted);">Graduação Atual:</span><span class="pill pill-grad" style="margin:0;"><span class="color-dot" style="background:${gAtualStyle.dot};"></span><strong>${gInfo.atual}</strong></span>
+              <span style="color:var(--text-muted);">➔ Próxima:</span><span class="pill pill-grad" style="margin:0;"><span class="color-dot" style="background:${gProxStyle.dot};"></span><strong>${gInfo.proxima}</strong></span>
+              <span style="margin-left:auto;font-weight:800;color:var(--accent);">Frequência na modalidade: ${gInfo.freq}%</span>
             </div>
-            <div class="track-bar"><div class="track-fill" style="width:${a.freq}%; background:${gAtualStyle.css};">${ponteiraHtml}</div></div>
+            <div class="track-bar"><div class="track-fill" style="width:${gInfo.freq}%; background:${gAtualStyle.css};">${ponteiraHtml}</div></div>
           </div>`;
       }).join("");
     }
-    document.getElementById("filtroGradMod").onchange = renderGraduacao;
 
-    window.promoverAluno = (id) => {
+    window.promoverAluno = (id, mod) => {
       if (!canEditGraduacao()) return;
       const al = alunos.find(x => x.id === id);
-      if (!al) return;
-      al.gradAtual = al.proxGrad;
+      if (!al || !al.graduacoes[mod]) return;
+      al.graduacoes[mod].atual = al.graduacoes[mod].proxima;
       renderGraduacao();
       renderChamada();
-      showToast(`🎓 ${al.apelido} promovido(a) para ${al.gradAtual}!`);
+      showToast(`${al.apelido} promovido(a) em ${mod} para ${al.graduacoes[mod].atual}!`);
     };
 
     function renderEventos() {
@@ -1003,7 +1453,7 @@
       agendaEventos.unshift(novo);
       renderEventos();
       e.target.reset();
-      showToast(`✓ Evento "${novo.titulo}" publicado no calendário!`);
+      showToast(`Evento "${novo.titulo}" publicado no calendário!`);
     };
 
     document.getElementById("btnContrast").onclick = (e) => e.target.setAttribute("aria-pressed", document.body.classList.toggle("high-contrast"));
