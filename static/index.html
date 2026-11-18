@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GingaSegura — Família Martelo Predador | Capoeira, Muay Thai & Contato Total</title>
+  <title>GingaSegura — Equipe Martelo Predador Team</title>
   <style>
     :root {
       --bg: #f1f5f3;
@@ -69,20 +69,18 @@
     body.high-contrast .btn-a11y { background: #000; color: #facc15; border: 2px solid #facc15; }
     .btn-a11y[aria-pressed="true"] { background: var(--accent); color: #0f172a; border-color: var(--accent); }
 
-    /* LOGIN + VISITANTE */
-    .login-wrapper { min-height: calc(100vh - 46px); display: flex; align-items: center; justify-content: center; padding: 24px 16px; background: radial-gradient(circle at top right, rgba(234, 179, 8, 0.14), transparent 45%), var(--bg); }
-    .login-card { background: var(--surface); border: 2px solid var(--border); border-radius: 20px; max-width: 470px; width: 100%; padding: 30px; box-shadow: var(--shadow-md); }
-    .logo-emblem { width: 58px; height: 58px; border-radius: 16px; background: linear-gradient(135deg, var(--primary), #1e633a); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1.5em; font-weight: 900; margin: 0 auto 12px; border: 2px solid var(--accent); }
-    .brand-pill { display: inline-block; background: var(--accent-soft); color: #854d0e; border: 1px solid #fde047; font-weight: 800; font-size: 0.74em; padding: 3px 12px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.4px; }
-    body.high-contrast .brand-pill { background: #000; color: #facc15; border-color: #facc15; }
-    .login-header { text-align: center; margin-bottom: 20px; }
-    .login-header h1 { font-size: 1.55em; font-weight: 900; margin-top: 8px; color: var(--primary); }
-    body.high-contrast .login-header h1 { color: #facc15; }
+    /* TELA INICIAL LIMPA: APENAS LOGOTIPO + E-MAIL/SENHA + VISITANTE */
+    .login-wrapper { min-height: calc(100vh - 46px); display: flex; align-items: center; justify-content: center; padding: 24px 16px; background: radial-gradient(circle at top right, rgba(234, 179, 8, 0.12), transparent 45%), var(--bg); }
+    .login-card { background: var(--surface); border: 2px solid var(--border); border-radius: 22px; max-width: 420px; width: 100%; padding: 30px 28px; box-shadow: var(--shadow-md); }
+    .logo-container { text-align: center; margin-bottom: 22px; }
+    .logo-img { width: 170px; height: 170px; object-fit: contain; border-radius: 50%; border: 3px solid #111827; box-shadow: 0 6px 18px rgba(0,0,0,0.15); background: #fff; }
+    body.high-contrast .logo-img { border-color: #facc15; }
+
     .form-group { margin-bottom: 13px; }
     .form-group label { display: block; font-size: 0.8em; font-weight: 800; text-transform: uppercase; color: var(--text-muted); margin-bottom: 5px; }
     .form-group input, .form-group select { width: 100%; padding: 11px 13px; border: 2px solid var(--border); border-radius: 10px; background: var(--surface); color: var(--text); font-weight: 600; font-size: 0.95em; }
 
-    .btn-primary { width: 100%; background: var(--primary); color: #fff; border: 2px solid var(--primary); padding: 12px 16px; border-radius: 10px; font-weight: 800; font-size: 0.96em; cursor: pointer; }
+    .btn-primary { width: 100%; background: var(--primary); color: #fff; border: 2px solid var(--primary); padding: 12px 16px; border-radius: 10px; font-weight: 800; font-size: 0.98em; cursor: pointer; }
     .btn-primary:hover { background: var(--primary-hover); }
     body.high-contrast .btn-primary { background: #facc15; color: #000; border-color: #facc15; }
 
@@ -92,11 +90,12 @@
 
     .login-error { background: var(--danger-bg); color: var(--danger); border: 1.5px solid var(--danger); padding: 10px 12px; border-radius: 10px; font-size: 0.86em; font-weight: 700; margin-bottom: 14px; display: none; }
 
-    /* HEADER */
+    /* HEADER INTERNO */
     header.app-header { background: linear-gradient(135deg, var(--primary), #1d5c37); color: #fff; padding: 20px 16px 32px; border-bottom: 3px solid var(--accent); }
     body.high-contrast header.app-header { background: #000; border-bottom: 3px solid #facc15; }
     .container { max-width: 1060px; margin: 0 auto; padding: 0 16px; }
     .header-flex { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .brand-pill { display: inline-block; background: var(--accent); color: #0f172a; font-weight: 800; font-size: 0.74em; padding: 3px 12px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.4px; }
     .user-badge { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.12); padding: 8px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.25); }
     .btn-logout { background: #fff; color: #0f172a; border: none; padding: 7px 13px; border-radius: 8px; font-weight: 800; font-size: 0.84em; cursor: pointer; }
     body.high-contrast .btn-logout { background: #facc15; color: #000; }
@@ -184,43 +183,46 @@
 </head>
 <body>
   <nav class="a11y-bar" aria-label="Recursos de Acessibilidade">
-    <span>Família Martelo Predador • Controle de Acesso RBAC &amp; WCAG 2.1</span>
+    <span>Equipe Martelo Predador Team • WCAG 2.1</span>
     <div class="a11y-actions">
       <button type="button" id="btnContrast" class="btn-a11y" aria-pressed="false">Alto Contraste</button>
       <button type="button" id="btnFont" class="btn-a11y" aria-pressed="false">Texto Maior (A+)</button>
     </div>
   </nav>
 
-  <!-- PÁGINA 1: LOGIN DA EQUIPE + ACESSO VISITANTE REGISTRADO -->
+  <!-- TELA INICIAL LIMPA: APENAS LOGOTIPO + LOGIN/SENHA + VISITANTE -->
   <section id="loginScreen" class="login-wrapper">
     <div class="login-card">
-      <div class="login-header">
-        <div class="logo-emblem" aria-hidden="true">FMP</div>
-        <span class="brand-pill">Capoeira • Muay Thai • Contato Total Português</span>
-        <h1>Família Martelo Predador</h1>
-        <p style="font-size:0.9em;color:var(--text-muted);margin-top:4px;">Sistema GingaSegura • Acesso por Categoria</p>
+      <div class="logo-container">
+        <img
+          src="/static/logo-martelo.jpg"
+          onerror="this.onerror=null; this.src='/static/logo-martelo.png';"
+          alt="Equipe Martelo Predador Team"
+          class="logo-img"
+        />
       </div>
+
       <div id="loginErrorBox" class="login-error" role="alert"></div>
 
       <form id="loginForm">
         <div class="form-group">
-          <label for="loginEmail">E-mail da Equipe (Admin / Super Admin / Prof. / Monitor / Estagiário)</label>
-          <input type="email" id="loginEmail" placeholder="seu.email@familiamartelopredador.org.br" required />
+          <label for="loginEmail">E-mail</label>
+          <input type="email" id="loginEmail" placeholder="Digite seu e-mail" required />
         </div>
         <div class="form-group">
           <label for="loginSenha">Senha</label>
           <input type="password" id="loginSenha" placeholder="Digite sua senha" required />
         </div>
-        <button type="submit" class="btn-primary">Entrar como Equipe</button>
+        <button type="submit" class="btn-primary">Entrar</button>
       </form>
 
       <div class="visitor-box">
         <form id="visitorForm">
           <div class="form-group" style="margin-bottom:10px;">
-            <label for="visitorName">Acesso Visitante (Somente Visualização • Fica Registrado)</label>
-            <input type="text" id="visitorName" placeholder="Informe seu nome completo para visitar" required />
+            <label for="visitorName">Visitante</label>
+            <input type="text" id="visitorName" placeholder="Digite seu nome para visitar" required />
           </div>
-          <button type="submit" class="btn-visitor">👁️ Entrar como Visitante (Somente Leitura)</button>
+          <button type="submit" class="btn-visitor">Entrar como Visitante</button>
         </form>
       </div>
     </div>
@@ -230,10 +232,18 @@
   <div id="appShell" style="display:none;">
     <header class="app-header">
       <div class="container header-flex">
-        <div>
-          <span class="brand-pill" style="background:var(--accent);color:#0f172a;border:none;">Embu das Artes • SP</span>
-          <h1 style="font-size:1.45em;font-weight:900;margin-top:6px;">Família Martelo Predador</h1>
-          <p style="font-size:0.88em;opacity:0.92;">Capoeira (Cordas) • Muay Thai (Kruangs) • Contato Total Português (Faixas e Graus)</p>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <img
+            src="/static/logo-martelo.jpg"
+            onerror="this.onerror=null; this.src='/static/logo-martelo.png';"
+            alt="Logo Martelo Predador"
+            style="width:54px;height:54px;border-radius:50%;border:2px solid var(--accent);background:#fff;object-fit:contain;"
+          />
+          <div>
+            <span class="brand-pill">Embu das Artes • SP</span>
+            <h1 style="font-size:1.38em;font-weight:900;margin-top:4px;">Equipe Martelo Predador Team</h1>
+            <p style="font-size:0.85em;opacity:0.92;">Capoeira • Muay Thai • Contato Total Português</p>
+          </div>
         </div>
         <div class="user-badge">
           <div>
@@ -271,8 +281,8 @@
         <div class="card">
           <div class="section-header">
             <div>
-              <h2 class="section-title">Operações da Família Martelo Predador</h2>
-              <p class="section-subtitle" id="inicioRoleDesc">Permissões aplicadas automaticamente conforme sua categoria de acesso</p>
+              <h2 class="section-title">Operações — Equipe Martelo Predador Team</h2>
+              <p class="section-subtitle">Selecione um módulo abaixo para visualizar ou gerenciar conforme sua permissão</p>
             </div>
           </div>
           <div class="grid-3">
@@ -368,7 +378,7 @@
         <div class="card">
           <div class="section-header">
             <div>
-              <h2 class="section-title">Sistema Oficial de Graduação — Família Martelo Predador</h2>
+              <h2 class="section-title">Sistema Oficial de Graduação — Equipe Martelo Predador</h2>
               <p class="section-subtitle">Barra colorida conforme a Corda (Capoeira), Kruang (Muay Thai) ou Faixa com Graus (Contato Total Português)</p>
             </div>
             <select id="filtroGradMod" style="padding:8px 12px;border:2px solid var(--border);border-radius:10px;font-weight:700;">
@@ -417,7 +427,7 @@
             </div>
             <div class="form-group" style="margin:0;">
               <label for="evLocal">Local / Núcleo</label>
-              <input type="text" id="evLocal" placeholder="Ex: Sede Família Martelo Predador - Embu das Artes" required />
+              <input type="text" id="evLocal" placeholder="Ex: Centro de Treinamento Raízes - Embu das Artes" required />
             </div>
             <div class="form-group" style="margin:0;">
               <label for="evTipo">Modalidade / Categoria</label>
@@ -441,7 +451,7 @@
         </div>
 
         <div class="card">
-          <h2 class="section-title" style="margin-bottom:10px;">Agenda Confirmada — Família Martelo Predador</h2>
+          <h2 class="section-title" style="margin-bottom:10px;">Agenda Confirmada — Equipe Martelo Predador Team</h2>
           <div id="listaEventosCards"></div>
         </div>
       </section>
@@ -452,20 +462,20 @@
           <div class="section-header">
             <div>
               <h2 class="section-title">🔐 Cadastrar Novo Usuário por Categoria</h2>
-              <p class="section-subtitle">Defina exatamente o nível de permissão de cada membro da equipe</p>
+              <p class="section-subtitle">Defina o nível de permissão de cada membro</p>
             </div>
           </div>
           <form id="formNovoUsuario" class="grid-2">
             <div class="form-group" style="margin:0;">
               <label for="usrNome">Nome / Apelido</label>
-              <input type="text" id="usrNome" placeholder="Ex: Mestra Engraçadinha / Contramestre Jaguar" required />
+              <input type="text" id="usrNome" placeholder="Ex: Mestra Engraçadinha" required />
             </div>
             <div class="form-group" style="margin:0;">
               <label for="usrEmail">E-mail de Login</label>
               <input type="email" id="usrEmail" placeholder="usuario@familiamartelopredador.org.br" required />
             </div>
             <div class="form-group" style="margin:0;">
-              <label for="usrCargo">Cargo / Título na Escola</label>
+              <label for="usrCargo">Cargo / Título</label>
               <input type="text" id="usrCargo" placeholder="Ex: Supervisora Geral / Professor / Monitor" required />
             </div>
             <div class="form-group" style="margin:0;">
@@ -482,7 +492,7 @@
               <input type="password" id="usrSenha" minlength="6" placeholder="Crie uma senha forte" required />
             </div>
             <div style="grid-column:1/-1;">
-              <button type="submit" class="btn-primary">Criar Usuário na Categoria Selecionada</button>
+              <button type="submit" class="btn-primary">Criar Usuário Autorizado</button>
             </div>
           </form>
         </div>
@@ -556,7 +566,6 @@
     let authToken = null;
     let currentUser = null;
 
-    // Helpers de Permissão RBAC
     function canManageUsers() { return currentUser?.role === "admin"; }
     function canManageAdminOps() { return ["admin", "super_admin"].includes(currentUser?.role); }
     function canEditChamada() { return ["admin", "super_admin", "professor", "monitor"].includes(currentUser?.role); }
@@ -617,7 +626,7 @@
 
     const agendaEventos = [
       { titulo: "Batizado de Capoeira, Exame de Kruang & Faixa Contato Total", data: "2026-11-28", local: "Quadra E.M. Jequitibá • Embu das Artes", tipo: "Cerimônia Oficial de Graduação" },
-      { titulo: "Roda Aberta & Treino Comunitário — Família Martelo Predador", data: "2026-11-21", local: "Sede Família Martelo Predador", tipo: "Treino Integrado & Roda Aberta" }
+      { titulo: "Roda Aberta & Treino Comunitário — Equipe Martelo Predador", data: "2026-11-21", local: "Centro de Treinamento Raízes", tipo: "Treino Integrado & Roda Aberta" }
     ];
 
     function getGradStyle(gradNome) { return CORES_GRADUACAO[gradNome] || { css: "#15803d", dot: "#15803d", graus: 0 }; }
@@ -641,26 +650,21 @@
       document.getElementById("loggedUserName").textContent = currentUser.nome;
       document.getElementById("loggedUserRole").textContent = `${ROLE_LABELS[currentUser.role] || currentUser.cargo}`;
 
-      // Controle de exibição por perfil RBAC
       const isAdmin = canManageUsers();
       document.getElementById("tabAdminBtn").style.display = isAdmin ? "flex" : "none";
       document.getElementById("cardAtalhoAdmin").style.display = isAdmin ? "block" : "none";
 
-      // Chamada: bloqueia edição para Estagiário e Visitante
       const editaChamada = canEditChamada();
       document.getElementById("btnMarcarTodos").style.display = editaChamada ? "inline-block" : "none";
       document.getElementById("footerSalvarChamada").style.display = editaChamada ? "block" : "none";
-
-      // Eventos: bloqueia criação para Professor, Monitor, Estagiário e Visitante
       document.getElementById("cardFormNovoEvento").style.display = canManageAdminOps() ? "block" : "none";
 
-      // Faixa de aviso de leitura para perfis restritos
       const roBanner = document.getElementById("readonlyBanner");
       if (currentUser.role === "visitante") {
         roBanner.textContent = "👁️ MODO VISITANTE (SOMENTE LEITURA): Sua visita foi registrada. Você pode navegar por todas as telas, mas nenhuma alteração é permitida.";
         roBanner.style.display = "block";
       } else if (currentUser.role === "estagiario") {
-        roBanner.textContent = "📋 PERFIL ESTAGIÁRIO: Permissão ativa para conferência das Listas de Chamada e consulta geral (edição bloqueada).";
+        roBanner.textContent = "📋 PERFIL ESTAGIÁRIO: Permissão ativa para conferência das Listas de Chamada e consulta geral.";
         roBanner.style.display = "block";
       } else if (currentUser.role === "monitor") {
         roBanner.textContent = "✅ PERFIL MONITOR: Permissão ativa para realizar Chamadas e conferir Listas de Presença.";
@@ -679,7 +683,6 @@
       if (isAdmin) carregarDadosAdmin();
     }
 
-    // LOGIN EQUIPE
     document.getElementById("loginForm").onsubmit = async (e) => {
       e.preventDefault();
       const errBox = document.getElementById("loginErrorBox");
@@ -694,7 +697,6 @@
       iniciarSessao(data.token, data.user);
     };
 
-    // LOGIN VISITANTE NOMINAL
     document.getElementById("visitorForm").onsubmit = async (e) => {
       e.preventDefault();
       const errBox = document.getElementById("loginErrorBox");
@@ -728,7 +730,6 @@
 
     document.querySelectorAll(".nav-btn").forEach(btn => { btn.onclick = () => irParaPagina(btn.dataset.target); });
 
-    // ADMIN: USUÁRIOS E LOG DE VISITANTES
     async function carregarDadosAdmin() {
       if (!authToken || !canManageUsers()) return;
       const [resUsers, resVis] = await Promise.all([
@@ -807,7 +808,6 @@
       if (res.ok) { carregarDadosAdmin(); showToast("✓ Status do usuário atualizado!"); }
     };
 
-    // CHAMADA (COM TRAVA PARA ESTAGIÁRIO E VISITANTE)
     function renderChamada() {
       const mod = document.getElementById("selTurma").value;
       const termo = (document.getElementById("buscaAluno").value || "").toLowerCase();
@@ -903,7 +903,6 @@
     document.getElementById("filtroDataLista").onchange = (e) => renderListasSalvas(e.target.value);
     document.getElementById("btnResetLista").onclick = () => { document.getElementById("filtroDataLista").value = ""; renderListasSalvas(""); };
 
-    // MENSALIDADES (EDIÇÃO APENAS ADMIN / SUPER ADMIN)
     function renderMensalidades() {
       const podeBaixar = canManageAdminOps();
       document.getElementById("tbodyMensalidade").innerHTML = alunos.map((a, i) => `
@@ -928,7 +927,6 @@
       showToast(`✓ Mensalidade de ${alunos[i].apelido} baixada como Em Dia!`);
     };
 
-    // GRADUAÇÃO (EDIÇÃO APENAS PROFESSOR, SUPER ADMIN E ADMIN)
     function renderGraduacao() {
       const filtro = document.getElementById("filtroGradMod").value;
       const lista = filtro === "Todas" ? alunos : alunos.filter(a => a.modalidade === filtro);
