@@ -8,40 +8,14 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-app = FastAPI(
-    title="GingaSegura - Sistema de Gestão | Família Martelo Predador",
-    version="2.2.0"
-)
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
+app = FastAPI(title="GingaSegura - Família Martelo Predador", version="2.2.0")
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 DB_PATH = os.getenv("DB_PATH", "gingasegura.db")
 
 def init_db():
     conn = sqlite3.connect(DB_PATH)
-    conn.execute("""
-        CREATE TABLE IF NOT EXISTS chamadas (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            data_aula TEXT NOT NULL,
-            aluno_id INTEGER NOT NULL,
-            presente INTEGER NOT NULL,
-            registrado_em TEXT NOT NULL
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE IF NOT EXISTS eventos (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            titulo TEXT NOT NULL,
-            data_evento TEXT NOT NULL,
-            local TEXT NOT NULL,
-            categoria TEXT NOT NULL
-        )
-    """)
+    conn.execute("CREATE TABLE IF NOT EXISTS chamadas (id INTEGER PRIMARY KEY AUTOINCREMENT, data_aula TEXT NOT NULL, aluno_id INTEGER NOT NULL, presente INTEGER NOT NULL, registrado_em TEXT NOT NULL)")
+    conn.execute("CREATE TABLE IF NOT EXISTS eventos (id INTEGER PRIMARY KEY AUTOINCREMENT, titulo TEXT NOT NULL, data_evento TEXT NOT NULL, local TEXT NOT NULL, categoria TEXT NOT NULL)")
     conn.commit()
     conn.close()
 
@@ -63,26 +37,14 @@ class EventoRequest(BaseModel):
 
 @app.get("/health")
 def health_check():
-    return {
-        "status": "healthy",
-        "service": "GingaSegura - Família Martelo Predador",
-        "modalidades": [
-            "Capoeira (Cordas)",
-            "Muay Thai (Kruangs)",
-            "Contato Total Português (Faixas e Graus)"
-        ],
-        "timestamp_utc": datetime.now(timezone.utc).isoformat()
-    }
+    return {"status": "healthy", "service": "GingaSegura - Família Martelo Predador", "modalidades": ["Capoeira (Cordas)", "Muay Thai (Kruangs)", "Contato Total Português (Faixas e Graus)"], "timestamp_utc": datetime.now(timezone.utc).isoformat()}
 
 @app.post("/api/chamadas/lote")
 def salvar_chamada_lote(payload: ChamadaLoteRequest):
     conn = sqlite3.connect(DB_PATH)
     agora = datetime.now(timezone.utc).isoformat()
     for item in payload.registros:
-        conn.execute(
-            "INSERT INTO chamadas (data_aula, aluno_id, presente, registrado_em) VALUES (?, ?, ?, ?)",
-            (payload.data_aula, item.aluno_id, int(item.presente), agora),
-        )
+        conn.execute("INSERT INTO chamadas (data_aula, aluno_id, presente, registrado_em) VALUES (?, ?, ?, ?)", (payload.data_aula, item.aluno_id, int(item.presente), agora))
     conn.commit()
     conn.close()
     return {"status": "ok", "total_registrado": len(payload.registros), "data_aula": payload.data_aula}
@@ -90,10 +52,7 @@ def salvar_chamada_lote(payload: ChamadaLoteRequest):
 @app.post("/api/eventos")
 def criar_evento(payload: EventoRequest):
     conn = sqlite3.connect(DB_PATH)
-    conn.execute(
-        "INSERT INTO eventos (titulo, data_evento, local, categoria) VALUES (?, ?, ?, ?)",
-        (payload.titulo, payload.data_evento, payload.local, payload.categoria),
-    )
+    conn.execute("INSERT INTO eventos (titulo, data_evento, local, categoria) VALUES (?, ?, ?, ?)", (payload.titulo, payload.data_evento, payload.local, payload.categoria))
     conn.commit()
     conn.close()
     return {"status": "ok", "evento": payload.model_dump()}
