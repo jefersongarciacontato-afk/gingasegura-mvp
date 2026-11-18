@@ -3,49 +3,686 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GingaSegura - Assoc. Martelo Predador</title>
+  <title>GingaSegura ‚Äî Plataforma de Gest√£o | Assoc. Fam√≠lia Martelo Predador</title>
   <style>
-    body { font-family: system-ui, sans-serif; background: #14361d; color: #fff; margin: 0; padding: 16px; }
-    .card { background: #1e4d2b; border-radius: 12px; padding: 16px; margin-bottom: 14px; border: 1px solid #2e6f40; }
-    .btn { display: block; width: 100%; min-height: 54px; border: none; border-radius: 10px; font-size: 17px; font-weight: 700; cursor: pointer; margin-top: 10px; }
-    .btn-primary { background: #c85a17; color: #fff; }
-    .btn-danger { background: #b91c1c; color: #fff; text-decoration: none; display: flex; align-items: center; justify-content: center; }
-    .badge-online { color: #4ade80; font-weight: bold; }
-    .alerta-med { background: #991b1b; padding: 8px 12px; border-radius: 8px; margin-top: 8px; font-weight: bold; }
-    .row { display: flex; justify-content: space-between; align-items: center; }
-    input[type="checkbox"] { width: 32px; height: 32px; accent-color: #22c55e; }
+    :root {
+      --bg: #f1f5f3;
+      --surface: #ffffff;
+      --surface-alt: #f8faf9;
+      --primary: #123d23;
+      --primary-hover: #1a5632;
+      --accent: #eab308;
+      --accent-soft: #fef9c3;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --border: #cbd5e1;
+      --success: #15803d;
+      --success-bg: #dcfce7;
+      --danger: #b91c1c;
+      --danger-bg: #fee2e2;
+      --warn: #b45309;
+      --warn-bg: #fef3c7;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --radius: 14px;
+      --font-scale: 1;
+    }
+
+    body.high-contrast {
+      --bg: #000000;
+      --surface: #0a0a0a;
+      --surface-alt: #121212;
+      --primary: #000000;
+      --primary-hover: #1a1a1a;
+      --accent: #facc15;
+      --accent-soft: #1f1a00;
+      --text: #ffffff;
+      --text-muted: #facc15;
+      --border: #facc15;
+      --success: #22c55e;
+      --success-bg: #052e16;
+      --danger: #ff4d4d;
+      --danger-bg: #2a0000;
+      --warn: #facc15;
+      --warn-bg: #1f1a00;
+      --shadow-sm: none;
+      --shadow-md: none;
+    }
+
+    body.large-text { --font-scale: 1.15; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+    body { background: var(--bg); color: var(--text); font-size: calc(16px * var(--font-scale)); line-height: 1.55; padding-bottom: 96px; transition: background 0.2s, color 0.2s; }
+
+    /* Barra Superior WCAG 2.1 */
+    .a11y-bar { background: #0a2414; color: #f8fafc; padding: 8px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid var(--accent); font-size: 0.84em; }
+    body.high-contrast .a11y-bar { background: #000; border-bottom: 2px solid #facc15; }
+    .a11y-actions { display: flex; gap: 8px; }
+    .btn-a11y { background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.4); padding: 5px 12px; border-radius: 8px; cursor: pointer; font-weight: 700; transition: 0.15s; }
+    .btn-a11y:hover { background: rgba(255,255,255,0.22); }
+    body.high-contrast .btn-a11y { background: #000; color: #facc15; border: 2px solid #facc15; }
+    .btn-a11y[aria-pressed="true"] { background: var(--accent); color: #0f172a; border-color: var(--accent); }
+
+    /* P√ÅGINA 1: LOGIN UX */
+    .login-wrapper { min-height: calc(100vh - 46px); display: flex; align-items: center; justify-content: center; padding: 24px 16px; background: radial-gradient(circle at top right, rgba(234, 179, 8, 0.14), transparent 45%), var(--bg); }
+    .login-card { background: var(--surface); border: 2px solid var(--border); border-radius: 20px; max-width: 460px; width: 100%; padding: 32px; box-shadow: var(--shadow-md); }
+    .logo-emblem { width: 56px; height: 56px; border-radius: 16px; background: linear-gradient(135deg, var(--primary), #1e633a); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1.6em; font-weight: 900; margin: 0 auto 12px; border: 2px solid var(--accent); }
+    .brand-pill { display: inline-block; background: var(--accent-soft); color: #854d0e; border: 1px solid #fde047; font-weight: 800; font-size: 0.74em; padding: 3px 12px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.4px; }
+    body.high-contrast .brand-pill { background: #000; color: #facc15; border-color: #facc15; }
+    .login-header { text-align: center; margin-bottom: 22px; }
+    .login-header h1 { font-size: 1.65em; font-weight: 900; margin-top: 8px; color: var(--primary); }
+    body.high-contrast .login-header h1 { color: #facc15; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 0.8em; font-weight: 800; text-transform: uppercase; color: var(--text-muted); margin-bottom: 5px; letter-spacing: 0.3px; }
+    .form-group input, .form-group select { width: 100%; padding: 11px 13px; border: 2px solid var(--border); border-radius: 10px; background: var(--surface); color: var(--text); font-weight: 600; font-size: 0.95em; transition: border-color 0.15s; }
+    .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--primary); }
+    body.high-contrast .form-group input:focus, body.high-contrast .form-group select:focus { border-color: #facc15; }
+
+    .btn-primary { width: 100%; background: var(--primary); color: #fff; border: 2px solid var(--primary); padding: 12px 16px; border-radius: 10px; font-weight: 800; font-size: 0.98em; cursor: pointer; transition: 0.15s; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    body.high-contrast .btn-primary { background: #facc15; color: #000; border-color: #facc15; }
+
+    .quick-profiles { margin-top: 20px; padding-top: 16px; border-top: 1px dashed var(--border); }
+    .quick-profiles p { font-size: 0.8em; font-weight: 700; color: var(--text-muted); margin-bottom: 10px; text-align: center; }
+    .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .profile-chip { background: var(--surface-alt); color: var(--text); border: 1.5px solid var(--border); padding: 8px 10px; border-radius: 10px; font-size: 0.82em; font-weight: 700; cursor: pointer; text-align: left; transition: 0.15s; }
+    .profile-chip:hover { border-color: var(--primary); background: var(--accent-soft); }
+    .profile-chip span { display: block; font-size: 0.82em; font-weight: 600; color: var(--text-muted); }
+
+    /* CABE√áALHO DO SISTEMA LOGADO */
+    header.app-header { background: linear-gradient(135deg, var(--primary), #1d5c37); color: #fff; padding: 20px 16px 32px; border-bottom: 3px solid var(--accent); }
+    body.high-contrast header.app-header { background: #000; border-bottom: 3px solid #facc15; }
+    .container { max-width: 980px; margin: 0 auto; padding: 0 16px; }
+    .header-flex { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .user-badge { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.12); padding: 8px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.25); }
+    .btn-logout { background: #fff; color: #0f172a; border: none; padding: 7px 13px; border-radius: 8px; font-weight: 800; font-size: 0.84em; cursor: pointer; }
+    body.high-contrast .btn-logout { background: #facc15; color: #000; }
+
+    /* NAVEGA√á√ÉO PRINCIPAL (5 M√ìDULOS + PAINEL) */
+    .nav-tabs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin: -20px 0 20px; }
+    @media (max-width: 820px) { .nav-tabs { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 480px) { .nav-tabs { grid-template-columns: repeat(2, 1fr); } }
+    .nav-btn { background: var(--surface); color: var(--text); border: 2px solid var(--border); padding: 12px 8px; border-radius: var(--radius); font-weight: 800; font-size: 0.85em; cursor: pointer; box-shadow: var(--shadow-sm); transition: 0.15s; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .nav-btn:hover { border-color: var(--primary); transform: translateY(-1px); }
+    .nav-btn.active { background: var(--primary); color: #fff; border-color: var(--accent); }
+    body.high-contrast .nav-btn.active { background: #facc15; color: #000; }
+
+    /* CARDS, KPIs E COMPONENTES UX */
+    .card { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); padding: 18px; margin-bottom: 16px; box-shadow: var(--shadow-sm); }
+    .section-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+    .section-title { font-size: 1.15em; font-weight: 900; }
+    .section-subtitle { font-size: 0.88em; color: var(--text-muted); }
+
+    .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+    @media (max-width: 720px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+    .kpi-card { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); padding: 14px; }
+    .kpi-label { font-size: 0.78em; font-weight: 800; text-transform: uppercase; color: var(--text-muted); }
+    .kpi-value { font-size: 1.65em; font-weight: 900; margin-top: 4px; color: var(--primary); }
+    body.high-contrast .kpi-value { color: #facc15; }
+    .kpi-foot { font-size: 0.8em; color: var(--text-muted); margin-top: 2px; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .grid-3 { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 12px; }
+    @media (max-width: 680px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+    .student-row { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; transition: 0.15s; }
+    .student-row:hover { border-color: var(--primary); }
+    .apelido-main { font-size: 1.18em; font-weight: 900; }
+    .nome-sub { font-size: 0.88em; color: var(--text-muted); font-weight: 600; }
+
+    .pill { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 999px; font-size: 0.78em; font-weight: 800; margin-right: 6px; margin-top: 5px; }
+    .pill-corda { background: #e2e8f0; color: #1e293b; }
+    body.high-contrast .pill-corda { background: #facc15; color: #000; }
+    .pill-warn { background: var(--warn-bg); color: var(--warn); border: 1px solid #f59e0b; }
+    .pill-ok { background: var(--success-bg); color: var(--success); }
+    .pill-danger { background: var(--danger-bg); color: var(--danger); }
+
+    .btn-sos { background: var(--danger-bg); color: var(--danger); border: 2px solid var(--danger); padding: 8px 13px; border-radius: 10px; font-weight: 800; cursor: pointer; }
+    .btn-toggle { min-width: 122px; padding: 9px 14px; border-radius: 10px; font-weight: 800; cursor: pointer; border: 2px solid transparent; transition: 0.15s; }
+    .btn-toggle.presente { background: var(--success); color: #fff; }
+    .btn-toggle.ausente { background: transparent; color: var(--danger); border-color: var(--danger); }
+    .btn-accent { background: var(--accent); color: #0f172a; border: 2px solid #ca8a04; padding: 9px 15px; border-radius: 10px; font-weight: 800; cursor: pointer; }
+
+    table.ux-table { width: 100%; border-collapse: collapse; font-size: 0.92em; }
+    table.ux-table th { text-align: left; padding: 11px 10px; background: var(--surface-alt); border-bottom: 2px solid var(--border); font-size: 0.82em; text-transform: uppercase; color: var(--text-muted); }
+    table.ux-table td { padding: 11px 10px; border-bottom: 1px solid var(--border); }
+
+    /* Barra de Progresso Gradua√ß√£o */
+    .track-bar { width: 100%; height: 12px; background: #e2e8f0; border-radius: 999px; overflow: hidden; margin-top: 8px; }
+    .track-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--success)); transition: width 0.3s; }
+    body.high-contrast .track-fill { background: #facc15; }
+
+    /* Calend√°rio Visual */
+    .cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center; font-weight: 800; font-size: 0.8em; color: var(--text-muted); margin-top: 12px; }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 6px; }
+    .cal-cell { border: 1.5px solid var(--border); border-radius: 10px; padding: 8px 6px; min-height: 68px; background: var(--surface); font-size: 0.86em; }
+    .cal-cell.event-day { background: var(--warn-bg); border: 2px solid #eab308; }
+    .cal-tag { display: block; margin-top: 4px; font-size: 0.75em; font-weight: 800; color: var(--warn); line-height: 1.2; }
+
+    .toast { margin-bottom: 14px; padding: 13px 16px; border-radius: 12px; font-weight: 800; display: none; border: 2px solid var(--success); background: var(--success-bg); color: var(--success); }
+    .sticky-footer { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); border-top: 2px solid var(--border); padding: 12px 16px; z-index: 20; }
+
+    /* Modal SOS */
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.78); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 50; }
+    .modal-backdrop.open { display: flex; }
+    .modal-box { background: var(--surface); border: 3px solid var(--danger); border-radius: 16px; max-width: 470px; width: 100%; padding: 22px; box-shadow: var(--shadow-md); }
+    .sos-field { background: var(--surface-alt); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; margin-top: 8px; }
   </style>
 </head>
 <body>
-  <header class="row">
-    <div><strong>GINGASEGURA</strong><br><small>Assoc. Martelo Predador</small></div>
-    <span id="net-status" class="badge-online">‚óè ONLINE</span>
-  </header>
-  <h2>Ola, Mestre Martelo</h2>
-  <section id="tela-1"><h3>TURMAS DE HOJE</h3><div id="lista-turmas"></div></section>
-  <section id="tela-2" hidden>
-    <button onclick="mostrarTela('tela-1')">‚Üê Voltar</button>
-    <h3>CHAMADA DE HOJE</h3>
-    <div id="lista-alunos"></div>
-    <button class="btn btn-primary" onclick="finalizarChamada()">FINALIZAR CHAMADA</button>
-  </section>
-  <section id="tela-3" hidden>
-    <div class="card"><h3>‚úì CHAMADA ENVIADA!</h3><p id="resumo-chamada"></p></div>
-    <div id="ficha-emergencia" class="card" hidden>
-      <h3>‚ö† FICHA MEDICA DE EMERGENCIA</h3>
-      <p id="med-aluno"></p>
-      <div class="alerta-med" id="med-detalhe"></div>
-      <a id="btn-ligar" class="btn btn-danger" href="#">LIGAR PARA RESPONSAVEL</a>
+  <nav class="a11y-bar" aria-label="Recursos de Acessibilidade">
+    <span>GingaSegura UX ‚Ä¢ Padr√£o WCAG 2.1 (ODS 3, 4 e 10)</span>
+    <div class="a11y-actions">
+      <button type="button" id="btnContrast" class="btn-a11y" aria-pressed="false">Alto Contraste</button>
+      <button type="button" id="btnFont" class="btn-a11y" aria-pressed="false">Texto Maior (A+)</button>
     </div>
-    <button class="btn" onclick="mostrarTela('tela-1')">VOLTAR AO MENU</button>
+  </nav>
+
+  <!-- P√ÅGINA 1: LOGIN INSTITUCIONAL -->
+  <section id="loginScreen" class="login-wrapper">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="logo-emblem" aria-hidden="true">GS</div>
+        <span class="brand-pill">Associa√ß√£o Fam√≠lia Martelo Predador</span>
+        <h1>GingaSegura</h1>
+        <p style="font-size:0.9em;color:var(--text-muted);margin-top:4px;">Gest√£o Integrada de Roda, Frequ√™ncia, Sa√∫de e Eventos</p>
+      </div>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">E-mail ou Usu√°rio da Lideran√ßa</label>
+          <input type="text" id="loginEmail" value="mestre.martelo@familiamartelo.org.br" required />
+        </div>
+        <div class="form-group">
+          <label for="loginSenha">Senha de Acesso</label>
+          <input type="password" id="loginSenha" value="martelopredador2026" required />
+        </div>
+        <button type="submit" class="btn-primary">Entrar na Plataforma</button>
+      </form>
+      <div class="quick-profiles">
+        <p>Acesso R√°pido por Perfil Validado em Campo:</p>
+        <div class="profile-grid">
+          <button type="button" class="profile-chip" onclick="acessarSistema('Mestre Martelo', 'Fundador & Mestre')">Mestre Martelo<span>Fundador &amp; Mestre</span></button>
+          <button type="button" class="profile-chip" onclick="acessarSistema('Mestra Engra√ßadinha', 'Supervisora Geral')">Mestra Engra√ßadinha<span>Supervisora Geral</span></button>
+          <button type="button" class="profile-chip" onclick="acessarSistema('Contramestre Jaguar', 'Instrutor T√©cnico')">Contramestre Jaguar<span>Instrutor T√©cnico</span></button>
+          <button type="button" class="profile-chip" onclick="acessarSistema('Monitor Guuh', 'Apoio aos Alunos')">Monitor Guuh<span>Apoio aos Alunos</span></button>
+        </div>
+      </div>
+    </div>
   </section>
+
+  <!-- √ÅREA LOGADA DO SISTEMA -->
+  <div id="appShell" style="display:none;">
+    <header class="app-header">
+      <div class="container header-flex">
+        <div>
+          <span class="brand-pill" style="background:var(--accent);color:#0f172a;border:none;">Embu das Artes ‚Ä¢ SP</span>
+          <h1 style="font-size:1.45em;font-weight:900;margin-top:6px;">Associa√ß√£o de Capoeira Fam√≠lia Martelo Predador</h1>
+          <p style="font-size:0.88em;opacity:0.92;">Sistema GingaSegura ‚Ä¢ N√∫cleos E.M. Jequitib√° e Sede Comunit√°ria</p>
+        </div>
+        <div class="user-badge">
+          <div>
+            <strong id="loggedUserName" style="display:block;font-size:0.92em;">Mestre Martelo</strong>
+            <small id="loggedUserRole" style="opacity:0.85;">Fundador &amp; Mestre</small>
+          </div>
+          <button type="button" id="btnLogout" class="btn-logout">Sair</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- MENU DE NAVEGA√á√ÉO DAS P√ÅGINAS -->
+      <nav class="nav-tabs" role="tablist" aria-label="M√≥dulos do Sistema">
+        <button type="button" class="nav-btn active" data-target="secInicio">üè† Vis√£o Geral</button>
+        <button type="button" class="nav-btn" data-target="secChamada">‚úÖ Chamada</button>
+        <button type="button" class="nav-btn" data-target="secLista">üìã Lista Chamada</button>
+        <button type="button" class="nav-btn" data-target="secMensalidade">üí≥ Mensalidades</button>
+        <button type="button" class="nav-btn" data-target="secGraduacao">ü•ã Gradua√ß√£o</button>
+        <button type="button" class="nav-btn" data-target="secEventos">üìÖ Eventos</button>
+      </nav>
+
+      <div id="toastBanner" class="toast" role="status" aria-live="polite"></div>
+
+      <!-- P√ÅGINA 1 LOGADA: DASHBOARD / VIS√ÉO GERAL -->
+      <section id="secInicio" class="ux-page">
+        <div class="kpi-grid">
+          <div class="kpi-card"><div class="kpi-label">Alunos Ativos</div><div class="kpi-value">5</div><div class="kpi-foot">2 n√∫cleos ativos</div></div>
+          <div class="kpi-card"><div class="kpi-label">Frequ√™ncia M√©dia</div><div class="kpi-value" id="kpiFreqMedia">85%</div><div class="kpi-foot">Meta Batizado: 75%</div></div>
+          <div class="kpi-card"><div class="kpi-label">Alertas M√©dicos</div><div class="kpi-value">2</div><div class="kpi-foot">Monitorados (ODS 3)</div></div>
+          <div class="kpi-card"><div class="kpi-label">Pr√≥ximo Evento</div><div class="kpi-value">21/11</div><div class="kpi-foot">Roda Comunit√°ria</div></div>
+        </div>
+
+        <div class="card">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Acesso R√°pido √†s Opera√ß√µes da Academia</h2>
+              <p class="section-subtitle">Selecione uma das p√°ginas abaixo para iniciar o atendimento em quadra</p>
+            </div>
+          </div>
+          <div class="grid-3">
+            <button type="button" class="profile-chip" onclick="irParaPagina('secChamada')" style="padding:14px;">‚úÖ Realizar Chamada do Dia<span>Marca√ß√£o r√°pida por apelido + SOS M√©dico</span></button>
+            <button type="button" class="profile-chip" onclick="irParaPagina('secLista')" style="padding:14px;">üìã Conferir Lista de Chamada<span>Hist√≥rico audit√°vel por data e turma</span></button>
+            <button type="button" class="profile-chip" onclick="irParaPagina('secMensalidade')" style="padding:14px;">üí≥ Checar Mensalidades<span>Status financeiro e bolsistas sociais</span></button>
+            <button type="button" class="profile-chip" onclick="irParaPagina('secGraduacao')" style="padding:14px;">ü•ã Gradua√ß√£o dos Alunos<span>Progresso de cordas e aptid√£o</span></button>
+            <button type="button" class="profile-chip" onclick="irParaPagina('secEventos')" style="padding:14px;">üìÖ Eventos &amp; Calend√°rio<span>Agendar Batizados e Rodas Abertas</span></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- P√ÅGINA 2: REALIZAR CHAMADA + SOS M√âDICO -->
+      <section id="secChamada" class="ux-page" style="display:none;">
+        <div class="card grid-3">
+          <div class="form-group" style="margin:0;">
+            <label for="selTurma">Turma / N√∫cleo</label>
+            <select id="selTurma">
+              <option value="Infantil / Juvenil ‚Äî E.M. Jequitib√° (18h30)">Infantil / Juvenil ‚Äî E.M. Jequitib√° (18h30)</option>
+              <option value="Adulto / Graduados ‚Äî Sede Embu (20h00)">Adulto / Graduados ‚Äî Sede Embu (20h00)</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin:0;">
+            <label for="inpDataAula">Data do Treino</label>
+            <input type="date" id="inpDataAula" value="2026-11-17" />
+          </div>
+          <div class="form-group" style="margin:0;">
+            <label for="buscaAluno">Buscar Apelido ou Nome</label>
+            <input type="search" id="buscaAluno" placeholder="Ex: Gavi√£o, Estrela..." />
+          </div>
+        </div>
+
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Chamada R√°pida (<span id="countPres">4</span>/<span id="countTot">5</span> Presentes)</h2>
+            <p class="section-subtitle">Prioridade visual pelo apelido de roda e alertas cl√≠nicos preventivos</p>
+          </div>
+          <button type="button" id="btnMarcarTodos" class="btn-accent">‚úì Marcar Todos Presentes</button>
+        </div>
+
+        <div id="listaChamadaCards"></div>
+
+        <div class="sticky-footer">
+          <button type="button" id="btnSalvarChamada" class="btn-primary" style="max-width:980px;margin:0 auto;display:block;">Confirmar e Salvar Chamada na Lista</button>
+        </div>
+      </section>
+
+      <!-- P√ÅGINA 3: CONFERIR LISTA DE CHAMADA -->
+      <section id="secLista" class="ux-page" style="display:none;">
+        <div class="card grid-2">
+          <div class="form-group" style="margin:0;">
+            <label for="filtroDataLista">Filtrar Hist√≥rico por Data</label>
+            <input type="date" id="filtroDataLista" />
+          </div>
+          <div class="form-group" style="margin:0;">
+            <label>&nbsp;</label>
+            <button type="button" id="btnResetLista" class="btn-primary">Mostrar Todas as Listas Salvas</button>
+          </div>
+        </div>
+        <div id="containerListasSalvas"></div>
+      </section>
+
+      <!-- P√ÅGINA 4: MENSALIDADES DOS ALUNOS -->
+      <section id="secMensalidade" class="ux-page" style="display:none;">
+        <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr);">
+          <div class="kpi-card"><div class="kpi-label">Em Dia</div><div class="kpi-value" id="mEmDia">3</div><div class="kpi-foot">Contribui√ß√£o regular</div></div>
+          <div class="kpi-card"><div class="kpi-label">Pendentes</div><div class="kpi-value" id="mPendente">1</div><div class="kpi-foot">Aguardando acerto</div></div>
+          <div class="kpi-card"><div class="kpi-label">Bolsistas Sociais</div><div class="kpi-value" id="mBolsista">1</div><div class="kpi-foot">Isen√ß√£o social (ODS 10)</div></div>
+        </div>
+        <div class="card">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Situa√ß√£o Financeira e Contribui√ß√£o Comunit√°ria</h2>
+              <p class="section-subtitle">Acompanhe pagamentos, vencimentos e bolsas sociais da associa√ß√£o</p>
+            </div>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="ux-table">
+              <thead>
+                <tr><th>Apelido / Nome Civil</th><th>Modalidade</th><th>Vencimento</th><th>Status</th><th>A√ß√£o R√°pida</th></tr>
+              </thead>
+              <tbody id="tbodyMensalidade"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- P√ÅGINA 5: GRADUA√á√ÉO DOS ALUNOS -->
+      <section id="secGraduacao" class="ux-page" style="display:none;">
+        <div class="card">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Gradua√ß√£o dos Alunos e Sistema de Cordas</h2>
+              <p class="section-subtitle">Elegibilidade autom√°tica baseada na frequ√™ncia m√≠nima de 75% nas rodas e treinos</p>
+            </div>
+          </div>
+          <div id="containerGraduacao"></div>
+        </div>
+      </section>
+
+      <!-- P√ÅGINA 6: EVENTOS E CALEND√ÅRIO -->
+      <section id="secEventos" class="ux-page" style="display:none;">
+        <div class="card">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Marcar Novo Evento no Calend√°rio</h2>
+              <p class="section-subtitle">Organize Batizados, Trocas de Corda, Rodas de Rua e Oficinas Culturais</p>
+            </div>
+          </div>
+          <form id="formNovoEvento" class="grid-2">
+            <div class="form-group" style="margin:0;">
+              <label for="evTitulo">T√≠tulo do Evento</label>
+              <input type="text" id="evTitulo" placeholder="Ex: Batizado e Troca de Cordas 2026" required />
+            </div>
+            <div class="form-group" style="margin:0;">
+              <label for="evData">Data do Evento</label>
+              <input type="date" id="evData" value="2026-11-28" required />
+            </div>
+            <div class="form-group" style="margin:0;">
+              <label for="evLocal">Local / N√∫cleo</label>
+              <input type="text" id="evLocal" placeholder="Ex: Quadra E.M. Jequitib√° - Embu das Artes" required />
+            </div>
+            <div class="form-group" style="margin:0;">
+              <label for="evTipo">Tipo de Atividade</label>
+              <select id="evTipo">
+                <option value="Batizado & Troca de Gradua√ß√£o">Batizado &amp; Troca de Gradua√ß√£o</option>
+                <option value="Roda Aberta Comunit√°ria">Roda Aberta Comunit√°ria</option>
+                <option value="Oficina de Berimbau e Musicalidade">Oficina de Berimbau e Musicalidade</option>
+              </select>
+            </div>
+            <div style="grid-column:1/-1;">
+              <button type="submit" class="btn-primary">Confirmar e Publicar no Calend√°rio</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title">Calend√°rio Mensal ‚Äî Novembro 2026</h2>
+          <div class="cal-weekdays"><span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>S√°b</span></div>
+          <div id="calGrid" class="cal-grid"></div>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title" style="margin-bottom:10px;">Agenda Confirmada da Associa√ß√£o</h2>
+          <div id="listaEventosCards"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- MODAL SOS M√âDICO -->
+  <div id="sosModal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <h2 style="color:var(--danger);font-weight:900;">üö® Ficha M√©dica de Emerg√™ncia (ODS 3)</h2>
+      <div id="sosModalBody"></div>
+      <button type="button" onclick="document.getElementById('sosModal').classList.remove('open')" class="btn-primary" style="margin-top:16px;">Fechar Prontu√°rio</button>
+    </div>
+  </div>
+
   <script>
-    let alunosAtuais = [];
-    function mostrarTela(id) { ['tela-1', 'tela-2', 'tela-3'].forEach(t => document.getElementById(t).hidden = (t !== id)); }
-    async function carregarTurmas() {
-      const res = await fetch('/api/turmas');
-      const turmas = await res.json();
-      document.getElementById('lista-turmas').innerHTML = turmas.map(t => '<div class="card" onclick="abrirChamada(' + t.id + ')"><strong>' + t.nome + '</strong><br>' + t.horario + '<br><span style="color:#f59e0b">Iniciar Chamada ></span></div>').join('');
+    const alunos = [
+      { id: 1, apelido: "Gavi√£o", nome: "Lucas Gabriel Silva", presente: true, sangue: "O+", alerta: false, alergia: "Nenhuma alergia conhecida", contato: "(11) 98412-3390 ‚Äî Mariana Silva (M√£e)", statusFin: "Em Dia", plano: "Contribui√ß√£o R$ 60,00", venc: "10/11/2026", corda: "Corda Verde", proxCorda: "Corda Verde/Amarela", freq: 92 },
+      { id: 2, apelido: "Estrela", nome: "Ana Beatriz Oliveira", presente: true, sangue: "A+", alerta: true, alergia: "Alergia √† Dipirona ‚Ä¢ Asma leve (bombinha na mochila)", contato: "(11) 97230-1184 ‚Äî Carlos Oliveira (Pai)", statusFin: "Em Dia", plano: "Contribui√ß√£o R$ 60,00", venc: "10/11/2026", corda: "Corda Amarela", proxCorda: "Corda Amarela/Azul", freq: 88 },
+      { id: 3, apelido: "Trov√£o", nome: "Pedro Henrique Santos", presente: false, sangue: "B-", alerta: true, alergia: "Intoler√¢ncia severa √† lactose", contato: "(11) 99104-5521 ‚Äî Fernanda Santos (M√£e)", statusFin: "Pendente", plano: "Contribui√ß√£o R$ 60,00", venc: "10/11/2026", corda: "Corda Crua", proxCorda: "Corda Crua/Amarela", freq: 68 },
+      { id: 4, apelido: "Corisco", nome: "Jo√£o Victor Almeida", presente: true, sangue: "AB+", alerta: false, alergia: "Nenhuma restri√ß√£o m√©dica", contato: "(11) 96541-8802 ‚Äî Roberto Almeida (Pai)", statusFin: "Bolsista Social", plano: "Isento (Inclus√£o ODS 10)", venc: "‚Äî", corda: "Corda Azul", proxCorda: "Corda Azul/Verde", freq: 95 },
+      { id: 5, apelido: "Pantera", nome: "Mariana Souza Lima", presente: true, sangue: "O-", alerta: false, alergia: "Nenhuma restri√ß√£o m√©dica", contato: "(11) 98871-2019 ‚Äî Cl√°udia Lima (M√£e)", statusFin: "Em Dia", plano: "Contribui√ß√£o R$ 60,00", venc: "10/11/2026", corda: "Corda Verde/Amarela", proxCorda: "Corda Amarela", freq: 84 }
+    ];
+
+    const listasHistorico = [
+      {
+        data: "2026-11-17",
+        turma: "Infantil / Juvenil ‚Äî E.M. Jequitib√° (18h30)",
+        registros: alunos.map(a => ({ apelido: a.apelido, nome: a.nome, corda: a.corda, presente: a.presente }))
+      },
+      {
+        data: "2026-11-15",
+        turma: "Infantil / Juvenil ‚Äî E.M. Jequitib√° (18h30)",
+        registros: alunos.map(a => ({ apelido: a.apelido, nome: a.nome, corda: a.corda, presente: true }))
+      }
+    ];
+
+    const agendaEventos = [
+      { titulo: "Batizado e Troca de Gradua√ß√£o ‚Äî Fam√≠lia Martelo Predador", data: "2026-11-28", local: "Quadra E.M. Jequitib√° ‚Ä¢ Embu das Artes", tipo: "Batizado & Troca de Gradua√ß√£o" },
+      { titulo: "Roda Aberta Comunit√°ria & Oficina de Berimbau", data: "2026-11-21", local: "Sede Associa√ß√£o Fam√≠lia Martelo Predador", tipo: "Roda Aberta Comunit√°ria" }
+    ];
+
+    function showToast(msg) {
+      const el = document.getElementById("toastBanner");
+      el.textContent = msg;
+      el.style.display = "block";
+      setTimeout(() => { el.style.display = "none"; }, 4500);
     }
-    async function abrirChamada(turmaId) {
-      const res = await fetch('/api/turmas/' + turmaIdÄ¨ÄúΩÖ±’πΩÃú§Ï(ÄÄÄÄÄÅÖ±’πΩÕ—’Ö•ÃÄÙÅÖ›Ö•–Å…ïÃπ©ÕΩ∏†§Ï(ÄÄÄÄÄÅëΩç’µïπ–πùï—±ïµïπ—	Â%ê†ù±•Õ—ÑµÖ±’πΩÃú§π•ππï…!Q50ÄÙÅÖ±’πΩÕ—’Ö•ÃπµÖ¿°ÑÄÙ¯ÄúÒë•ÿÅç±ÖÕÃÙâçÖ…êÅ…Ω‹à¯Òë•ÿ¯ÒÕ—…Ωπú¯úÄ¨ÅÑππΩµîÄ¨ÄúÄ†àúÄ¨ÅÑπÖ¡ï±•ëºÄ¨Äúà§ΩÕ—…Ωπú¯Òâ»¯ÒÕµÖ±∞¯úÄ¨ÅÑπçΩ…ëÑÄ¨ÄúΩÕµÖ±∞¯úÄ¨Ä°Ñπ…ïÕ—…•çÖΩ}µïë•çÑÄÑÙÙÄù9ïπ°’µÑúÄ¸ÄúÒë•ÿÅç±ÖÕÃÙâÖ±ï…—Ñµµïêà˚är@ÄúÄ¨ÅÑπ…ïÕ—…•çÖΩ}µïë•çÑÄ¨ÄúΩë•ÿ¯úÄËÄúú§Ä¨ÄúΩë•ÿ¯Òë•ÿ¯Ò•π¡’–Å—Â¡îÙâç°ïç≠âΩ‡àÅ•êÙâ¡…ïÃ¥úÄ¨ÅÑπ•êÄ¨ÄúàÅç°ïç≠ïê¯Òâ’——Ω∏ÅΩπç±•ç¨ıpùÖâ…•…µï…ùïπç•Ñ†úÄ¨Å)M=8πÕ—…•πù•ô‰°Ñ§Ä¨Äú•púÄÅÕ—Â±îÙâµÖ…ù•∏µ±ïô–Ë·¡‡Ìµ•∏µ›•ë—†Ë–·¡‡Ìµ•∏µ°ï•ù°–Ë–·¡‡ÌâÖç≠ù…Ω’πêËçà‰≈å≈åÌçΩ±Ω»ËçôôòÌâΩ…ëï»ÈπΩπîÌâΩ…ëï»µ…Öë•’ÃË·¡‡ÌôΩπ–µ›ï•ù°–ÈâΩ±êÏà˚är@Ωâ’——Ω∏¯Ωë•ÿ¯Ωë•ÿ¯ú§π©Ω•∏†úú§Ï(ÄÄÄÄÄÅµΩÕ—…Ö…Qï±Ñ†ù—ï±Ñ¥»ú§Ï(ÄÄÄÅÙ(ÄÄÄÅô’πç—•Ω∏ÅÖâ…•…µï…ùïπç•Ñ°Ö±’πº§ÅÏ(ÄÄÄÄÄÅëΩç’µïπ–πùï—±ïµïπ—	Â%ê†ùô•ç°Ñµïµï…ùïπç•Ñú§π°•ëëï∏ÄÙÅôÖ±ÕîÏ(ÄÄÄÄÄÅëΩç’µïπ–πùï—±ïµïπ—	Â%ê†ùµïêµÖ±’πºú§π•ππï…Qï·–ÄÙÅÖ±’πºππΩµîÄ¨ÄúÄ†àúÄ¨ÅÖ±’πºπÖ¡ï±•ëºÄ¨Äúà§Ä¥ÅIïÕ¿ËÄúÄ¨ÅÖ±’πºπ…ïÕ¡ΩπÕÖŸï±}πΩµîÏ(ÄÄÄÄÄÅëΩç’µïπ–πùï—±ïµïπ—	Â%ê†ùµïêµëï—Ö±°îú§π•ππï…Qï·–ÄÙÄù±ï…ù•ÑËÄúÄ¨ÅÖ±’πºπÖ±ï…ù•ÑÄ¨ÄúÅÅIïÕ—…•çÖºËÄúÄ¨ÅÖ±’πºπ…ïÕ—…•çÖΩ}µïë•çÑÏ(ÄÄÄÄÄÅëΩç’µïπ–πùï—±ïµïπ—	Â%ê†ùâ—∏µ±•ùÖ»ú§π°…ïòÄÙÄù—ï∞ËúÄ¨ÅÖ±’πºπ…ïÕ¡ΩπÕÖŸï±}—ï±ïôΩπîÏ(ÄÄÄÄÄÅµΩÕ—…Ö…Qï±Ñ†ù—ï±Ñ¥Ãú§Ï(ÄÄÄÅÙ(ÄÄÄÅÖÕÂπåÅô’πç—•Ω∏Åô•πÖ±•ÈÖ…°ÖµÖëÑ†§ÅÏ(ÄÄÄÄÄÅçΩπÕ–Å¡ÖÂ±ΩÖêÄÙÅÏÅëÖ—Ö}Ö’±ÑËÅπï‹ÅÖ—î†§π—Ω%M=M—…•πú†§πÕ¡±•–†ùPú•l¡t∞Å…ïù•Õ—…ΩÃËÅÖ±’πΩÕ—’Ö•ÃπµÖ¿°ÑÄÙ¯Ä°ÌÖ±’πΩ}•êËÅÑπ•ê∞Å¡…ïÕïπ—îËÅëΩç’µïπ–πùï—±ïµïπ—	Â%ê†ù¡…ïÃ¥úÄ¨ÅÑπ•ê§πç°ïç≠ïëÙ§§ÅÙÏ(ÄÄÄÄÄÅ—…‰ÅÏ(ÄÄÄÄÄÄÄÅçΩπÕ–Å…ïÃÄÙÅÖ›Ö•–Åôï—ç††úΩÖ¡§Ωç°ÖµÖëÖÃΩ±Ω—îú∞ÅÏÅµï—°ΩêËÄùA=MPú∞Å°ïÖëï…ÃËÅÏùΩπ—ïπ–µQÂ¡îúËÄùÖ¡¡±•çÖ—•Ω∏Ω©ÕΩ∏ùÙ∞ÅâΩë‰ËÅ)M=8πÕ—…•πù•ô‰°¡ÖÂ±ΩÖê§ÅÙ§Ï(ÄÄÄÄÄÄÄÅçΩπÕ–ÅëÖ—ÑÄÙÅÖ›Ö•–Å…ïÃπ©ÕΩ∏†§Ï(ÄÄÄÄÄÄÄÅëΩç’µïπ–πùï—±ïµïπ—	Â%ê†ù…ïÕ’µºµç°ÖµÖëÑú§π•ππï…Qï·–ÄÙÅ…ïÃπΩ¨Ä¸ÅëÖ—Ñπ¡…ïÕïπ—ïÃÄ¨ÄúÅA…ïÕïπ—ïÃÄºÄúÄ¨ÅëÖ—ÑπÖ’Õïπ—ïÃÄ¨ÄúÅ’Õïπ—ïÃÄ°M•πç…Ωπ•ÈÖëº§úÄËÅëÖ—Ñπëï—Ö•∞Ï(ÄÄÄÄÄÅÙÅçÖ—ç†ÅÏ(ÄÄÄÄÄÄÄÅ±ΩçÖ±M—Ω…ÖùîπÕï—%—ï¥†ùô•±Ö}Ωôô±•πîú∞Å)M=8πÕ—…•πù•ô‰°¡ÖÂ±ΩÖê§§Ï(ÄÄÄÄÄÄÄÅëΩç’µïπ–πùï—±ïµïπ—	Â%ê†ù…ïÕ’µºµç°ÖµÖëÑú§π•ππï…Qï·–ÄÙÄùMÖ±ŸºÅπÑÅô•±ÑÅΩôô±•πîÅ±ΩçÖ∞Ä°I¿–§∏úÏ(ÄÄÄÄÄÅÙ(ÄÄÄÄÄÅµΩÕ—…Ö…Qï±Ñ†ù—ï±Ñ¥Ãú§Ï(ÄÄÄÅÙ(ÄÄÄÅçÖ……ïùÖ…Q’…µÖÃ†§Ï(ÄÄΩÕç…•¡–¯(ΩâΩë‰¯(Ω°—µ∞
+
+    function fmtData(iso) {
+      const [y, m, d] = iso.split("-");
+      return `${d}/${m}/${y}`;
+    }
+
+    function acessarSistema(nome, cargo) {
+      document.getElementById("loggedUserName").textContent = nome;
+      document.getElementById("loggedUserRole").textContent = cargo;
+      document.getElementById("loginScreen").style.display = "none";
+      document.getElementById("appShell").style.display = "block";
+      renderTudo();
+    }
+
+    document.getElementById("loginForm").onsubmit = (e) => {
+      e.preventDefault();
+      acessarSistema("Mestre Martelo", "Fundador & Mestre");
+    };
+
+    document.getElementById("btnLogout").onclick = () => {
+      document.getElementById("appShell").style.display = "none";
+      document.getElementById("loginScreen").style.display = "flex";
+    };
+
+    function irParaPagina(targetId) {
+      document.querySelectorAll(".nav-btn").forEach(b => b.classList.toggle("active", b.dataset.target === targetId));
+      document.querySelectorAll(".ux-page").forEach(sec => sec.style.display = "none");
+      document.getElementById(targetId).style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    document.querySelectorAll(".nav-btn").forEach(btn => {
+      btn.onclick = () => irParaPagina(btn.dataset.target);
+    });
+
+    // Render Chamada
+    function renderChamada() {
+      const termo = (document.getElementById("buscaAluno").value || "").toLowerCase();
+      const box = document.getElementById("listaChamadaCards");
+      box.innerHTML = "";
+      const filtrados = alunos.filter(a => a.apelido.toLowerCase().includes(termo) || a.nome.toLowerCase().includes(termo));
+
+      filtrados.forEach(a => {
+        const row = document.createElement("div");
+        row.className = "student-row";
+        row.innerHTML = `
+          <div>
+            <div class="apelido-main">${a.apelido} <span class="nome-sub">‚Ä¢ ${a.nome}</span></div>
+            <div>
+              <span class="pill pill-corda">${a.corda}</span>
+              <span class="pill pill-corda">Sangue ${a.sangue}</span>
+              ${a.alerta ? `<span class="pill pill-warn">‚ö† Alerta M√©dico</span>` : ""}
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <button type="button" class="btn-sos">SOS M√©dico</button>
+            <button type="button" class="btn-toggle ${a.presente ? "presente" : "ausente"}">${a.presente ? "‚úì Presente" : "‚úï Ausente"}</button>
+          </div>
+        `;
+        row.querySelector(".btn-sos").onclick = () => {
+          document.getElementById("sosModalBody").innerHTML = `
+            <div class="sos-field"><small>CAPOEIRISTA</small><br><strong>${a.apelido} (${a.nome})</strong></div>
+            <div class="sos-field"><small>TIPO SANGU√çNEO</small><br><strong>${a.sangue}</strong></div>
+            <div class="sos-field"><small>ALERGIAS / CONDI√á√ïES CL√çNICAS</small><br><strong>${a.alergia}</strong></div>
+            <div class="sos-field"><small>CONTATO DE EMERG√äNCIA</small><br><strong>${a.contato}</strong></div>
+          `;
+          document.getElementById("sosModal").classList.add("open");
+        };
+        row.querySelector(".btn-toggle").onclick = () => {
+          a.presente = !a.presente;
+          renderChamada();
+        };
+        box.appendChild(row);
+      });
+
+      document.getElementById("countTot").textContent = alunos.length;
+      document.getElementById("countPres").textContent = alunos.filter(a => a.presente).length;
+    }
+
+    document.getElementById("buscaAluno").oninput = renderChamada;
+    document.getElementById("btnMarcarTodos").onclick = () => {
+      alunos.forEach(a => a.presente = true);
+      renderChamada();
+    };
+
+    document.getElementById("btnSalvarChamada").onclick = async () => {
+      const data = document.getElementById("inpDataAula").value;
+      const turma = document.getElementById("selTurma").value;
+      try {
+        await fetch("/api/chamadas/lote", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ data_aula: data, registros: alunos.map(a => ({ aluno_id: a.id, presente: a.presente })) })
+        });
+      } catch (e) {}
+      listasHistorico.unshift({
+        data,
+        turma,
+        registros: alunos.map(a => ({ apelido: a.apelido, nome: a.nome, corda: a.corda, presente: a.presente }))
+      });
+      renderListasSalvas();
+      showToast(`‚úì Chamada de ${fmtData(data)} salva com sucesso! Dispon√≠vel na aba "Lista Chamada".`);
+    };
+
+    // Render Lista de Chamada
+    function renderListasSalvas(filtro = "") {
+      const box = document.getElementById("containerListasSalvas");
+      const items = filtro ? listasHistorico.filter(l => l.data === filtro) : listasHistorico;
+      box.innerHTML = items.map(l => {
+        const pres = l.registros.filter(r => r.presente).length;
+        const pct = Math.round((pres / l.registros.length) * 100);
+        return `
+          <div class="card">
+            <div class="section-header">
+              <div>
+                <h3 class="section-title">Data: ${fmtData(l.data)} ‚Äî ${l.turma}</h3>
+                <p class="section-subtitle">Aproveitamento da turma: ${pres} de ${l.registros.length} alunos (${pct}%)</p>
+              </div>
+              <span class="pill pill-ok">Auditado</span>
+            </div>
+            <div style="overflow-x:auto;">
+              <table class="ux-table">
+                <thead><tr><th>Apelido</th><th>Nome Civil</th><th>Gradua√ß√£o</th><th>Frequ√™ncia</th></tr></thead>
+                <tbody>
+                  ${l.registros.map(r => `<tr><td><strong>${r.apelido}</strong></td><td>${r.nome}</td><td>${r.corda}</td><td><span class="pill ${r.presente ? "pill-ok" : "pill-danger"}">${r.presente ? "‚úì Presente" : "‚úï Ausente"}</span></td></tr>`).join("")}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    document.getElementById("filtroDataLista").onchange = (e) => renderListasSalvas(e.target.value);
+    document.getElementById("btnResetLista").onclick = () => { document.getElementById("filtroDataLista").value = ""; renderListasSalvas(""); };
+
+    // Render Mensalidades
+    function renderMensalidades() {
+      const tbody = document.getElementById("tbodyMensalidade");
+      tbody.innerHTML = alunos.map((a, i) => `
+        <tr>
+          <td><strong>${a.apelido}</strong><br><small style="color:var(--text-muted);">${a.nome}</small></td>
+          <td>${a.plano}</td>
+          <td>${a.venc}</td>
+          <td><span class="pill ${a.statusFin === "Pendente" ? "pill-danger" : "pill-ok"}">${a.statusFin}</span></td>
+          <td>${a.statusFin === "Pendente" ? `<button type="button" class="btn-accent" onclick="darBaixa(${i})">Registrar Pagamento</button>` : "‚úì Quitado"}</td>
+        </tr>
+      `).join("");
+      document.getElementById("mEmDia").textContent = alunos.filter(a => a.statusFin === "Em Dia").length;
+      document.getElementById("mPendente").textContent = alunos.filter(a => a.statusFin === "Pendente").length;
+      document.getElementById("mBolsista").textContent = alunos.filter(a => a.statusFin === "Bolsista Social").length;
+    }
+
+    window.darBaixa = (i) => {
+      alunos[i].statusFin = "Em Dia";
+      renderMensalidades();
+      showToast(`‚úì Mensalidade de ${alunos[i].apelido} (${alunos[i].nome}) baixada como Em Dia!`);
+    };
+
+    // Render Gradua√ß√£o
+    function renderGraduacao() {
+      const box = document.getElementById("containerGraduacao");
+      box.innerHTML = alunos.map(a => {
+        const apto = a.freq >= 75;
+        return `
+          <div class="student-row" style="display:block;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+              <div><strong class="apelido-main">${a.apelido}</strong> <span class="nome-sub">‚Ä¢ ${a.nome}</span></div>
+              <span class="pill ${apto ? "pill-ok" : "pill-danger"}">${apto ? "‚úì Apto para Troca de Corda" : "Abaixo da meta (75%)"}</span>
+            </div>
+            <p style="font-size:0.9em;margin-top:6px;">Gradua√ß√£o Atual: <strong>${a.corda}</strong> ‚ûî Pr√≥xima Corda: <strong>${a.proxCorda}</strong> ‚Ä¢ Frequ√™ncia: <strong>${a.freq}%</strong></p>
+            <div class="track-bar"><div class="track-fill" style="width:${a.freq}%;"></div></div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    // Render Eventos e Calend√°rio
+    function renderEventos() {
+      const cal = document.getElementById("calGrid");
+      const mapEventos = {};
+      agendaEventos.forEach(ev => {
+        const dia = parseInt(ev.data.split("-")[2], 10);
+        mapEventos[dia] = ev.titulo;
+      });
+      let html = "";
+      for (let d = 1; d <= 30; d++) {
+        const evTitulo = mapEventos[d];
+        html += `<div class="cal-cell ${evTitulo ? "event-day" : ""}"><strong>${d}</strong>${evTitulo ? `<span class="cal-tag">${evTitulo.slice(0, 22)}...</span>` : ""}</div>`;
+      }
+      cal.innerHTML = html;
+
+      document.getElementById("listaEventosCards").innerHTML = agendaEventos.map(ev => `
+        <div class="student-row">
+          <div>
+            <strong>${ev.titulo}</strong>
+            <p style="font-size:0.86em;color:var(--text-muted);">${fmtData(ev.data)} ‚Ä¢ ${ev.local}</p>
+          </div>
+          <span class="pill pill-warn">${ev.tipo}</span>
+        </div>
+      `).join("");
+    }
+
+    document.getElementById("formNovoEvento").onsubmit = async (e) => {
+      e.preventDefault();
+      const novo = {
+        titulo: document.getElementById("evTitulo").value,
+        data: document.getElementById("evData").value,
+        local: document.getElementById("evLocal").value,
+        tipo: document.getElementById("evTipo").value
+      };
+      try {
+        await fetch("/api/eventos", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ titulo: novo.titulo, data_evento: novo.data, local: novo.local, categoria: novo.tipo })
+        });
+      } catch (err) {}
+      agendaEventos.unshift(novo);
+      renderEventos();
+      e.target.reset();
+      showToast(`‚úì Evento "${novo.titulo}" agendado no calend√°rio da associa√ß√£o!`);
+    };
+
+    // Acessibilidade WCAG 2.1
+    document.getElementById("btnContrast").onclick = (e) => e.target.setAttribute("aria-pressed", document.body.classList.toggle("high-contrast"));
+    document.getElementById("btnFont").onclick = (e) => e.target.setAttribute("aria-pressed", document.body.classList.toggle("large-text"));
+
+    function renderTudo() {
+      renderChamada();
+      renderListasSalvas();
+      renderMensalidades();
+      renderGraduacao();
+      renderEventos();
+    }
+  </script>
+</body>
+</html>
