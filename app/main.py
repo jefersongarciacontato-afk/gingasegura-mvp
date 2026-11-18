@@ -10,7 +10,7 @@ from pydantic import BaseModel
 
 app = FastAPI(
     title="GingaSegura - Sistema de Gestão | Família Martelo Predador",
-    version="2.1.0"
+    version="2.2.0"
 )
 
 app.add_middleware(
@@ -66,7 +66,11 @@ def health_check():
     return {
         "status": "healthy",
         "service": "GingaSegura - Família Martelo Predador",
-        "modalidades": ["Capoeira (Cordas)", "Contato Total Português (Faixas)"],
+        "modalidades": [
+            "Capoeira (Cordas)",
+            "Muay Thai (Kruangs)",
+            "Contato Total Português (Faixas e Graus)"
+        ],
         "timestamp_utc": datetime.now(timezone.utc).isoformat()
     }
 
