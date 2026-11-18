@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GingaSegura — Plataforma de Gestão | Assoc. Família Martelo Predador</title>
+  <title>GingaSegura — Família Martelo Predador | Capoeira & Contato Total Português</title>
   <style>
     :root {
       --bg: #f1f5f3;
@@ -22,6 +22,8 @@
       --danger-bg: #fee2e2;
       --warn: #b45309;
       --warn-bg: #fef3c7;
+      --info: #1d4ed8;
+      --info-bg: #dbeafe;
       --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
       --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
       --radius: 14px;
@@ -45,6 +47,8 @@
       --danger-bg: #2a0000;
       --warn: #facc15;
       --warn-bg: #1f1a00;
+      --info: #facc15;
+      --info-bg: #121212;
       --shadow-sm: none;
       --shadow-md: none;
     }
@@ -54,42 +58,38 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
     body { background: var(--bg); color: var(--text); font-size: calc(16px * var(--font-scale)); line-height: 1.55; padding-bottom: 96px; transition: background 0.2s, color 0.2s; }
 
-    /* Barra Superior WCAG 2.1 */
     .a11y-bar { background: #0a2414; color: #f8fafc; padding: 8px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid var(--accent); font-size: 0.84em; }
     body.high-contrast .a11y-bar { background: #000; border-bottom: 2px solid #facc15; }
     .a11y-actions { display: flex; gap: 8px; }
-    .btn-a11y { background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.4); padding: 5px 12px; border-radius: 8px; cursor: pointer; font-weight: 700; transition: 0.15s; }
-    .btn-a11y:hover { background: rgba(255,255,255,0.22); }
+    .btn-a11y { background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.4); padding: 5px 12px; border-radius: 8px; cursor: pointer; font-weight: 700; }
     body.high-contrast .btn-a11y { background: #000; color: #facc15; border: 2px solid #facc15; }
     .btn-a11y[aria-pressed="true"] { background: var(--accent); color: #0f172a; border-color: var(--accent); }
 
-    /* PÁGINA 1: LOGIN UX */
+    /* LOGIN */
     .login-wrapper { min-height: calc(100vh - 46px); display: flex; align-items: center; justify-content: center; padding: 24px 16px; background: radial-gradient(circle at top right, rgba(234, 179, 8, 0.14), transparent 45%), var(--bg); }
-    .login-card { background: var(--surface); border: 2px solid var(--border); border-radius: 20px; max-width: 460px; width: 100%; padding: 32px; box-shadow: var(--shadow-md); }
-    .logo-emblem { width: 56px; height: 56px; border-radius: 16px; background: linear-gradient(135deg, var(--primary), #1e633a); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1.6em; font-weight: 900; margin: 0 auto 12px; border: 2px solid var(--accent); }
+    .login-card { background: var(--surface); border: 2px solid var(--border); border-radius: 20px; max-width: 470px; width: 100%; padding: 32px; box-shadow: var(--shadow-md); }
+    .logo-emblem { width: 58px; height: 58px; border-radius: 16px; background: linear-gradient(135deg, var(--primary), #1e633a); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1.5em; font-weight: 900; margin: 0 auto 12px; border: 2px solid var(--accent); }
     .brand-pill { display: inline-block; background: var(--accent-soft); color: #854d0e; border: 1px solid #fde047; font-weight: 800; font-size: 0.74em; padding: 3px 12px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.4px; }
     body.high-contrast .brand-pill { background: #000; color: #facc15; border-color: #facc15; }
     .login-header { text-align: center; margin-bottom: 22px; }
-    .login-header h1 { font-size: 1.65em; font-weight: 900; margin-top: 8px; color: var(--primary); }
+    .login-header h1 { font-size: 1.55em; font-weight: 900; margin-top: 8px; color: var(--primary); }
     body.high-contrast .login-header h1 { color: #facc15; }
     .form-group { margin-bottom: 14px; }
-    .form-group label { display: block; font-size: 0.8em; font-weight: 800; text-transform: uppercase; color: var(--text-muted); margin-bottom: 5px; letter-spacing: 0.3px; }
-    .form-group input, .form-group select { width: 100%; padding: 11px 13px; border: 2px solid var(--border); border-radius: 10px; background: var(--surface); color: var(--text); font-weight: 600; font-size: 0.95em; transition: border-color 0.15s; }
-    .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--primary); }
-    body.high-contrast .form-group input:focus, body.high-contrast .form-group select:focus { border-color: #facc15; }
+    .form-group label { display: block; font-size: 0.8em; font-weight: 800; text-transform: uppercase; color: var(--text-muted); margin-bottom: 5px; }
+    .form-group input, .form-group select { width: 100%; padding: 11px 13px; border: 2px solid var(--border); border-radius: 10px; background: var(--surface); color: var(--text); font-weight: 600; font-size: 0.95em; }
 
-    .btn-primary { width: 100%; background: var(--primary); color: #fff; border: 2px solid var(--primary); padding: 12px 16px; border-radius: 10px; font-weight: 800; font-size: 0.98em; cursor: pointer; transition: 0.15s; }
+    .btn-primary { width: 100%; background: var(--primary); color: #fff; border: 2px solid var(--primary); padding: 12px 16px; border-radius: 10px; font-weight: 800; font-size: 0.98em; cursor: pointer; }
     .btn-primary:hover { background: var(--primary-hover); }
     body.high-contrast .btn-primary { background: #facc15; color: #000; border-color: #facc15; }
 
     .quick-profiles { margin-top: 20px; padding-top: 16px; border-top: 1px dashed var(--border); }
     .quick-profiles p { font-size: 0.8em; font-weight: 700; color: var(--text-muted); margin-bottom: 10px; text-align: center; }
     .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .profile-chip { background: var(--surface-alt); color: var(--text); border: 1.5px solid var(--border); padding: 8px 10px; border-radius: 10px; font-size: 0.82em; font-weight: 700; cursor: pointer; text-align: left; transition: 0.15s; }
+    .profile-chip { background: var(--surface-alt); color: var(--text); border: 1.5px solid var(--border); padding: 8px 10px; border-radius: 10px; font-size: 0.82em; font-weight: 700; cursor: pointer; text-align: left; }
     .profile-chip:hover { border-color: var(--primary); background: var(--accent-soft); }
     .profile-chip span { display: block; font-size: 0.82em; font-weight: 600; color: var(--text-muted); }
 
-    /* CABEÇALHO DO SISTEMA LOGADO */
+    /* HEADER */
     header.app-header { background: linear-gradient(135deg, var(--primary), #1d5c37); color: #fff; padding: 20px 16px 32px; border-bottom: 3px solid var(--accent); }
     body.high-contrast header.app-header { background: #000; border-bottom: 3px solid #facc15; }
     .container { max-width: 980px; margin: 0 auto; padding: 0 16px; }
@@ -98,16 +98,14 @@
     .btn-logout { background: #fff; color: #0f172a; border: none; padding: 7px 13px; border-radius: 8px; font-weight: 800; font-size: 0.84em; cursor: pointer; }
     body.high-contrast .btn-logout { background: #facc15; color: #000; }
 
-    /* NAVEGAÇÃO PRINCIPAL (5 MÓDULOS + PAINEL) */
+    /* NAVEGAÇÃO */
     .nav-tabs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin: -20px 0 20px; }
     @media (max-width: 820px) { .nav-tabs { grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 480px) { .nav-tabs { grid-template-columns: repeat(2, 1fr); } }
-    .nav-btn { background: var(--surface); color: var(--text); border: 2px solid var(--border); padding: 12px 8px; border-radius: var(--radius); font-weight: 800; font-size: 0.85em; cursor: pointer; box-shadow: var(--shadow-sm); transition: 0.15s; display: flex; flex-direction: column; align-items: center; gap: 4px; }
-    .nav-btn:hover { border-color: var(--primary); transform: translateY(-1px); }
+    .nav-btn { background: var(--surface); color: var(--text); border: 2px solid var(--border); padding: 12px 8px; border-radius: var(--radius); font-weight: 800; font-size: 0.85em; cursor: pointer; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; align-items: center; gap: 4px; }
     .nav-btn.active { background: var(--primary); color: #fff; border-color: var(--accent); }
     body.high-contrast .nav-btn.active { background: #facc15; color: #000; }
 
-    /* CARDS, KPIs E COMPONENTES UX */
     .card { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); padding: 18px; margin-bottom: 16px; box-shadow: var(--shadow-sm); }
     .section-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
     .section-title { font-size: 1.15em; font-weight: 900; }
@@ -125,20 +123,21 @@
     .grid-3 { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 12px; }
     @media (max-width: 680px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
 
-    .student-row { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; transition: 0.15s; }
-    .student-row:hover { border-color: var(--primary); }
+    .student-row { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
     .apelido-main { font-size: 1.18em; font-weight: 900; }
     .nome-sub { font-size: 0.88em; color: var(--text-muted); font-weight: 600; }
 
     .pill { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 999px; font-size: 0.78em; font-weight: 800; margin-right: 6px; margin-top: 5px; }
-    .pill-corda { background: #e2e8f0; color: #1e293b; }
-    body.high-contrast .pill-corda { background: #facc15; color: #000; }
+    .pill-mod-cap { background: #dcfce7; color: #14532d; border: 1px solid #86efac; }
+    .pill-mod-ctp { background: var(--info-bg); color: var(--info); border: 1px solid #93c5fd; }
+    .pill-grad { background: #e2e8f0; color: #1e293b; }
+    body.high-contrast .pill-grad, body.high-contrast .pill-mod-cap, body.high-contrast .pill-mod-ctp { background: #facc15; color: #000; border-color: #facc15; }
     .pill-warn { background: var(--warn-bg); color: var(--warn); border: 1px solid #f59e0b; }
     .pill-ok { background: var(--success-bg); color: var(--success); }
     .pill-danger { background: var(--danger-bg); color: var(--danger); }
 
     .btn-sos { background: var(--danger-bg); color: var(--danger); border: 2px solid var(--danger); padding: 8px 13px; border-radius: 10px; font-weight: 800; cursor: pointer; }
-    .btn-toggle { min-width: 122px; padding: 9px 14px; border-radius: 10px; font-weight: 800; cursor: pointer; border: 2px solid transparent; transition: 0.15s; }
+    .btn-toggle { min-width: 122px; padding: 9px 14px; border-radius: 10px; font-weight: 800; cursor: pointer; border: 2px solid transparent; }
     .btn-toggle.presente { background: var(--success); color: #fff; }
     .btn-toggle.ausente { background: transparent; color: var(--danger); border-color: var(--danger); }
     .btn-accent { background: var(--accent); color: #0f172a; border: 2px solid #ca8a04; padding: 9px 15px; border-radius: 10px; font-weight: 800; cursor: pointer; }
@@ -147,12 +146,10 @@
     table.ux-table th { text-align: left; padding: 11px 10px; background: var(--surface-alt); border-bottom: 2px solid var(--border); font-size: 0.82em; text-transform: uppercase; color: var(--text-muted); }
     table.ux-table td { padding: 11px 10px; border-bottom: 1px solid var(--border); }
 
-    /* Barra de Progresso Graduação */
     .track-bar { width: 100%; height: 12px; background: #e2e8f0; border-radius: 999px; overflow: hidden; margin-top: 8px; }
-    .track-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--success)); transition: width 0.3s; }
+    .track-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--success)); }
     body.high-contrast .track-fill { background: #facc15; }
 
-    /* Calendário Visual */
     .cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center; font-weight: 800; font-size: 0.8em; color: var(--text-muted); margin-top: 12px; }
     .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 6px; }
     .cal-cell { border: 1.5px solid var(--border); border-radius: 10px; padding: 8px 6px; min-height: 68px; background: var(--surface); font-size: 0.86em; }
@@ -162,16 +159,15 @@
     .toast { margin-bottom: 14px; padding: 13px 16px; border-radius: 12px; font-weight: 800; display: none; border: 2px solid var(--success); background: var(--success-bg); color: var(--success); }
     .sticky-footer { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); border-top: 2px solid var(--border); padding: 12px 16px; z-index: 20; }
 
-    /* Modal SOS */
     .modal-backdrop { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.78); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 50; }
     .modal-backdrop.open { display: flex; }
-    .modal-box { background: var(--surface); border: 3px solid var(--danger); border-radius: 16px; max-width: 470px; width: 100%; padding: 22px; box-shadow: var(--shadow-md); }
+    .modal-box { background: var(--surface); border: 3px solid var(--danger); border-radius: 16px; max-width: 470px; width: 100%; padding: 22px; }
     .sos-field { background: var(--surface-alt); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; margin-top: 8px; }
   </style>
 </head>
 <body>
   <nav class="a11y-bar" aria-label="Recursos de Acessibilidade">
-    <span>GingaSegura UX • Padrão WCAG 2.1 (ODS 3, 4 e 10)</span>
+    <span>Família Martelo Predador • Padrão WCAG 2.1 (ODS 3, 4 e 10)</span>
     <div class="a11y-actions">
       <button type="button" id="btnContrast" class="btn-a11y" aria-pressed="false">Alto Contraste</button>
       <button type="button" id="btnFont" class="btn-a11y" aria-pressed="false">Texto Maior (A+)</button>
@@ -182,15 +178,15 @@
   <section id="loginScreen" class="login-wrapper">
     <div class="login-card">
       <div class="login-header">
-        <div class="logo-emblem" aria-hidden="true">GS</div>
-        <span class="brand-pill">Associação Família Martelo Predador</span>
-        <h1>GingaSegura</h1>
-        <p style="font-size:0.9em;color:var(--text-muted);margin-top:4px;">Gestão Integrada de Roda, Frequência, Saúde e Eventos</p>
+        <div class="logo-emblem" aria-hidden="true">FMP</div>
+        <span class="brand-pill">Capoeira &amp; Contato Total Português</span>
+        <h1>Família Martelo Predador</h1>
+        <p style="font-size:0.9em;color:var(--text-muted);margin-top:4px;">Sistema GingaSegura • Chamada, Saúde, Graduações e Eventos</p>
       </div>
       <form id="loginForm">
         <div class="form-group">
-          <label for="loginEmail">E-mail ou Usuário da Liderança</label>
-          <input type="text" id="loginEmail" value="mestre.martelo@familiamartelo.org.br" required />
+          <label for="loginEmail">E-mail ou Usuário da Equipe</label>
+          <input type="text" id="loginEmail" value="mestre.martelo@familiamartelopredador.org.br" required />
         </div>
         <div class="form-group">
           <label for="loginSenha">Senha de Acesso</label>
@@ -199,25 +195,25 @@
         <button type="submit" class="btn-primary">Entrar na Plataforma</button>
       </form>
       <div class="quick-profiles">
-        <p>Acesso Rápido por Perfil Validado em Campo:</p>
+        <p>Acesso Rápido por Liderança / Monitoria:</p>
         <div class="profile-grid">
           <button type="button" class="profile-chip" onclick="acessarSistema('Mestre Martelo', 'Fundador & Mestre')">Mestre Martelo<span>Fundador &amp; Mestre</span></button>
           <button type="button" class="profile-chip" onclick="acessarSistema('Mestra Engraçadinha', 'Supervisora Geral')">Mestra Engraçadinha<span>Supervisora Geral</span></button>
           <button type="button" class="profile-chip" onclick="acessarSistema('Contramestre Jaguar', 'Instrutor Técnico')">Contramestre Jaguar<span>Instrutor Técnico</span></button>
-          <button type="button" class="profile-chip" onclick="acessarSistema('Monitor Guuh', 'Apoio aos Alunos')">Monitor Guuh<span>Apoio aos Alunos</span></button>
+          <button type="button" class="profile-chip" onclick="acessarSistema('Monitor Guuh', 'Monitor dos Alunos')">Monitor Guuh<span>Monitor dos Alunos</span></button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ÁREA LOGADA DO SISTEMA -->
+  <!-- ÁREA LOGADA -->
   <div id="appShell" style="display:none;">
     <header class="app-header">
       <div class="container header-flex">
         <div>
           <span class="brand-pill" style="background:var(--accent);color:#0f172a;border:none;">Embu das Artes • SP</span>
-          <h1 style="font-size:1.45em;font-weight:900;margin-top:6px;">Associação de Capoeira Família Martelo Predador</h1>
-          <p style="font-size:0.88em;opacity:0.92;">Sistema GingaSegura • Núcleos E.M. Jequitibá e Sede Comunitária</p>
+          <h1 style="font-size:1.45em;font-weight:900;margin-top:6px;">Família Martelo Predador</h1>
+          <p style="font-size:0.88em;opacity:0.92;">Capoeira (Graduação por Cordas) • Contato Total Português (Graduação por Faixas)</p>
         </div>
         <div class="user-badge">
           <div>
@@ -230,7 +226,6 @@
     </header>
 
     <main class="container">
-      <!-- MENU DE NAVEGAÇÃO DAS PÁGINAS -->
       <nav class="nav-tabs" role="tablist" aria-label="Módulos do Sistema">
         <button type="button" class="nav-btn active" data-target="secInicio">🏠 Visão Geral</button>
         <button type="button" class="nav-btn" data-target="secChamada">✅ Chamada</button>
@@ -242,40 +237,41 @@
 
       <div id="toastBanner" class="toast" role="status" aria-live="polite"></div>
 
-      <!-- PÁGINA 1 LOGADA: DASHBOARD / VISÃO GERAL -->
+      <!-- VISÃO GERAL -->
       <section id="secInicio" class="ux-page">
         <div class="kpi-grid">
-          <div class="kpi-card"><div class="kpi-label">Alunos Ativos</div><div class="kpi-value">5</div><div class="kpi-foot">2 núcleos ativos</div></div>
-          <div class="kpi-card"><div class="kpi-label">Frequência Média</div><div class="kpi-value" id="kpiFreqMedia">85%</div><div class="kpi-foot">Meta Batizado: 75%</div></div>
+          <div class="kpi-card"><div class="kpi-label">Alunos Ativos</div><div class="kpi-value">6</div><div class="kpi-foot">Capoeira &amp; Contato Total</div></div>
+          <div class="kpi-card"><div class="kpi-label">Frequência Média</div><div class="kpi-value">86%</div><div class="kpi-foot">Meta Exame/Batizado: 75%</div></div>
           <div class="kpi-card"><div class="kpi-label">Alertas Médicos</div><div class="kpi-value">2</div><div class="kpi-foot">Monitorados (ODS 3)</div></div>
-          <div class="kpi-card"><div class="kpi-label">Próximo Evento</div><div class="kpi-value">21/11</div><div class="kpi-foot">Roda Comunitária</div></div>
+          <div class="kpi-card"><div class="kpi-label">Próximo Evento</div><div class="kpi-value">21/11</div><div class="kpi-foot">Roda &amp; Treino Aberto</div></div>
         </div>
 
         <div class="card">
           <div class="section-header">
             <div>
-              <h2 class="section-title">Acesso Rápido às Operações da Academia</h2>
-              <p class="section-subtitle">Selecione uma das páginas abaixo para iniciar o atendimento em quadra</p>
+              <h2 class="section-title">Operações da Família Martelo Predador</h2>
+              <p class="section-subtitle">Gerencie turmas de Capoeira (cordas) e Contato Total Português (faixas) em um único ambiente</p>
             </div>
           </div>
           <div class="grid-3">
-            <button type="button" class="profile-chip" onclick="irParaPagina('secChamada')" style="padding:14px;">✅ Realizar Chamada do Dia<span>Marcação rápida por apelido + SOS Médico</span></button>
-            <button type="button" class="profile-chip" onclick="irParaPagina('secLista')" style="padding:14px;">📋 Conferir Lista de Chamada<span>Histórico auditável por data e turma</span></button>
-            <button type="button" class="profile-chip" onclick="irParaPagina('secMensalidade')" style="padding:14px;">💳 Checar Mensalidades<span>Status financeiro e bolsistas sociais</span></button>
-            <button type="button" class="profile-chip" onclick="irParaPagina('secGraduacao')" style="padding:14px;">🥋 Graduação dos Alunos<span>Progresso de cordas e aptidão</span></button>
-            <button type="button" class="profile-chip" onclick="irParaPagina('secEventos')" style="padding:14px;">📅 Eventos &amp; Calendário<span>Agendar Batizados e Rodas Abertas</span></button>
+            <button type="button" class="profile-chip" onclick="irParaPagina('secChamada')" style="padding:14px;">✅ Chamada do Dia<span>Por turma/modalidade + SOS Médico</span></button>
+            <button type="button" class="profile-chip" onclick="irParaPagina('secLista')" style="padding:14px;">📋 Lista de Chamada<span>Conferência e histórico por data</span></button>
+            <button type="button" class="profile-chip" onclick="irParaPagina('secMensalidade')" style="padding:14px;">💳 Mensalidades<span>Controle financeiro e bolsas sociais</span></button>
+            <button type="button" class="profile-chip" onclick="irParaPagina('secGraduacao')" style="padding:14px;">🥋 Graduação (Cordas &amp; Faixas)<span>Evolução nas duas modalidades</span></button>
+            <button type="button" class="profile-chip" onclick="irParaPagina('secEventos')" style="padding:14px;">📅 Eventos &amp; Calendário<span>Batizados, Exames de Faixa e Rodas</span></button>
           </div>
         </div>
       </section>
 
-      <!-- PÁGINA 2: REALIZAR CHAMADA + SOS MÉDICO -->
+      <!-- PÁGINA 2: CHAMADA + SOS MÉDICO -->
       <section id="secChamada" class="ux-page" style="display:none;">
         <div class="card grid-3">
           <div class="form-group" style="margin:0;">
-            <label for="selTurma">Turma / Núcleo</label>
+            <label for="selTurma">Modalidade / Turma</label>
             <select id="selTurma">
-              <option value="Infantil / Juvenil — E.M. Jequitibá (18h30)">Infantil / Juvenil — E.M. Jequitibá (18h30)</option>
-              <option value="Adulto / Graduados — Sede Embu (20h00)">Adulto / Graduados — Sede Embu (20h00)</option>
+              <option value="Todas">Todas as Modalidades (Capoeira + Contato Total)</option>
+              <option value="Capoeira">Capoeira (Graduação por Cordas)</option>
+              <option value="Contato Total Português">Contato Total Português (Graduação por Faixas)</option>
             </select>
           </div>
           <div class="form-group" style="margin:0;">
@@ -284,14 +280,14 @@
           </div>
           <div class="form-group" style="margin:0;">
             <label for="buscaAluno">Buscar Apelido ou Nome</label>
-            <input type="search" id="buscaAluno" placeholder="Ex: Gavião, Estrela..." />
+            <input type="search" id="buscaAluno" placeholder="Ex: Gavião, Estrela, Falcão..." />
           </div>
         </div>
 
         <div class="section-header">
           <div>
-            <h2 class="section-title">Chamada Rápida (<span id="countPres">4</span>/<span id="countTot">5</span> Presentes)</h2>
-            <p class="section-subtitle">Prioridade visual pelo apelido de roda e alertas clínicos preventivos</p>
+            <h2 class="section-title">Chamada Rápida (<span id="countPres">5</span>/<span id="countTot">6</span> Presentes)</h2>
+            <p class="section-subtitle">Identificação por apelido, modalidade, graduação (corda ou faixa) e alerta médico</p>
           </div>
           <button type="button" id="btnMarcarTodos" class="btn-accent">✓ Marcar Todos Presentes</button>
         </div>
@@ -318,24 +314,24 @@
         <div id="containerListasSalvas"></div>
       </section>
 
-      <!-- PÁGINA 4: MENSALIDADES DOS ALUNOS -->
+      <!-- PÁGINA 4: MENSALIDADES -->
       <section id="secMensalidade" class="ux-page" style="display:none;">
         <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr);">
-          <div class="kpi-card"><div class="kpi-label">Em Dia</div><div class="kpi-value" id="mEmDia">3</div><div class="kpi-foot">Contribuição regular</div></div>
+          <div class="kpi-card"><div class="kpi-label">Em Dia</div><div class="kpi-value" id="mEmDia">4</div><div class="kpi-foot">Contribuição regular</div></div>
           <div class="kpi-card"><div class="kpi-label">Pendentes</div><div class="kpi-value" id="mPendente">1</div><div class="kpi-foot">Aguardando acerto</div></div>
           <div class="kpi-card"><div class="kpi-label">Bolsistas Sociais</div><div class="kpi-value" id="mBolsista">1</div><div class="kpi-foot">Isenção social (ODS 10)</div></div>
         </div>
         <div class="card">
           <div class="section-header">
             <div>
-              <h2 class="section-title">Situação Financeira e Contribuição Comunitária</h2>
-              <p class="section-subtitle">Acompanhe pagamentos, vencimentos e bolsas sociais da associação</p>
+              <h2 class="section-title">Mensalidades e Contribuição Comunitária</h2>
+              <p class="section-subtitle">Controle unificado das turmas de Capoeira e Contato Total Português</p>
             </div>
           </div>
           <div style="overflow-x:auto;">
             <table class="ux-table">
               <thead>
-                <tr><th>Apelido / Nome Civil</th><th>Modalidade</th><th>Vencimento</th><th>Status</th><th>Ação Rápida</th></tr>
+                <tr><th>Apelido / Nome Civil</th><th>Modalidade</th><th>Plano</th><th>Vencimento</th><th>Status</th><th>Ação Rápida</th></tr>
               </thead>
               <tbody id="tbodyMensalidade"></tbody>
             </table>
@@ -343,13 +339,13 @@
         </div>
       </section>
 
-      <!-- PÁGINA 5: GRADUAÇÃO DOS ALUNOS -->
+      <!-- PÁGINA 5: GRADUAÇÃO (CORDAS E FAIXAS) -->
       <section id="secGraduacao" class="ux-page" style="display:none;">
         <div class="card">
           <div class="section-header">
             <div>
-              <h2 class="section-title">Graduação dos Alunos e Sistema de Cordas</h2>
-              <p class="section-subtitle">Elegibilidade automática baseada na frequência mínima de 75% nas rodas e treinos</p>
+              <h2 class="section-title">Graduação dos Alunos — Cordas (Capoeira) &amp; Faixas (Contato Total Português)</h2>
+              <p class="section-subtitle">Elegibilidade automática para Batizado ou Exame de Faixa baseada na frequência mínima de 75%</p>
             </div>
           </div>
           <div id="containerGraduacao"></div>
@@ -362,13 +358,13 @@
           <div class="section-header">
             <div>
               <h2 class="section-title">Marcar Novo Evento no Calendário</h2>
-              <p class="section-subtitle">Organize Batizados, Trocas de Corda, Rodas de Rua e Oficinas Culturais</p>
+              <p class="section-subtitle">Agende Batizados de Capoeira, Exames de Faixa de Contato Total Português e Rodas Abertas</p>
             </div>
           </div>
           <form id="formNovoEvento" class="grid-2">
             <div class="form-group" style="margin:0;">
               <label for="evTitulo">Título do Evento</label>
-              <input type="text" id="evTitulo" placeholder="Ex: Batizado e Troca de Cordas 2026" required />
+              <input type="text" id="evTitulo" placeholder="Ex: Exame de Faixa Contato Total & Batizado" required />
             </div>
             <div class="form-group" style="margin:0;">
               <label for="evData">Data do Evento</label>
@@ -376,14 +372,14 @@
             </div>
             <div class="form-group" style="margin:0;">
               <label for="evLocal">Local / Núcleo</label>
-              <input type="text" id="evLocal" placeholder="Ex: Quadra E.M. Jequitibá - Embu das Artes" required />
+              <input type="text" id="evLocal" placeholder="Ex: Sede Família Martelo Predador - Embu das Artes" required />
             </div>
             <div class="form-group" style="margin:0;">
-              <label for="evTipo">Tipo de Atividade</label>
+              <label for="evTipo">Modalidade / Categoria</label>
               <select id="evTipo">
-                <option value="Batizado & Troca de Graduação">Batizado &amp; Troca de Graduação</option>
-                <option value="Roda Aberta Comunitária">Roda Aberta Comunitária</option>
-                <option value="Oficina de Berimbau e Musicalidade">Oficina de Berimbau e Musicalidade</option>
+                <option value="Batizado & Troca de Cordas (Capoeira)">Batizado &amp; Troca de Cordas (Capoeira)</option>
+                <option value="Exame de Faixa (Contato Total Português)">Exame de Faixa (Contato Total Português)</option>
+                <option value="Roda Aberta & Treino Integrado">Roda Aberta &amp; Treino Integrado</option>
               </select>
             </div>
             <div style="grid-column:1/-1;">
@@ -399,7 +395,7 @@
         </div>
 
         <div class="card">
-          <h2 class="section-title" style="margin-bottom:10px;">Agenda Confirmada da Associação</h2>
+          <h2 class="section-title" style="margin-bottom:10px;">Agenda Confirmada — Família Martelo Predador</h2>
           <div id="listaEventosCards"></div>
         </div>
       </section>
@@ -417,29 +413,30 @@
 
   <script>
     const alunos = [
-      { id: 1, apelido: "Gavião", nome: "Lucas Gabriel Silva", presente: true, sangue: "O+", alerta: false, alergia: "Nenhuma alergia conhecida", contato: "(11) 98412-3390 — Mariana Silva (Mãe)", statusFin: "Em Dia", plano: "Contribuição R$ 60,00", venc: "10/11/2026", corda: "Corda Verde", proxCorda: "Corda Verde/Amarela", freq: 92 },
-      { id: 2, apelido: "Estrela", nome: "Ana Beatriz Oliveira", presente: true, sangue: "A+", alerta: true, alergia: "Alergia à Dipirona • Asma leve (bombinha na mochila)", contato: "(11) 97230-1184 — Carlos Oliveira (Pai)", statusFin: "Em Dia", plano: "Contribuição R$ 60,00", venc: "10/11/2026", corda: "Corda Amarela", proxCorda: "Corda Amarela/Azul", freq: 88 },
-      { id: 3, apelido: "Trovão", nome: "Pedro Henrique Santos", presente: false, sangue: "B-", alerta: true, alergia: "Intolerância severa à lactose", contato: "(11) 99104-5521 — Fernanda Santos (Mãe)", statusFin: "Pendente", plano: "Contribuição R$ 60,00", venc: "10/11/2026", corda: "Corda Crua", proxCorda: "Corda Crua/Amarela", freq: 68 },
-      { id: 4, apelido: "Corisco", nome: "João Victor Almeida", presente: true, sangue: "AB+", alerta: false, alergia: "Nenhuma restrição médica", contato: "(11) 96541-8802 — Roberto Almeida (Pai)", statusFin: "Bolsista Social", plano: "Isento (Inclusão ODS 10)", venc: "—", corda: "Corda Azul", proxCorda: "Corda Azul/Verde", freq: 95 },
-      { id: 5, apelido: "Pantera", nome: "Mariana Souza Lima", presente: true, sangue: "O-", alerta: false, alergia: "Nenhuma restrição médica", contato: "(11) 98871-2019 — Cláudia Lima (Mãe)", statusFin: "Em Dia", plano: "Contribuição R$ 60,00", venc: "10/11/2026", corda: "Corda Verde/Amarela", proxCorda: "Corda Amarela", freq: 84 }
+      { id: 1, apelido: "Gavião", nome: "Lucas Gabriel Silva", modalidade: "Capoeira", presente: true, sangue: "O+", alerta: false, alergia: "Nenhuma alergia conhecida", contato: "(11) 98412-3390 — Mariana Silva (Mãe)", statusFin: "Em Dia", plano: "R$ 60,00/mês", venc: "10/11/2026", gradAtual: "Corda Verde", proxGrad: "Corda Verde/Amarela", freq: 92 },
+      { id: 2, apelido: "Estrela", nome: "Ana Beatriz Oliveira", modalidade: "Capoeira", presente: true, sangue: "A+", alerta: true, alergia: "Alergia à Dipirona • Asma leve (bombinha na mochila)", contato: "(11) 97230-1184 — Carlos Oliveira (Pai)", statusFin: "Em Dia", plano: "R$ 60,00/mês", venc: "10/11/2026", gradAtual: "Corda Amarela", proxGrad: "Corda Amarela/Azul", freq: 88 },
+      { id: 3, apelido: "Falcão", nome: "Rafael Mendes Costa", modalidade: "Contato Total Português", presente: true, sangue: "O-", alerta: false, alergia: "Nenhuma restrição médica", contato: "(11) 98119-4402 — Patrícia Costa (Esposa)", statusFin: "Em Dia", plano: "R$ 70,00/mês", venc: "10/11/2026", gradAtual: "Faixa Azul", proxGrad: "Faixa Roxa", freq: 90 },
+      { id: 4, apelido: "Trovão", nome: "Pedro Henrique Santos", modalidade: "Capoeira", presente: false, sangue: "B-", alerta: true, alergia: "Intolerância severa à lactose", contato: "(11) 99104-5521 — Fernanda Santos (Mãe)", statusFin: "Pendente", plano: "R$ 60,00/mês", venc: "10/11/2026", gradAtual: "Corda Crua", proxGrad: "Corda Crua/Amarela", freq: 68 },
+      { id: 5, apelido: "Corisco", nome: "João Victor Almeida", modalidade: "Capoeira", presente: true, sangue: "AB+", alerta: false, alergia: "Nenhuma restrição médica", contato: "(11) 96541-8802 — Roberto Almeida (Pai)", statusFin: "Bolsista Social", plano: "Isento (Inclusão ODS 10)", venc: "—", gradAtual: "Corda Azul", proxGrad: "Corda Azul/Verde", freq: 95 },
+      { id: 6, apelido: "Pantera", nome: "Mariana Souza Lima", modalidade: "Contato Total Português", presente: true, sangue: "A-", alerta: false, alergia: "Nenhuma restrição médica", contato: "(11) 98871-2019 — Cláudia Lima (Mãe)", statusFin: "Em Dia", plano: "R$ 70,00/mês", venc: "10/11/2026", gradAtual: "Faixa Verde", proxGrad: "Faixa Azul", freq: 84 }
     ];
 
     const listasHistorico = [
       {
         data: "2026-11-17",
-        turma: "Infantil / Juvenil — E.M. Jequitibá (18h30)",
-        registros: alunos.map(a => ({ apelido: a.apelido, nome: a.nome, corda: a.corda, presente: a.presente }))
+        turma: "Treino Integrado — Capoeira & Contato Total Português",
+        registros: alunos.map(a => ({ apelido: a.apelido, nome: a.nome, modalidade: a.modalidade, grad: a.gradAtual, presente: a.presente }))
       },
       {
         data: "2026-11-15",
-        turma: "Infantil / Juvenil — E.M. Jequitibá (18h30)",
-        registros: alunos.map(a => ({ apelido: a.apelido, nome: a.nome, corda: a.corda, presente: true }))
+        turma: "Treino Integrado — Capoeira & Contato Total Português",
+        registros: alunos.map(a => ({ apelido: a.apelido, nome: a.nome, modalidade: a.modalidade, grad: a.gradAtual, presente: true }))
       }
     ];
 
     const agendaEventos = [
-      { titulo: "Batizado e Troca de Graduação — Família Martelo Predador", data: "2026-11-28", local: "Quadra E.M. Jequitibá • Embu das Artes", tipo: "Batizado & Troca de Graduação" },
-      { titulo: "Roda Aberta Comunitária & Oficina de Berimbau", data: "2026-11-21", local: "Sede Associação Família Martelo Predador", tipo: "Roda Aberta Comunitária" }
+      { titulo: "Batizado de Capoeira & Exame de Faixa Contato Total Português", data: "2026-11-28", local: "Quadra E.M. Jequitibá • Embu das Artes", tipo: "Batizado & Exame de Faixa" },
+      { titulo: "Roda Aberta & Treino Comunitário — Família Martelo Predador", data: "2026-11-21", local: "Sede Família Martelo Predador", tipo: "Roda Aberta & Treino Integrado" }
     ];
 
     function showToast(msg) {
@@ -483,22 +480,29 @@
       btn.onclick = () => irParaPagina(btn.dataset.target);
     });
 
-    // Render Chamada
     function renderChamada() {
+      const mod = document.getElementById("selTurma").value;
       const termo = (document.getElementById("buscaAluno").value || "").toLowerCase();
       const box = document.getElementById("listaChamadaCards");
       box.innerHTML = "";
-      const filtrados = alunos.filter(a => a.apelido.toLowerCase().includes(termo) || a.nome.toLowerCase().includes(termo));
+
+      const filtrados = alunos.filter(a => {
+        const matchMod = mod === "Todas" || a.modalidade === mod;
+        const matchTxt = a.apelido.toLowerCase().includes(termo) || a.nome.toLowerCase().includes(termo);
+        return matchMod && matchTxt;
+      });
 
       filtrados.forEach(a => {
+        const isCapoeira = a.modalidade === "Capoeira";
         const row = document.createElement("div");
         row.className = "student-row";
         row.innerHTML = `
           <div>
             <div class="apelido-main">${a.apelido} <span class="nome-sub">• ${a.nome}</span></div>
             <div>
-              <span class="pill pill-corda">${a.corda}</span>
-              <span class="pill pill-corda">Sangue ${a.sangue}</span>
+              <span class="pill ${isCapoeira ? "pill-mod-cap" : "pill-mod-ctp"}">${a.modalidade}</span>
+              <span class="pill pill-grad">${a.gradAtual}</span>
+              <span class="pill pill-grad">Sangue ${a.sangue}</span>
               ${a.alerta ? `<span class="pill pill-warn">⚠ Alerta Médico</span>` : ""}
             </div>
           </div>
@@ -509,7 +513,8 @@
         `;
         row.querySelector(".btn-sos").onclick = () => {
           document.getElementById("sosModalBody").innerHTML = `
-            <div class="sos-field"><small>CAPOEIRISTA</small><br><strong>${a.apelido} (${a.nome})</strong></div>
+            <div class="sos-field"><small>ATLETA / CAPOEIRISTA</small><br><strong>${a.apelido} (${a.nome})</strong></div>
+            <div class="sos-field"><small>MODALIDADE &amp; GRADUAÇÃO</small><br><strong>${a.modalidade} • ${a.gradAtual}</strong></div>
             <div class="sos-field"><small>TIPO SANGUÍNEO</small><br><strong>${a.sangue}</strong></div>
             <div class="sos-field"><small>ALERGIAS / CONDIÇÕES CLÍNICAS</small><br><strong>${a.alergia}</strong></div>
             <div class="sos-field"><small>CONTATO DE EMERGÊNCIA</small><br><strong>${a.contato}</strong></div>
@@ -523,19 +528,24 @@
         box.appendChild(row);
       });
 
-      document.getElementById("countTot").textContent = alunos.length;
-      document.getElementById("countPres").textContent = alunos.filter(a => a.presente).length;
+      document.getElementById("countTot").textContent = filtrados.length;
+      document.getElementById("countPres").textContent = filtrados.filter(a => a.presente).length;
     }
 
+    document.getElementById("selTurma").onchange = renderChamada;
     document.getElementById("buscaAluno").oninput = renderChamada;
     document.getElementById("btnMarcarTodos").onclick = () => {
-      alunos.forEach(a => a.presente = true);
+      const mod = document.getElementById("selTurma").value;
+      alunos.forEach(a => {
+        if (mod === "Todas" || a.modalidade === mod) a.presente = true;
+      });
       renderChamada();
     };
 
     document.getElementById("btnSalvarChamada").onclick = async () => {
       const data = document.getElementById("inpDataAula").value;
-      const turma = document.getElementById("selTurma").value;
+      const mod = document.getElementById("selTurma").value;
+      const turmaLabel = mod === "Todas" ? "Treino Integrado — Capoeira & Contato Total Português" : `Turma ${mod}`;
       try {
         await fetch("/api/chamadas/lote", {
           method: "POST",
@@ -545,14 +555,13 @@
       } catch (e) {}
       listasHistorico.unshift({
         data,
-        turma,
-        registros: alunos.map(a => ({ apelido: a.apelido, nome: a.nome, corda: a.corda, presente: a.presente }))
+        turma: turmaLabel,
+        registros: alunos.map(a => ({ apelido: a.apelido, nome: a.nome, modalidade: a.modalidade, grad: a.gradAtual, presente: a.presente }))
       });
       renderListasSalvas();
-      showToast(`✓ Chamada de ${fmtData(data)} salva com sucesso! Disponível na aba "Lista Chamada".`);
+      showToast(`✓ Chamada de ${fmtData(data)} salva com sucesso na Lista de Chamada!`);
     };
 
-    // Render Lista de Chamada
     function renderListasSalvas(filtro = "") {
       const box = document.getElementById("containerListasSalvas");
       const items = filtro ? listasHistorico.filter(l => l.data === filtro) : listasHistorico;
@@ -564,15 +573,15 @@
             <div class="section-header">
               <div>
                 <h3 class="section-title">Data: ${fmtData(l.data)} — ${l.turma}</h3>
-                <p class="section-subtitle">Aproveitamento da turma: ${pres} de ${l.registros.length} alunos (${pct}%)</p>
+                <p class="section-subtitle">Aproveitamento: ${pres} de ${l.registros.length} alunos (${pct}%)</p>
               </div>
               <span class="pill pill-ok">Auditado</span>
             </div>
             <div style="overflow-x:auto;">
               <table class="ux-table">
-                <thead><tr><th>Apelido</th><th>Nome Civil</th><th>Graduação</th><th>Frequência</th></tr></thead>
+                <thead><tr><th>Apelido</th><th>Nome Civil</th><th>Modalidade</th><th>Corda / Faixa</th><th>Frequência</th></tr></thead>
                 <tbody>
-                  ${l.registros.map(r => `<tr><td><strong>${r.apelido}</strong></td><td>${r.nome}</td><td>${r.corda}</td><td><span class="pill ${r.presente ? "pill-ok" : "pill-danger"}">${r.presente ? "✓ Presente" : "✕ Ausente"}</span></td></tr>`).join("")}
+                  ${l.registros.map(r => `<tr><td><strong>${r.apelido}</strong></td><td>${r.nome}</td><td>${r.modalidade}</td><td>${r.grad}</td><td><span class="pill ${r.presente ? "pill-ok" : "pill-danger"}">${r.presente ? "✓ Presente" : "✕ Ausente"}</span></td></tr>`).join("")}
                 </tbody>
               </table>
             </div>
@@ -584,12 +593,12 @@
     document.getElementById("filtroDataLista").onchange = (e) => renderListasSalvas(e.target.value);
     document.getElementById("btnResetLista").onclick = () => { document.getElementById("filtroDataLista").value = ""; renderListasSalvas(""); };
 
-    // Render Mensalidades
     function renderMensalidades() {
       const tbody = document.getElementById("tbodyMensalidade");
       tbody.innerHTML = alunos.map((a, i) => `
         <tr>
           <td><strong>${a.apelido}</strong><br><small style="color:var(--text-muted);">${a.nome}</small></td>
+          <td><span class="pill ${a.modalidade === "Capoeira" ? "pill-mod-cap" : "pill-mod-ctp"}">${a.modalidade}</span></td>
           <td>${a.plano}</td>
           <td>${a.venc}</td>
           <td><span class="pill ${a.statusFin === "Pendente" ? "pill-danger" : "pill-ok"}">${a.statusFin}</span></td>
@@ -604,28 +613,30 @@
     window.darBaixa = (i) => {
       alunos[i].statusFin = "Em Dia";
       renderMensalidades();
-      showToast(`✓ Mensalidade de ${alunos[i].apelido} (${alunos[i].nome}) baixada como Em Dia!`);
+      showToast(`✓ Mensalidade de ${alunos[i].apelido} (${alunos[i].modalidade}) baixada como Em Dia!`);
     };
 
-    // Render Graduação
     function renderGraduacao() {
       const box = document.getElementById("containerGraduacao");
       box.innerHTML = alunos.map(a => {
         const apto = a.freq >= 75;
+        const isCap = a.modalidade === "Capoeira";
         return `
           <div class="student-row" style="display:block;">
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-              <div><strong class="apelido-main">${a.apelido}</strong> <span class="nome-sub">• ${a.nome}</span></div>
-              <span class="pill ${apto ? "pill-ok" : "pill-danger"}">${apto ? "✓ Apto para Troca de Corda" : "Abaixo da meta (75%)"}</span>
+              <div>
+                <strong class="apelido-main">${a.apelido}</strong> <span class="nome-sub">• ${a.nome}</span>
+                <span class="pill ${isCap ? "pill-mod-cap" : "pill-mod-ctp"}" style="margin-left:6px;">${a.modalidade}</span>
+              </div>
+              <span class="pill ${apto ? "pill-ok" : "pill-danger"}">${apto ? (isCap ? "✓ Apto para Troca de Corda" : "✓ Apto para Exame de Faixa") : "Abaixo da meta (75%)"}</span>
             </div>
-            <p style="font-size:0.9em;margin-top:6px;">Graduação Atual: <strong>${a.corda}</strong> ➔ Próxima Corda: <strong>${a.proxCorda}</strong> • Frequência: <strong>${a.freq}%</strong></p>
+            <p style="font-size:0.9em;margin-top:6px;">Graduação Atual: <strong>${a.gradAtual}</strong> ➔ Próxima Graduação: <strong>${a.proxGrad}</strong> • Frequência: <strong>${a.freq}%</strong></p>
             <div class="track-bar"><div class="track-fill" style="width:${a.freq}%;"></div></div>
           </div>
         `;
       }).join("");
     }
 
-    // Render Eventos e Calendário
     function renderEventos() {
       const cal = document.getElementById("calGrid");
       const mapEventos = {};
@@ -669,10 +680,9 @@
       agendaEventos.unshift(novo);
       renderEventos();
       e.target.reset();
-      showToast(`✓ Evento "${novo.titulo}" agendado no calendário da associação!`);
+      showToast(`✓ Evento "${novo.titulo}" publicado no calendário da Família Martelo Predador!`);
     };
 
-    // Acessibilidade WCAG 2.1
     document.getElementById("btnContrast").onclick = (e) => e.target.setAttribute("aria-pressed", document.body.classList.toggle("high-contrast"));
     document.getElementById("btnFont").onclick = (e) => e.target.setAttribute("aria-pressed", document.body.classList.toggle("large-text"));
 
